@@ -81,10 +81,6 @@ export default {
       options.layout = config.layout || path.resolve(__dirname, './layout.jsx');
       options.scriptBundleName = config.scriptBundleName || 'script.js';
 
-      // TODO only support one pure CSS file now, support LESS and SCSS process in the future
-      options.stylePath = config.styleFile ? path.resolve(projectPath, config.styleFile) : '';
-      options.styleBundleName = config.styleBundleName || 'style.css';
-
       options.publicPath = config.publicPath || 'assets';
     });
   }
