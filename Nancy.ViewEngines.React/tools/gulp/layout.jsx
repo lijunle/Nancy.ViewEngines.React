@@ -10,6 +10,10 @@ export default React.createClass({
     return this.props.model.title || '';
   },
 
+  getStyles() {
+    return this.props.model.styles || [];
+  },
+
   render() {
     return <this.props.view {...this.props.model} />;
   }
