@@ -20,3 +20,14 @@ NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
 LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
 OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+===
+
+This license applies to all parts of Nancy.ViewEngines.React that are
+not externally maintained libraries.
+
+The externally maintained libraries used by Nancy.ViewEngines.React
+are:
+
+- 7-Zip, located at tools/7za.exe. Its license is GNU LGPL. Check it
+  at http://7-zip.org/license.txt
