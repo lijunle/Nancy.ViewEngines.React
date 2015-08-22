@@ -42,7 +42,7 @@ function buildIndexCode(items) {
     ? ''
     : `if (typeof window !== "undefined") {\n${clientCode};\n}\n\n`;
 
-  const requireRender = requireLibrary('./render.js'); // TODO port render.js to here
+  const requireRender = requireLibrary('./render.js');
   const lookupCode = lookup.map(formatLine).join(',\n');
   const requireLayout = requireView(options.layout);
   const renderCode = `module.exports = ${requireRender}({\n${lookupCode}\n}, ${requireLayout});`;
