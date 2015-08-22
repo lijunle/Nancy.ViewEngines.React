@@ -103,7 +103,6 @@
     <None Include="ClearScript.V8\v8-x64.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <Content Include="npmPlaceholder.txt" />
     <Content Include="packages.config" />
     <Content Include="Views\Test.jsx" />
     <None Include="Web.Debug.config">
@@ -157,9 +156,7 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
-    <Error Condition="!Exists('..\packages\Npm.js.2.13.1.0\build\npm.js.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Npm.js.2.13.1.0\build\npm.js.targets'))" />
   </Target>
-  <Import Project="..\packages\Npm.js.2.13.1.0\build\npm.js.targets" Condition="Exists('..\packages\Npm.js.2.13.1.0\build\npm.js.targets')" />
   <Import Project="..\Nancy.ViewEngines.React\targets\Nancy.ViewEngines.React.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
