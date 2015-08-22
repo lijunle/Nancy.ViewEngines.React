@@ -1,0 +1,21 @@
+﻿<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <licenseUrl>https://github.com/lijunle/Nancy.ViewEngines.React/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/lijunle/Nancy.ViewEngines.React</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <copyright>Copyright 2015</copyright>
+    <tags>Nancy ViewEngine ViewEngines React ReactJs</tags>
+  </metadata>
+  <files>
+    <file src="targets\**\*" target="build" />
+    <file src="tools\**\*" target="tools" />
+    <file src="node_modules.7z" target="node_modules.7z" />
+  </files>
+</package>

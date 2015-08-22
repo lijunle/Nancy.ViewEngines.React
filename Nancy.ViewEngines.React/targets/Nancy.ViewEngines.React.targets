@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <BuildDependsOn>
+      RestoreReactViewEnginePackages;
+      $(BuildDependsOn)
+    </BuildDependsOn>
+  </PropertyGroup>
+  <PropertyGroup>
+    <!--
+      The whitespaces wrapping the path variables are critical.
+      They avoid the tailing character is back-slash to escape the quote sign.
+      They will be trim off when parse from gulp.
+    -->
+    <Execute>
+      <![CDATA[
+      "$(MSBuildThisFileDirectory)..\tools\node" "$(MSBuildThisFileDirectory)..\node_modules\gulp\bin\gulp.js" ^
+        --projectFile " $(MSBuildProjectFullPath) " ^
+        --outputPath " $(OutputPath) " ^
+        --configuration "$(Configuration)"
+      ]]>
+    </Execute>
+  </PropertyGroup>
+  <Target Name="RestoreReactViewEnginePackages">
+    <Message Text="Building React view engine scripts..." />
+    <Exec Command="$(Execute)" WorkingDirectory="$(MSBuildThisFileDirectory)..\tools" />
+    <Message Text="React view engine scripts is built!" />
+  </Target>
+</Project>

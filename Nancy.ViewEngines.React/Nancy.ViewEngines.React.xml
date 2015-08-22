@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Nancy.ViewEngines.React</name>
+    </assembly>
+    <members>
+        <member name="T:Nancy.ViewEngines.React.ReactConventions">
+            <inheritdoc/>
+        </member>
+        <member name="M:Nancy.ViewEngines.React.ReactConventions.Initialise(Nancy.Conventions.NancyConventions)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Nancy.ViewEngines.React.ReactConventions.Validate(Nancy.Conventions.NancyConventions)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Nancy.ViewEngines.React.ReactPipeline">
+            <inheritdoc/>
+        </member>
+        <member name="M:Nancy.ViewEngines.React.ReactPipeline.#ctor(Nancy.IRootPathProvider)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Nancy.ViewEngines.React.ReactPipeline"/> class.
+            </summary>
+            <param name="rootPathProvider">The root path provider.</param>
+        </member>
+        <member name="M:Nancy.ViewEngines.React.ReactPipeline.Initialize(Nancy.Bootstrapper.IPipelines)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Nancy.ViewEngines.React.ReactViewEngine">
+            <summary>
+            The React.js view engine.
+            </summary>
+        </member>
+        <member name="M:Nancy.ViewEngines.React.ReactViewEngine.#ctor(System.Collections.Generic.IEnumerable{Nancy.ErrorHandling.IStatusCodeHandler})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Nancy.ViewEngines.React.ReactViewEngine"/> class.
+            </summary>
+            <param name="statusCodeHandlers">The status code handlers. This is a workaround to generate error page, see NancyFx/Nancy#1948.</param>
+        </member>
+        <member name="P:Nancy.ViewEngines.React.ReactViewEngine.Extensions">
+            <summary>
+            Gets the React.js view engine discovering extensions. Default is <c>jsx</c>.
+            </summary>
+            <value>The React.js view engine discovering extensions.</value>
+        </member>
+        <member name="M:Nancy.ViewEngines.React.ReactViewEngine.Initialize(Nancy.ViewEngines.ViewEngineStartupContext)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Nancy.ViewEngines.React.ReactViewEngine.Dispose">
+            <inheritdoc/>
+        </member>
+        <member name="M:Nancy.ViewEngines.React.ReactViewEngine.RenderView(Nancy.ViewEngines.ViewLocationResult,System.Object,Nancy.ViewEngines.IRenderContext)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Nancy.ViewEngines.React.ReactViewEngine.Dispose(System.Boolean)">
+            <summary>
+            Dispose React.js view engine.
+            </summary>
+            <param name="disposing">Disposing.</param>
+        </member>
+    </members>
+</doc>
