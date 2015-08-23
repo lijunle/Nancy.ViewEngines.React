@@ -28,7 +28,7 @@ gulp.task('index', ['init'], function _index() {
 });
 
 gulp.task('webpack', ['init', 'index'], function _webpack() {
-  const webpack = require('./gulp/webpack-helper');
+  const webpack = require('./gulp/webpack');
   return webpack(options);
 });
 
