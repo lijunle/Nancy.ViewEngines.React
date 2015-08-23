@@ -34,7 +34,6 @@
 
                     string injected = response.GetResponseContent()
                         .InjectModel(viewPath, model)
-                        .InjectScript(this.rootPath)
                         .NormalizeDocType();
 
                     byte[] buffer = Encoding.UTF8.GetBytes(injected);
