@@ -4,19 +4,17 @@
     {
         public TitleModule()
         {
-            this.Get["title"] = _ => new TestModel("This is title");
+            this.Get["title"] = _ => new TitleModel("This is title");
         }
 
-        private class TestModel
+        private class TitleModel
         {
-            public TestModel(string title)
+            public TitleModel(string title)
             {
                 this.Title = title;
             }
 
             public string Title { get; }
-
-            public string Text => "Render title.";
         }
     }
 }

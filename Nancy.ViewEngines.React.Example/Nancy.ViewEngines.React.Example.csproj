@@ -107,6 +107,7 @@
     <Content Include="Views\Form.jsx" />
     <Content Include="Views\Layout.jsx" />
     <Content Include="Views\Test.jsx" />
+    <Content Include="Views\Title.jsx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
