@@ -105,6 +105,7 @@
     </None>
     <Content Include="packages.config" />
     <Content Include="Views\Test.jsx" />
+    <Content Include="Views\Form.jsx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -116,7 +117,10 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Modules\TestModule.cs" />
+    <Compile Include="Modules\FormModule.cs" />
+    <Compile Include="Modules\HomeModule.cs" />
+    <Compile Include="Modules\StyleModule.cs" />
+    <Compile Include="Modules\TitleModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
