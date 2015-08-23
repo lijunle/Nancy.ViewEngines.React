@@ -41,12 +41,16 @@ function renderClientSide(layout) {
 
   let head = document.getElementsByTagName('head')[0];
   let currentStyles = instance.getStyles();
+  let currentTitle = instance.getTitle();
 
   // hooks to update static HTML elements when re-render layout
   hook(layout, (instance, result) => {
     if (typeof instance.getTitle === 'function') {
       const title = instance.getTitle() || '';
-      window.document.title = title;
+      if (currentTitle !== title) {
+        window.document.title = title;
+        currentTitle = title;
+      }
     }
 
     if (typeof instance.getStyles === 'function') {
