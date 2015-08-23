@@ -1,8 +1,8 @@
 ﻿namespace Nancy.ViewEngines.React.Example.Modules
 {
-    public class TestModule : NancyModule
+    public class HomeModule : NancyModule
     {
-        public TestModule()
+        public HomeModule()
         {
             this.Get["/"] = _ => new TestModel("Hello world");
         }
