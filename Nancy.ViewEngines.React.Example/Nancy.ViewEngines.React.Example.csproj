@@ -104,6 +104,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <Content Include="packages.config" />
+    <Content Include="Views\Console.jsx" />
     <Content Include="Views\Form.jsx" />
     <Content Include="Views\Home.jsx" />
     <Content Include="Views\Layout.jsx" />
@@ -120,6 +121,7 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Modules\ConsoleModule.cs" />
     <Compile Include="Modules\FormModule.cs" />
     <Compile Include="Modules\HomeModule.cs" />
     <Compile Include="Modules\StyleModule.cs" />
