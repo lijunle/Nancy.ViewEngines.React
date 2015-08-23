@@ -28,13 +28,8 @@ gulp.task('index', ['init'], function _index() {
 });
 
 gulp.task('webpack', ['init', 'index'], function _webpack() {
-  const helper = require('./gulp/webpack-helper');
-  return helper.checkLock(options)
-    .then(function _checkLock(isLocked) {
-      return isLocked
-        ? gutil.log('Webpack watch is on, compilation locked.')
-        : helper.compile(options);
-    });
+  const webpack = require('./gulp/webpack');
+  return webpack(options);
 });
 
 gulp.task('clean-index', ['init', 'webpack'], function _cleanIndex(done) {

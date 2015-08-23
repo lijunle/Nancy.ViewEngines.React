@@ -1,9 +1,9 @@
 import path from 'path';
 import gutil from 'gulp-util';
-import locker from 'lockfile';
 import webpack from 'webpack';
 
-function compilerInvoke(options, method) {
+// TODO find another way to watch webpack
+export default (options) => {
   const uglifyPlugin = new webpack.optimize.UglifyJsPlugin({
     compress: {
       warnings: false
@@ -31,6 +31,7 @@ function compilerInvoke(options, method) {
           test: /\.jsx?$/,
           loader: 'imports',
           query: {
+            // TODO console.log not work in browser
             console: path.resolve(__dirname, './console.js')
           }
         }
@@ -46,7 +47,7 @@ function compilerInvoke(options, method) {
   });
 
   return new Promise((resolve, reject) => {
-    const runner = method(compiler, (err, stats) => {
+    compiler.run((err, stats) => {
       if (err) {
         gutil.log(err);
         reject(err);
@@ -57,48 +58,7 @@ function compilerInvoke(options, method) {
           version: false,
           chunks: false
         }));
-        resolve(runner);
       }
     });
   });
-}
-
-export const checkLock = function checkLock(options) {
-  return new Promise((resolve, reject) => {
-    locker.check(options.webpackLockPath, (error, isLocked) => {
-      if (error) {
-        gutil.log(error.toString());
-        reject(error);
-      } else {
-        resolve(isLocked);
-      }
-    });
-  });
-};
-
-export const lock = function lock(options, watcher) {
-  if (!watcher) {
-    return watcher; // another watcher is on, already locked
-  }
-
-  // TODO handle exit event and do the same thing
-  process.on('SIGINT', () => {
-    watcher.close(() => {
-      locker.unlock(options.webpackLockPath, () => {
-        gutil.log('Webpack watcher closed, compilation lock released');
-      });
-    });
-  });
-
-  // inject the lock process before return watcher
-  return new Promise(resolve => {
-    locker.lock(options.webpackLockPath, (err) => {
-      gutil.log(err ? err.toString() : 'Webpack watcher started, lock compilation');
-      resolve(watcher);
-    });
-  });
-};
-
-export const compile = function compile(options) {
-  return compilerInvoke(options, (compiler, cb) => compiler.run(cb));
 };
