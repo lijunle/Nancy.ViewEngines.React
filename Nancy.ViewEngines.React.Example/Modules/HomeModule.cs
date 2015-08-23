@@ -4,12 +4,12 @@
     {
         public HomeModule()
         {
-            this.Get["/"] = _ => new TestModel("Hello world");
+            this.Get["/"] = _ => new HomeModel("Hello world");
         }
 
-        private class TestModel
+        private class HomeModel
         {
-            public TestModel(string text)
+            public HomeModel(string text)
             {
                 this.Text = text;
             }

@@ -2,6 +2,6 @@
 
 export default React.createClass({
   render() {
-    return <div>Text: <code>{this.props.text}</code></div>;
+    return <div>Home: <code>{this.props.text}</code></div>;
   }
 });
