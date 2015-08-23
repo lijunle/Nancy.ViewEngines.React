@@ -9,25 +9,32 @@ function parse(payload) {
   }
 }
 
+function hook(layout, callback) {
+  const LayoutPrototype = layout.type.prototype;
+  const layoutRender = LayoutPrototype.render;
+  LayoutPrototype.render = function _render() {
+    const result = layoutRender.apply(this, arguments);
+    return callback(this, result);
+  };
+}
+
 function renderClientSide(layout) {
   React.render(layout, window.document.body);
 
-  // TODO hooks on getStyles function too.
-  // hooks to update document title when re-render layout
-  const LayoutPrototype = layout.type.prototype;
-  const layoutGetTitle = LayoutPrototype.getTitle;
-  if (typeof layoutGetTitle === 'function') {
-    const layoutRender = LayoutPrototype.render;
-    LayoutPrototype.render = function renderWithTitle() {
-      const result = layoutRender.apply(this, arguments);
-
-      // update document title
-      const title = layoutGetTitle.call(this) || '';
+  // hooks to update static HTML elements when re-render layout
+  hook(layout, (instance, result) => {
+    if (typeof instance.getTitle === 'function') {
+      const title = instance.getTitle() || '';
       window.document.title = title;
+    }
 
-      return result;
-    };
-  }
+    if (typeof instance.getStyles === 'function') {
+      const styles = instance.getStyles() || [];
+      window.console.log(styles); // TODO implement this
+    }
+
+    return result;
+  });
 }
 
 export default (lookup, defaultLayout) => {
