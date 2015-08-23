@@ -18,8 +18,29 @@ function hook(layout, callback) {
   };
 }
 
+function newStyle(style) {
+  const link = document.createElement('link');
+  link.setAttribute('rel', 'stylesheet');
+  link.setAttribute('type', 'text/css');
+  link.setAttribute('href', style);
+  return link;
+}
+
+function updateStyles(styles, currentStyles, head) {
+  currentStyles
+    .filter(current => styles.indexOf(current) === -1)
+    .forEach(current => head.querySelector(`link[href='${current}']`).remove());
+
+  styles
+    .filter(style => currentStyles.indexOf(style) === -1)
+    .forEach(style => head.appendChild(newStyle(style)));
+}
+
 function renderClientSide(layout) {
-  React.render(layout, window.document.body);
+  const instance = React.render(layout, window.document.body);
+
+  let head = document.getElementsByTagName('head')[0];
+  let currentStyles = instance.getStyles();
 
   // hooks to update static HTML elements when re-render layout
   hook(layout, (instance, result) => {
@@ -30,7 +51,8 @@ function renderClientSide(layout) {
 
     if (typeof instance.getStyles === 'function') {
       const styles = instance.getStyles() || [];
-      window.console.log(styles); // TODO implement this
+      updateStyles(styles, currentStyles, head);
+      currentStyles = styles;
     }
 
     return result;
