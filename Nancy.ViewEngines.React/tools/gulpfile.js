@@ -43,26 +43,4 @@ gulp.task('clean-index', ['init', 'webpack'], function _cleanIndex(done) {
   fs.unlink(options.indexPath, done);
 });
 
-gulp.task('style-generate', ['init', 'info'], function _styleGenerate() {
-  const helper = require('./gulp/style-helper');
-  const concat = require('gulp-concat');
-  const minify = require('gulp-minify-css');
-  const gulpif = require('gulp-if');
-
-  gutil.log('Style file path:', options.stylePath);
-
-  return gulp.src(options.stylePath)
-    .pipe(helper.rewriteUrl())
-    .pipe(concat(options.styleBundleName))
-    .pipe(gulpif(!options.debug, minify()))
-    .pipe(gulp.dest(options.clientPath));
-});
-
-gulp.task('style-copy', ['init', 'info', 'style-generate'], function _styleCopy() {
-  const helper = require('./gulp/style-helper');
-  return helper.copyFiles();
-});
-
-gulp.task('style', ['style-generate', 'style-copy']);
-
-gulp.task('default', ['info', 'webpack', 'clean-index', 'style']);
+gulp.task('default', ['info', 'webpack', 'clean-index']);
