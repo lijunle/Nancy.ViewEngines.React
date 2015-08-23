@@ -100,7 +100,6 @@
     <None Include="tools\gulp\layout.jsx" />
     <None Include="tools\gulp\options.js" />
     <None Include="tools\gulp\render.js" />
-    <None Include="tools\gulp\style-helper.js" />
     <None Include="tools\gulpfile.js" />
     <None Include="tools\install.ps1" />
     <None Include="tools\node.cmd" />
