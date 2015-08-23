@@ -31,6 +31,7 @@ function compilerInvoke(options, method) {
           test: /\.jsx?$/,
           loader: 'imports',
           query: {
+            // TODO console.log not work in browser
             console: path.resolve(__dirname, './console.js')
           }
         }
@@ -77,6 +78,7 @@ export const checkLock = function checkLock(options) {
 };
 
 export const lock = function lock(options, watcher) {
+  // TODO find another way to watch webpack
   if (!watcher) {
     return watcher; // another watcher is on, already locked
   }

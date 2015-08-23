@@ -12,6 +12,7 @@ function parse(payload) {
 function renderClientSide(layout) {
   React.render(layout, window.document.body);
 
+  // TODO hooks on getStyles function too.
   // hooks to update document title when re-render layout
   const LayoutPrototype = layout.type.prototype;
   const layoutGetTitle = LayoutPrototype.getTitle;

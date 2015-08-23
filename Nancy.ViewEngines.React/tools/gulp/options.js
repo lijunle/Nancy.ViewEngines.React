@@ -44,6 +44,7 @@ function parseConfig(projectPath) {
       return '<contents></contents>';
     })
     .then(contents => {
+      // TODO provide a dedicated section for project settings
       const doc = new DOMParser().parseFromString(contents, 'text/xml');
       const entries = Array.from(doc.getElementsByTagName('add'))
         .filter(entry => entry.hasAttribute('key'))

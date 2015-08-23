@@ -27,6 +27,7 @@ function requireView(view) {
 }
 
 function formatLine(line) {
+  // TODO use secret number instead of local path for release build
   const key = JSON.stringify(line[0]);
   const value = line[1];
   return `  ${key}: ${value}`;
@@ -64,6 +65,7 @@ function buildIndexFile(file) {
   return file;
 }
 
+// TODO hack gulp-xpath to meet the requirements, see donum/gulp-xpath#1
 export default function buildIndex() {
   return through.obj((file, enc, done) => {
     if (file.isStream()) {
