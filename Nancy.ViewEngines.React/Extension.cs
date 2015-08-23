@@ -40,13 +40,6 @@
                 .Replace("</head>", $"<script src='{ReactConfiguration.Script.Request}?t={ReactConfiguration.Script.HashCode}'></script></head>")
                 .Replace("</body>", $"<script>render({ReactConfiguration.Serializer.Serialize(viewPath)}, {ReactConfiguration.Serializer.Serialize(model)})</script></body>");
 
-        internal static string InjectScript(this string content, string rootPath) =>
-            !content.IsHtml() || !ReactConfiguration.Style.InjectionEnabled
-            ? content
-            : content.Replace(
-                "</head>",
-                $"<link href='{ReactConfiguration.Style.Request}?t={ReactConfiguration.Style.HashCode}' rel='stylesheet' /></head>");
-
         internal static string NormalizeDocType(this string content) =>
             !content.StartsWith("<html>")
             ? content

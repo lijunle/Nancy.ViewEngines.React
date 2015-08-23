@@ -7,24 +7,23 @@
     {
         public StyleModule()
         {
-            this.Get["style"] = _ => new TestModel("Background should be yellow.");
+            this.Get["style"] = _ => new StyleModel();
 
-            this.Get["style/css"] = _ => new TextResponse("code { background: yellow }", "text/css");
+            this.Get["style/color/{color}"] = parameters =>
+            {
+                var color = parameters.Color;
+                var css = $".{color} {{ background: {color} }}";
+                return new TextResponse(css, "text/css");
+            };
         }
 
-        private class TestModel
+        private class StyleModel
         {
-            public TestModel(string text)
-            {
-                this.Text = text;
-            }
-
-            public string Text { get; }
-
             public IEnumerable<string> Styles =>
                 new[]
                 {
-                    "/style/css"
+                    "/style/color/yellow",
+                    "/style/color/blue"
                 };
         }
     }

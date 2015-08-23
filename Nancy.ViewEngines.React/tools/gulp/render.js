@@ -9,25 +9,58 @@ function parse(payload) {
   }
 }
 
-function renderClientSide(layout) {
-  React.render(layout, window.document.body);
-
-  // TODO hooks on getStyles function too.
-  // hooks to update document title when re-render layout
+function hook(layout, callback) {
   const LayoutPrototype = layout.type.prototype;
-  const layoutGetTitle = LayoutPrototype.getTitle;
-  if (typeof layoutGetTitle === 'function') {
-    const layoutRender = LayoutPrototype.render;
-    LayoutPrototype.render = function renderWithTitle() {
-      const result = layoutRender.apply(this, arguments);
+  const layoutRender = LayoutPrototype.render;
+  LayoutPrototype.render = function _render() {
+    const result = layoutRender.apply(this, arguments);
+    return callback(this, result);
+  };
+}
 
-      // update document title
-      const title = layoutGetTitle.call(this) || '';
-      window.document.title = title;
+function newStyle(style) {
+  const link = document.createElement('link');
+  link.setAttribute('rel', 'stylesheet');
+  link.setAttribute('type', 'text/css');
+  link.setAttribute('href', style);
+  return link;
+}
 
-      return result;
-    };
-  }
+function updateStyles(styles, currentStyles, head) {
+  currentStyles
+    .filter(current => styles.indexOf(current) === -1)
+    .forEach(current => head.querySelector(`link[href='${current}']`).remove());
+
+  styles
+    .filter(style => currentStyles.indexOf(style) === -1)
+    .forEach(style => head.appendChild(newStyle(style)));
+}
+
+function renderClientSide(layout) {
+  const instance = React.render(layout, window.document.body);
+
+  let head = document.getElementsByTagName('head')[0];
+  let currentStyles = instance.getStyles();
+  let currentTitle = instance.getTitle();
+
+  // hooks to update static HTML elements when re-render layout
+  hook(layout, (instance, result) => {
+    if (typeof instance.getTitle === 'function') {
+      const title = instance.getTitle() || '';
+      if (currentTitle !== title) {
+        window.document.title = title;
+        currentTitle = title;
+      }
+    }
+
+    if (typeof instance.getStyles === 'function') {
+      const styles = instance.getStyles() || [];
+      updateStyles(styles, currentStyles, head);
+      currentStyles = styles;
+    }
+
+    return result;
+  });
 }
 
 export default (lookup, defaultLayout) => {
