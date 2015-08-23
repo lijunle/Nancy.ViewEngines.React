@@ -27,7 +27,7 @@ export default React.createClass({
           <meta charSet="utf-8" />
           <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
           <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-          <script dangerouslySetInnerHTML={{__html: consoleCode}} />
+          {consoleCode ? <script dangerouslySetInnerHTML={{__html: consoleCode}} /> : null}
           {styles.map(style => <link rel="stylesheet" type="text/css" href={style} />)}
         </head>
         <body dangerouslySetInnerHTML={{__html: body}} />
