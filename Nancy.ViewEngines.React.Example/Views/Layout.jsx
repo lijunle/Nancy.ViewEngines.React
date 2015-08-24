@@ -3,14 +3,14 @@ import React from 'react';
 export default React.createClass({
   propTypes: {
     view: React.PropTypes.func.isRequired, // React component constructor
-    model: React.PropTypes.object.isRequired
+    model: React.PropTypes.object.isRequired,
   },
 
   getInitialState() {
     return {
       title: this.props.model.title || 'Example Title',
-      styles: this.props.model.styles || []
-    }
+      styles: this.props.model.styles || [],
+    };
   },
 
   getTitle() {
@@ -34,6 +34,6 @@ export default React.createClass({
   },
 
   updateStyles(styles) {
-    this.setState({ styles })
-  }
+    this.setState({ styles });
+  },
 });
