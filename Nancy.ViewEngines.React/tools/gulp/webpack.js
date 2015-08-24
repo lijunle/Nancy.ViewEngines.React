@@ -6,8 +6,8 @@ import webpack from 'webpack';
 export default (options) => {
   const uglifyPlugin = new webpack.optimize.UglifyJsPlugin({
     compress: {
-      warnings: false
-    }
+      warnings: false,
+    },
   });
 
   const compiler = webpack({
@@ -16,7 +16,7 @@ export default (options) => {
       path: options.clientPath,
       filename: options.scriptBundleName,
       publicPath: `/${options.assets}/`,
-      library: 'render' // expose as render method
+      library: 'render', // expose as render method
     },
     devtool: options.debug ? 'cheap-module-source-map' : null,
     plugins: options.debug ? null : [uglifyPlugin],
@@ -26,25 +26,24 @@ export default (options) => {
         {
           test: /\.jsx?$/,
           exclude: /node_modules/,
-          loader: 'babel'
+          loader: 'babel',
         },
         {
           test: /\.jsx?$/,
           loader: 'imports',
           query: {
-            // TODO console.log not work in browser
-            console: path.resolve(__dirname, './console.js')
-          }
-        }
-      ]
+            console: path.resolve(__dirname, './console.js'),
+          },
+        },
+      ],
     },
     resolve: {
       root: path.resolve(__dirname, '../../node_modules'),
-      extensions: ['', '.js', '.jsx']
+      extensions: ['', '.js', '.jsx'],
     },
     resolveLoader: {
-      root: path.resolve(__dirname, '../../node_modules')
-    }
+      root: path.resolve(__dirname, '../../node_modules'),
+    },
   });
 
   return new Promise((resolve, reject) => {
@@ -57,7 +56,7 @@ export default (options) => {
           colors: false,
           hash: false,
           version: false,
-          chunks: false
+          chunks: false,
         }));
       }
     });

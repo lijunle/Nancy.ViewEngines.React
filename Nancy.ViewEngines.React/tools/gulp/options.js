@@ -84,5 +84,5 @@ export default {
 
       options.publicPath = config.publicPath || 'assets';
     });
-  }
+  },
 };
