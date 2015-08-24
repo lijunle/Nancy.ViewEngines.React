@@ -20,6 +20,7 @@ export default (options) => {
     },
     devtool: options.debug ? 'cheap-module-source-map' : null,
     plugins: options.debug ? null : [uglifyPlugin],
+    bail: true,
     module: {
       loaders: [
         {
