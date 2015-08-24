@@ -1,0 +1,8 @@
+{
+  "devDependencies": {
+    "babel-eslint": "^4.0.10",
+    "eslint": "^1.2.1",
+    "eslint-config-airbnb": "0.0.7",
+    "eslint-plugin-react": "^3.2.3"
+  }
+}

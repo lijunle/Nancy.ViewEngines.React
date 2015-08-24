@@ -117,13 +117,14 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
-    <Error Condition="!Exists('..\packages\Npm.js.2.13.1.0\build\npm.js.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Npm.js.2.13.1.0\build\npm.js.targets'))" />
     <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
     <Error Condition="!Exists('..\packages\Vsxmd.1.0.0\build\Vsxmd.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Vsxmd.1.0.0\build\Vsxmd.targets'))" />
   </Target>
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
-  <Import Project="..\packages\Npm.js.2.13.1.0\build\npm.js.targets" Condition="Exists('..\packages\Npm.js.2.13.1.0\build\npm.js.targets')" />
   <Target Name="BeforeBuild">
+    <Exec Command=".\packages\Npm.js.2.13.1.0\tools\npm --unicode=false install" WorkingDirectory="$(SolutionDir)" />
+    <Exec Command=".\node_modules\.bin\eslint --ext .js,.jsx $(ProjectDir)\tools" WorkingDirectory="$(SolutionDir)" />
+    <Exec Command="..\packages\Npm.js.2.13.1.0\tools\npm --unicode=false install" WorkingDirectory="$(MSBuildProjectPath)" />
     <Exec Command=".\tools\7za a -t7z -bd -mx9 -y .\node_modules.7z .\node_modules" WorkingDirectory="$(MSBuildProjectPath)" />
   </Target>
   <Target Name="AfterBuild">

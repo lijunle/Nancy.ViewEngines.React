@@ -167,11 +167,9 @@
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
   </Target>
   <Import Project="..\Nancy.ViewEngines.React\targets\Nancy.ViewEngines.React.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
-       Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
+    <Exec Command=".\node_modules\.bin\eslint --ext .js,.jsx $(ProjectDir)\Views" WorkingDirectory="$(SolutionDir)" />
   </Target>
   <Target Name="AfterBuild">
   </Target>
-  -->
 </Project>

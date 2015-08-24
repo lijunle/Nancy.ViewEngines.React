@@ -11,7 +11,7 @@ function getData(layout) {
 
 export default React.createClass({
   propTypes: {
-    layout: React.PropTypes.node.isRequired
+    layout: React.PropTypes.node.isRequired,
   },
 
   render() {
@@ -33,5 +33,5 @@ export default React.createClass({
         <body dangerouslySetInnerHTML={{__html: body}} />
       </html>
     );
-  }
+  },
 });

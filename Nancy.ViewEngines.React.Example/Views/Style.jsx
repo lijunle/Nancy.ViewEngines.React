@@ -1,11 +1,16 @@
 import React from 'react';
 
 export default React.createClass({
+  propTypes: {
+    styles: React.PropTypes.array.isRequired,
+    updateStyles: React.PropTypes.func.isRequired,
+  },
+
   getInitialState() {
     return {
       styles: this.props.styles,
-      value: 'red'
-    }
+      value: 'red',
+    };
   },
 
   renderItem(style) {
@@ -14,7 +19,7 @@ export default React.createClass({
 
     return (
       <li className={color} key={color}>
-        {style} <a href="javascript:void(0)" onClick={this.handleRemove(style)}>remove</a>
+        {style} <button onClick={this.handleRemove(style)}>remove</button>
       </li>
     );
   },
@@ -47,6 +52,6 @@ export default React.createClass({
       const styles = this.state.styles.filter(x => x !== style);
       this.props.updateStyles(styles);
       this.setState({ styles });
-    }
-  }
+    };
+  },
 });

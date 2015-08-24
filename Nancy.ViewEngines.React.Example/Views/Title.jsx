@@ -1,10 +1,15 @@
 import React from 'react';
 
 export default React.createClass({
+  propTypes: {
+    title: React.PropTypes.string.isRequired,
+    updateTitle: React.PropTypes.func.isRequired,
+  },
+
   getInitialState() {
     return {
-      title: this.props.title
-    }
+      title: this.props.title,
+    };
   },
 
   render() {
@@ -23,5 +28,5 @@ export default React.createClass({
 
   handleUpdate() {
     this.props.updateTitle(this.state.title);
-  }
+  },
 });

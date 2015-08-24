@@ -1,9 +1,13 @@
 import React from 'react';
 
 export default React.createClass({
+  propTypes: {
+    text: React.PropTypes.string.isRequired,
+  },
+
   getInitialState() {
     return {
-      text: this.props.text
+      text: this.props.text,
     };
   },
 
@@ -35,5 +39,5 @@ export default React.createClass({
 
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     xhr.send(`text=${this.state.text}`);
-  }
+  },
 });

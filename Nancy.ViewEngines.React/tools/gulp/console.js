@@ -8,14 +8,14 @@ const logs = {};
 [
   'assert', 'clear', 'count', 'debug', 'dir', 'dirxml', 'exception', 'group',
   'groupCollapsed', 'groupEnd', 'markTimeline', 'profile', 'profileEnd',
-  'table', 'time', 'timeEnd', 'timeStamp'
+  'table', 'time', 'timeEnd', 'timeStamp',
 ].forEach(method => {
   logger[method] = logger[method] || () => {};
 });
 
 // restore the log arguements to redirect information for client
 [
-  'log', 'dir', 'trace', 'debug', 'info', 'warn', 'error'
+  'log', 'dir', 'trace', 'debug', 'info', 'warn', 'error',
 ].forEach(method => {
   logger[method] = logger[method] || ((...args) => {
     const stacktrace = (new Error()).stack;

@@ -14,7 +14,8 @@ function hook(layout, callback) {
   const layoutRender = LayoutPrototype.render;
   LayoutPrototype.render = function _render() {
     const result = layoutRender.apply(this, arguments);
-    return callback(this, result);
+    callback(this);
+    return result;
   };
 }
 
@@ -39,12 +40,12 @@ function updateStyles(styles, currentStyles, head) {
 function renderClientSide(layout) {
   const instance = React.render(layout, window.document.body);
 
-  let head = document.getElementsByTagName('head')[0];
+  const head = document.getElementsByTagName('head')[0];
   let currentStyles = instance.getStyles();
   let currentTitle = instance.getTitle();
 
   // hooks to update static HTML elements when re-render layout
-  hook(layout, (instance, result) => {
+  hook(layout, () => {
     if (typeof instance.getTitle === 'function') {
       const title = instance.getTitle() || '';
       if (currentTitle !== title) {
@@ -58,8 +59,6 @@ function renderClientSide(layout) {
       updateStyles(styles, currentStyles, head);
       currentStyles = styles;
     }
-
-    return result;
   });
 }
 
