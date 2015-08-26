@@ -109,16 +109,20 @@
   </ItemGroup>
   <ItemGroup>
     <None Include=".bin\node.cmd" />
-    <None Include="ClearScript.V8\ClearScriptV8-32.dll">
+    <None Include="..\packages\JavaScriptEngineSwitcher.V8.1.2.9\content\ClearScript.V8\ClearScriptV8-32.dll">
+      <Link>ClearScript.V8\ClearScriptV8-32.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="ClearScript.V8\ClearScriptV8-64.dll">
+    <None Include="..\packages\JavaScriptEngineSwitcher.V8.1.2.9\content\ClearScript.V8\ClearScriptV8-64.dll">
+      <Link>ClearScript.V8\ClearScriptV8-64.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="ClearScript.V8\v8-ia32.dll">
+    <None Include="..\packages\JavaScriptEngineSwitcher.V8.1.2.9\content\ClearScript.V8\v8-ia32.dll">
+      <Link>ClearScript.V8\v8-ia32.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="ClearScript.V8\v8-x64.dll">
+    <None Include="..\packages\JavaScriptEngineSwitcher.V8.1.2.9\content\ClearScript.V8\v8-x64.dll">
+      <Link>ClearScript.V8\v8-x64.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <Content Include="packages.config" />
