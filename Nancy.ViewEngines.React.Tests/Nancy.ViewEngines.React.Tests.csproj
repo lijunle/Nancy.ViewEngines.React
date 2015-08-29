@@ -112,7 +112,9 @@
     <Compile Include="Pages\FormPage.cs" />
     <Compile Include="Pages\HomePage.cs" />
     <Compile Include="Pages\PageBase.cs" />
+    <Compile Include="Pages\StylePage.cs" />
     <Compile Include="Pages\TitlePage.cs" />
+    <Compile Include="StyleTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="HomeTests.cs" />
     <Compile Include="TestBase.cs" />
