@@ -3,6 +3,7 @@
     using System;
     using Common;
     using OpenQA.Selenium;
+    using OpenQA.Selenium.Support.UI;
 
     internal abstract class PageBase
     {
@@ -28,5 +29,11 @@
         }
 
         protected abstract string Path { get; }
+
+        internal TResult WaitUntil<TResult>(Func<IWebDriver, TResult> condition)
+        {
+            var wait = new WebDriverWait(this.Driver, TimeSpan.FromSeconds(5));
+            return wait.Until(condition);
+        }
     }
 }
