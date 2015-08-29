@@ -106,9 +106,11 @@
     <Compile Include="Fixture.cs" />
     <Compile Include="Pages\HomePage.cs" />
     <Compile Include="Pages\PageBase.cs" />
+    <Compile Include="Pages\TitlePage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="HomeTests.cs" />
     <Compile Include="TestBase.cs" />
+    <Compile Include="TitleTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
