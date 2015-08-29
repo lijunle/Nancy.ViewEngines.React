@@ -103,6 +103,8 @@
     <Compile Include="Common\Host.cs" />
     <Compile Include="Common\TestBootstrapper.cs" />
     <Compile Include="Common\TestRootPathProvider.cs" />
+    <Compile Include="Pages\HomePage.cs" />
+    <Compile Include="Pages\PageBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="HomeTests.cs" />
     <Compile Include="TestBase.cs" />
