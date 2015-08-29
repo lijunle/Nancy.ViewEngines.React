@@ -27,6 +27,9 @@ cache:
 before_build:
   - ps: nuget restore "$env:APPVEYOR_BUILD_FOLDER\Nancy.ViewEngines.React.sln"
 
+before_test:
+  - cinst googlechrome
+
 artifacts:
   - path: 'Nancy.ViewEngines.React\**\*.nupkg'
 
