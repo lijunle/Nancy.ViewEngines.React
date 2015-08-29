@@ -12,6 +12,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nancy.ViewEngines.React", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nancy.ViewEngines.React.Example", "Nancy.ViewEngines.React.Example\Nancy.ViewEngines.React.Example.csproj", "{68FBCE3D-D9A1-4FCD-A59A-FB7B556D827E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nancy.ViewEngines.React.Tests", "Nancy.ViewEngines.React.Tests\Nancy.ViewEngines.React.Tests.csproj", "{1DB25BF5-F80F-41A3-BABF-9BC49AC94986}"
+	ProjectSection(ProjectDependencies) = postProject
+		{68FBCE3D-D9A1-4FCD-A59A-FB7B556D827E} = {68FBCE3D-D9A1-4FCD-A59A-FB7B556D827E}
+		{921894ED-2DC3-422C-8ABC-0407D4D04A83} = {921894ED-2DC3-422C-8ABC-0407D4D04A83}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,6 +32,10 @@ Global
 		{68FBCE3D-D9A1-4FCD-A59A-FB7B556D827E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{68FBCE3D-D9A1-4FCD-A59A-FB7B556D827E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{68FBCE3D-D9A1-4FCD-A59A-FB7B556D827E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1DB25BF5-F80F-41A3-BABF-9BC49AC94986}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1DB25BF5-F80F-41A3-BABF-9BC49AC94986}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1DB25BF5-F80F-41A3-BABF-9BC49AC94986}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1DB25BF5-F80F-41A3-BABF-9BC49AC94986}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
