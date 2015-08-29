@@ -5,6 +5,11 @@
 
     public class HomeTests : TestBase
     {
+        public HomeTests(Fixture fixture)
+            : base(fixture)
+        {
+        }
+
         [Fact]
         public void Home_page_should_render_fine()
         {
