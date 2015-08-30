@@ -21,13 +21,53 @@ LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
 OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-===
-
 This license applies to all parts of Nancy.ViewEngines.React that are
 not externally maintained libraries.
 
-The externally maintained libraries used by Nancy.ViewEngines.React
-are:
+===
+
+The externally maintained libraries used by and distributed with
+Nancy.ViewEngines.React package are:
 
 - 7-Zip, located at tools/7za.exe. Its license is GNU LGPL. Check it
   at http://7-zip.org/license.txt
+
+- Babel, installed by NPM and packed into node_modules.7z.
+  It is licensed under MIT license. Check it at
+  https://github.com/babel/babel/blob/master/LICENSE
+
+- Babel-loader, installed by NPM and packed into node_modules.7z.
+  It is licensed under MIT license. Check it at
+  https://github.com/babel/babel-loader/blob/master/LICENSE
+
+- Gulp, installed by NPM and packed into node_modules.7z.
+  It is licensed under MIT license. Check it at
+  https://github.com/gulpjs/gulp/blob/master/LICENSE
+
+- Gulp-util, installed by NPM and packed into node_modules.7z.
+  It is licensed under MIT license. Check it at
+  https://github.com/gulpjs/gulp-util/blob/master/LICENSE
+
+- Imports-loader, installed by NPM and packed into node_modules.7z.
+  It is licensed under MIT license. Check it at
+  https://github.com/webpack/imports-loader#license
+
+- React, installed by NPM and packed into node_modules.7z.
+  It is licensed under BSD license. Check it at
+  https://github.com/facebook/react/blob/master/LICENSE
+
+- Through2, installed by NPM and packed into node_modules.7z.
+  It is licensed under MIT license. Check it at
+  https://github.com/rvagg/through2/blob/master/LICENSE
+
+- Webpack, installed by NPM and packed into node_modules.7z.
+  It is licensed under MIT license. Check it at
+  https://github.com/webpack/webpack/blob/master/LICENSE
+
+- Xmldom, installed by NPM and packed into node_modules.7z.
+  It is licensed under MIT and LGPL license. Check it at
+  https://github.com/jindw/xmldom/blob/master/LICENSE
+
+- Xpath, installed by NPM and packed into node_modules.7z.
+  It is licensed under MIT license. Check it at
+  https://github.com/goto100/xpath/blob/master/package.json#L26
