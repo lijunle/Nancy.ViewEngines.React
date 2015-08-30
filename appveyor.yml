@@ -23,6 +23,8 @@ assembly_info:
 
 cache:
   - packages -> **\packages.config
+  - node_modules -> package.json
+  - Nancy.ViewEngines.React\node_modules -> Nancy.ViewEngines.React\package.json
 
 before_build:
   - ps: nuget restore "$env:APPVEYOR_BUILD_FOLDER\Nancy.ViewEngines.React.sln"
