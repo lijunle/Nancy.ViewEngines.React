@@ -1,30 +1,35 @@
 ﻿namespace Nancy.ViewEngines.React.Tests
 {
-    using System;
-    using Common;
-    using OpenQA.Selenium;
-    using OpenQA.Selenium.Chrome;
+    using Pages;
     using Xunit;
 
     [Collection(FixtureCollection.Name)]
-    public class TestBase : IDisposable
+    public class TestBase
     {
-        public TestBase()
+        private readonly Fixture fixture;
+
+        public TestBase(Fixture fixture)
         {
-            this.Driver = new ChromeDriver();
+            this.fixture = fixture;
         }
 
-        protected IWebDriver Driver { get; }
-
-        public void Dispose()
+        internal TPage GoTo<TPage>()
+            where TPage : PageBase, new()
         {
-            this.Driver.Quit();
+            var page = new TPage()
+            {
+                Driver = this.fixture.Driver
+            };
+
+            this.fixture.Driver.Url = page.Url;
+
+            return page;
         }
 
         [CollectionDefinition(Name)]
-        public class FixtureCollection : ICollectionFixture<Host>
+        public class FixtureCollection : ICollectionFixture<Fixture>
         {
-            public const string Name = "host";
+            public const string Name = "fixture";
         }
     }
 }

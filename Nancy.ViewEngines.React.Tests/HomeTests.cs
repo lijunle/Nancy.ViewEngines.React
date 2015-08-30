@@ -1,17 +1,27 @@
 ﻿namespace Nancy.ViewEngines.React.Tests
 {
-    using Common;
+    using Pages;
     using Xunit;
 
     public class HomeTests : TestBase
     {
+        public HomeTests(Fixture fixture)
+            : base(fixture)
+        {
+        }
+
         [Fact]
         public void Home_page_should_render_fine()
         {
-            this.Driver.Url = Host.Url;
+            HomePage page = this.GoTo<HomePage>();
 
-            Assert.NotNull(this.Driver.Title);
-            Assert.NotEmpty(this.Driver.Title);
+            Assert.NotNull(page);
+
+            Assert.Equal("Example Title", page.Title);
+            Assert.Equal("Home: Hello world", page.Text);
+
+            Assert.NotEmpty(page.RootElement.GetAttribute("data-reactid"));
+            Assert.NotEmpty(page.RootElement.GetAttribute("data-react-checksum"));
         }
     }
 }
