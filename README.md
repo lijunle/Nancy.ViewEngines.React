@@ -4,7 +4,7 @@
 
 Use [React.js](https://facebook.github.io/react/) as view engine in Nancy.
 
-*This project is still in alpha stage.* The APIs may change in a future release. It is not recommended to use it in production.
+*This project is still in beta stage.* The APIs may change in a future release. It is not recommended to use it in production.
 
 # Features
 
