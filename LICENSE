@@ -56,6 +56,10 @@ Nancy.ViewEngines.React package are:
   It is licensed under BSD license. Check it at
   https://github.com/facebook/react/blob/master/LICENSE
 
+- Rimraf, installed by NPM and packed into node_modules.7z.
+  It is licensed under ISC license. Check it at
+  https://github.com/isaacs/rimraf/blob/master/LICENSE
+
 - Through2, installed by NPM and packed into node_modules.7z.
   It is licensed under MIT license. Check it at
   https://github.com/rvagg/through2/blob/master/LICENSE
