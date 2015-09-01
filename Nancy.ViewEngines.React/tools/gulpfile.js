@@ -8,6 +8,12 @@ gulp.task('init', function _init() {
   return options.initialize();
 });
 
+gulp.task('clean', ['init'], function _clean(done) {
+  const rimraf = require('rimraf');
+  gutil.log('Clean up client path:', options.clientPath);
+  rimraf(options.clientPath, done);
+});
+
 gulp.task('info', ['init'], function _info() {
   gutil.log('Build runs at debug mode?', options.debug);
   gutil.log('Build runs in TFS machine?', options.tfsBuild);
@@ -17,7 +23,7 @@ gulp.task('info', ['init'], function _info() {
   gutil.log('Path environment variable:', process.env.PATH);
 });
 
-gulp.task('index', ['init'], function _index() {
+gulp.task('index', ['init', 'clean'], function _index() {
   const buildIndex = require('./gulp/build-index');
   const projectFile = options.projectFile;
   const clientPath = options.clientPath;
@@ -27,15 +33,9 @@ gulp.task('index', ['init'], function _index() {
     .pipe(gulp.dest(clientPath));
 });
 
-gulp.task('webpack', ['init', 'index'], function _webpack() {
+gulp.task('webpack', ['init', 'clean', 'index'], function _webpack() {
   const webpack = require('./gulp/webpack');
   return webpack(options);
 });
 
-gulp.task('clean-index', ['init', 'webpack'], function _cleanIndex(done) {
-  const fs = require('fs');
-  gutil.log('Remove intermedia index file:', options.indexPath);
-  fs.unlink(options.indexPath, done);
-});
-
-gulp.task('default', ['info', 'webpack', 'clean-index']);
+gulp.task('default', ['info', 'clean', 'webpack']);
