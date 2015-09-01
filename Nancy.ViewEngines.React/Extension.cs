@@ -4,16 +4,17 @@
 
     internal static class Extension
     {
-        private const string ReactViewPath = "Nancy.ViewEngines.React.ViewPath";
+        private const string ReactViewId = "Nancy.ViewEngines.React.ViewId";
 
-        internal static void SetReactViewPath(this NancyContext context, string viewPath) =>
-            context.Items[ReactViewPath] = viewPath;
+        internal static void SetReactViewId(this NancyContext context, int viewId) =>
+            context.Items[ReactViewId] = viewId;
 
-        internal static string GetReactViewPath(this NancyContext context)
+        internal static int? GetReactViewId(this NancyContext context)
         {
-            object viewPath = null;
-            context.Items.TryGetValue(ReactViewPath, out viewPath);
-            return (string)viewPath;
+            object viewId = null;
+            return context.Items.TryGetValue(ReactViewId, out viewId)
+                ? (int?)viewId
+                : null;
         }
 
         internal static string GetResponseContent(this Response response)
@@ -33,12 +34,12 @@
         internal static string ResolvePath(params string[] paths) =>
             Path.GetFullPath(Path.Combine(paths));
 
-        internal static string InjectModel(this string content, string viewPath, object model) =>
+        internal static string InjectModel(this string content, int viewId, object model) =>
             !content.IsHtml() || !ReactConfiguration.Script.InjectionEnabled
             ? content
             : content
                 .Replace("</head>", $"<script src='{ReactConfiguration.Script.Request}?t={ReactConfiguration.Script.HashCode}'></script></head>")
-                .Replace("</body>", $"<script>render({ReactConfiguration.Serializer.Serialize(viewPath)}, {ReactConfiguration.Serializer.Serialize(model)})</script></body>");
+                .Replace("</body>", $"<script>render({viewId}, {ReactConfiguration.Serializer.Serialize(model)})</script></body>");
 
         internal static string NormalizeDocType(this string content) =>
             !content.StartsWith("<html>")

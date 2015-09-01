@@ -14,9 +14,18 @@
     /// </summary>
     public class ReactViewEngine : IViewEngine, IDisposable
     {
+        private static IDictionary<string, int> pathMapping;
+
         private readonly IEnumerable<IStatusCodeHandler> statusCodeHandlers;
 
         private readonly JsPool pool;
+
+        static ReactViewEngine()
+        {
+            var path = Path.GetFullPath(Path.Combine(ReactConfiguration.ClientPath, "index.map"));
+            var content = File.ReadAllText(path);
+            pathMapping = ReactConfiguration.Serializer.Deserialize<Dictionary<string, int>>(content);
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ReactViewEngine"/> class.
@@ -61,11 +70,12 @@
 
             try
             {
-                string path = GetViewLocationPath(viewLocationResult);
-                string payload = ReactConfiguration.Serializer.Serialize(model);
-                string html = engine.CallFunction<string>("render", path, payload);
+                var path = GetViewPath(viewLocationResult);
+                var id = GetViewId(path);
+                var payload = ReactConfiguration.Serializer.Serialize(model);
+                var html = engine.CallFunction<string>("render", id, payload);
 
-                renderContext.Context.SetReactViewPath(path);
+                renderContext.Context.SetReactViewId(id);
 
                 return new HtmlResponse(contents: stream =>
                 {
@@ -99,8 +109,11 @@
             }
         }
 
-        private static string GetViewLocationPath(ViewLocationResult viewLocationResult) =>
+        private static string GetViewPath(ViewLocationResult viewLocationResult) =>
             $"{viewLocationResult.Location}/{viewLocationResult.Name}.{viewLocationResult.Extension}";
+
+        private static int GetViewId(string viewPath) =>
+            pathMapping[viewPath];
 
         private static Response RenderExceptionResponse(
             IRenderContext renderContext,

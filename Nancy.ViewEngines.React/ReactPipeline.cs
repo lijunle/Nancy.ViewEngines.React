@@ -23,17 +23,17 @@
             pipelines.AfterRequest += async context =>
             {
                 Response response = context.Response;
-                string viewPath = context.GetReactViewPath();
+                var viewId = context.GetReactViewId();
                 object model = context.NegotiationContext.DefaultModel;
 
                 // check if it is a React response
-                if (response != null && viewPath != null && model != null)
+                if (response != null && viewId != null && model != null)
                 {
                     // it is a need to pre-execute the response, otherwise throws NullReference
                     await response.PreExecute(context);
 
                     string injected = response.GetResponseContent()
-                        .InjectModel(viewPath, model)
+                        .InjectModel(viewId.Value, model)
                         .NormalizeDocType();
 
                     byte[] buffer = Encoding.UTF8.GetBytes(injected);
