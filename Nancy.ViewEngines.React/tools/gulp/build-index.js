@@ -9,6 +9,9 @@ const PLUGIN_NAME = 'build-index';
 const PROJ_NAMESPACE = 'http://schemas.microsoft.com/developer/msbuild/2003';
 const XPATH_SELECTOR = '//proj:Content/@Include | //proj:None/@Include';
 
+let pathMappingCount = 0;
+const pathMapping = {};
+
 function requireLibrary(libirary, indent = 0) {
   const libiraryPath = libirary[0] === '.'
     ? path.resolve(__dirname, libirary)
@@ -27,10 +30,11 @@ function requireView(view) {
 }
 
 function formatLine(line) {
-  // TODO use secret number instead of local path for release build
-  const key = JSON.stringify(line[0]);
+  const filePath = line[0];
+  const key = pathMappingCount++;
   const value = line[1];
-  return `  ${key}: ${value}`;
+  pathMapping[filePath] = key;
+  return `  ${key}: ${value} /* ${filePath} */`;
 }
 
 function buildIndexCode(items) {
@@ -66,7 +70,7 @@ function buildIndexFile(file) {
 }
 
 // TODO hack gulp-xpath to meet the requirements, see donum/gulp-xpath#1
-export default function buildIndex() {
+function buildIndex() {
   return through.obj((file, enc, done) => {
     if (file.isStream()) {
       const error = new PluginError(PLUGIN_NAME, 'Streams are not supported!');
@@ -79,3 +83,7 @@ export default function buildIndex() {
     }
   });
 }
+
+buildIndex.pathMapping = pathMapping;
+
+export default buildIndex;

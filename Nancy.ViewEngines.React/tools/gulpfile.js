@@ -33,7 +33,16 @@ gulp.task('index', ['init', 'clean'], function _index() {
     .pipe(gulp.dest(clientPath));
 });
 
-gulp.task('webpack', ['init', 'clean', 'index'], function _webpack() {
+gulp.task('index-mapping', ['init', 'index'], function _indexMapping(done) {
+  const path = require('path');
+  const fs = require('fs');
+  const pathMapping = require('./gulp/build-index').pathMapping;
+  const content = JSON.stringify(pathMapping, null, 4);
+  const filePath = path.resolve(options.clientPath, 'index.map');
+  fs.writeFile(filePath, content, done);
+});
+
+gulp.task('webpack', ['init', 'index', 'index-mapping'], function _webpack() {
   const webpack = require('./gulp/webpack');
   return webpack(options);
 });
