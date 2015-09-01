@@ -131,6 +131,7 @@
     <Content Include="Views\Home.jsx" />
     <Content Include="Views\Layout.jsx" />
     <Content Include="Views\Style.jsx" />
+    <Content Include="Views\SuperSimple.sshtml" />
     <Content Include="Views\Title.jsx" />
     <Content Include="Nancy.ViewEngines.React.Example.ruleset" />
     <None Include="Web.Debug.config">
@@ -148,6 +149,7 @@
     <Compile Include="Modules\FormModule.cs" />
     <Compile Include="Modules\HomeModule.cs" />
     <Compile Include="Modules\StyleModule.cs" />
+    <Compile Include="Modules\SuperSimpleModule.cs" />
     <Compile Include="Modules\TitleModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
