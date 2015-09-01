@@ -1,0 +1,8 @@
+﻿<html>
+  <head>
+    <title>Super Simple Title</title>
+  </head>
+  <body>
+    React view engine is OK to co-exist with other view engines, for example, @Model.Name.
+  </body>
+</html>
