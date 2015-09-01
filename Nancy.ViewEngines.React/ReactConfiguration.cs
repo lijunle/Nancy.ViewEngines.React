@@ -3,14 +3,18 @@
     using System;
     using System.Collections.Generic;
     using System.Configuration;
+    using System.Diagnostics;
     using System.IO;
     using System.Linq;
+    using System.Reflection;
     using Json;
 
     internal static class ReactConfiguration
     {
         static ReactConfiguration()
         {
+            DebugMode = AppDomain.CurrentDomain.GetAssemblies().Any(AssemblyInDebugMode);
+
             Serializer = new JavaScriptSerializer();
             Serializer.RegisterConverters(JsonSettings.Converters, JsonSettings.PrimitiveConverters);
 
@@ -30,6 +34,8 @@
             Script = new BundleConfiguration("scriptBundleName", "script.js");
             Style = new BundleConfiguration("styleBundleName", "style.css");
         }
+
+        internal static bool DebugMode { get; }
 
         internal static string ClientPath { get; }
 
@@ -61,6 +67,9 @@
             string value = ConfigurationManager.AppSettings[key];
             return string.IsNullOrWhiteSpace(value) ? defaultValue : value;
         }
+
+        private static bool AssemblyInDebugMode(Assembly assembly) =>
+            assembly.GetCustomAttributes<DebuggableAttribute>().Any(x => x.IsJITTrackingEnabled);
 
         internal class BundleConfiguration
         {
