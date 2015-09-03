@@ -113,6 +113,7 @@
     <Compile Include="Pages\ExceptionPage.cs" />
     <Compile Include="Pages\FormPage.cs" />
     <Compile Include="Pages\HomePage.cs" />
+    <Compile Include="Pages\MomentPage.cs" />
     <Compile Include="Pages\PageBase.cs" />
     <Compile Include="Pages\StylePage.cs" />
     <Compile Include="Pages\SuperSimplePage.cs" />
@@ -121,6 +122,7 @@
     <Compile Include="PageTests\ExceptionTests.cs" />
     <Compile Include="PageTests\FormTests.cs" />
     <Compile Include="PageTests\HomeTests.cs" />
+    <Compile Include="PageTests\MomentTests.cs" />
     <Compile Include="PageTests\StyleTests.cs" />
     <Compile Include="PageTests\SuperSimpleTests.cs" />
     <Compile Include="PageTests\TestBase.cs" />
