@@ -5,7 +5,7 @@ import options from './options';
 import { DOMParser } from 'xmldom';
 import { PluginError } from 'gulp-util';
 
-const PLUGIN_NAME = 'build-index';
+const PLUGIN_NAME = 'build-entry';
 const PROJ_NAMESPACE = 'http://schemas.microsoft.com/developer/msbuild/2003';
 const XPATH_SELECTOR = '//proj:Content/@Include | //proj:None/@Include';
 
@@ -37,7 +37,7 @@ function formatLine(line) {
   return `  ${key}: ${value} /* ${filePath} */`;
 }
 
-function buildIndexCode(items) {
+function buildEntryCode(items) {
   const lookup = items
     .filter(file => options.extensions.indexOf(path.extname(file)) !== -1)
     .map(file => [file.replace(/\\/g, '/'), requireView(file)]);
@@ -55,35 +55,35 @@ function buildIndexCode(items) {
   return `${ifClientCode}${renderCode}`;
 }
 
-function buildIndexFile(file) {
+function buildEntryFile(file) {
   const contents = file.contents.toString();
   const doc = new DOMParser().parseFromString(contents);
   const select = xpath.useNamespaces({ 'proj': PROJ_NAMESPACE });
   const items = select(XPATH_SELECTOR, doc).map(node => node.value);
-  const code = buildIndexCode(items);
+  const code = buildEntryCode(items);
 
   // TODO wait for new version vinyl, see wearefractal/vinyl-fs#71
-  file.path = path.join(path.dirname(file.path), options.indexFileName);
+  file.path = path.join(path.dirname(file.path), options.entryFileName);
   file.contents = new Buffer(code);
 
   return file;
 }
 
 // TODO hack gulp-xpath to meet the requirements, see donum/gulp-xpath#1
-function buildIndex() {
+function buildEntry() {
   return through.obj((file, enc, done) => {
     if (file.isStream()) {
       const error = new PluginError(PLUGIN_NAME, 'Streams are not supported!');
       done(error);
     } else if (file.isBuffer()) {
-      const indexFile = buildIndexFile(file);
-      done(null, indexFile);
+      const entryFile = buildEntryFile(file);
+      done(null, entryFile);
     } else {
       done(null, file);
     }
   });
 }
 
-buildIndex.pathMapping = pathMapping;
+buildEntry.pathMapping = pathMapping;
 
-export default buildIndex;
+export default buildEntry;
