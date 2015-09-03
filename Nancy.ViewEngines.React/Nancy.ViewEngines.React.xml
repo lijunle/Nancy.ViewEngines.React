@@ -30,11 +30,10 @@
             The React.js view engine.
             </summary>
         </member>
-        <member name="M:Nancy.ViewEngines.React.ReactViewEngine.#ctor(System.Collections.Generic.IEnumerable{Nancy.ErrorHandling.IStatusCodeHandler})">
+        <member name="M:Nancy.ViewEngines.React.ReactViewEngine.#ctor">
             <summary>
             Initializes a new instance of the <see cref="T:Nancy.ViewEngines.React.ReactViewEngine"/> class.
             </summary>
-            <param name="statusCodeHandlers">The status code handlers. This is a workaround to generate error page, see NancyFx/Nancy#1948.</param>
         </member>
         <member name="P:Nancy.ViewEngines.React.ReactViewEngine.Extensions">
             <summary>
