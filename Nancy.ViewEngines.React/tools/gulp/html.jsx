@@ -4,9 +4,10 @@ import { restore } from './console';
 function getData(layout) {
   const Layout = layout.type;
   const instance = new Layout(layout.props);
+  const Container = Layout.container || 'div';
   const title = typeof instance.getTitle === 'function' ? instance.getTitle() : '';
   const styles = typeof instance.getStyles === 'function' ? instance.getStyles() : [];
-  return { title, styles };
+  return { Container, title, styles };
 }
 
 export default React.createClass({
@@ -16,8 +17,8 @@ export default React.createClass({
 
   render() {
     const layout = this.props.layout;
-    const { title, styles } = getData(layout);
-    const body = React.renderToString(layout);
+    const { Container, title, styles } = getData(layout);
+    const content = React.renderToString(layout);
     const consoleCode = restore();
 
     return (
@@ -30,7 +31,9 @@ export default React.createClass({
           {consoleCode ? <script dangerouslySetInnerHTML={{__html: consoleCode}} /> : null}
           {styles.map(style => <link rel="stylesheet" type="text/css" href={style} />)}
         </head>
-        <body dangerouslySetInnerHTML={{__html: body}} />
+        <body>
+          <Container dangerouslySetInnerHTML={{__html: content}} />
+        </body>
       </html>
     );
   },

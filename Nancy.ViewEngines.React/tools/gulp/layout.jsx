@@ -6,6 +6,10 @@ export default React.createClass({
     model: React.PropTypes.object.isRequired,
   },
 
+  statics: {
+    container: 'div',
+  },
+
   getTitle() {
     return this.props.model.title || '';
   },
