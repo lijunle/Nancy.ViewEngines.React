@@ -39,7 +39,8 @@ function updateStyles(styles, currentStyles, head) {
 }
 
 function renderClientSide(layout) {
-  const instance = React.render(layout, window.document.body);
+  const container = document.querySelector('[data-react-checksum]').parentElement;
+  const instance = React.render(layout, container);
 
   const head = document.getElementsByTagName('head')[0];
   let currentStyles = instance.getStyles();
