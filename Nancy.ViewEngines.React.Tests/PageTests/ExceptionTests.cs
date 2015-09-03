@@ -8,6 +8,7 @@
         public ExceptionTests(Fixture fixture)
             : base(fixture)
         {
+            StaticConfiguration.DisableErrorTraces = false;
         }
 
         [Fact]
