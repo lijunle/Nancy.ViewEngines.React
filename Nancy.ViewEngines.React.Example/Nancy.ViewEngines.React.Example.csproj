@@ -133,7 +133,6 @@
     <Content Include="Views\Exception.jsx" />
     <Content Include="Views\Form.jsx" />
     <Content Include="Views\Home.jsx" />
-    <Content Include="Views\Layout.jsx" />
     <Content Include="Views\Moment.jsx" />
     <Content Include="Views\Style.jsx" />
     <Content Include="Views\SuperSimple.sshtml" />
