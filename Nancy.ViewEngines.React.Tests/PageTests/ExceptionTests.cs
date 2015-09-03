@@ -17,7 +17,8 @@
             var page = this.GoTo<ExceptionPage>();
 
             Assert.Equal("500 - InternalServerError", page.ErrorCaption);
-            Assert.StartsWith("JavaScriptEngineSwitcher.Core.JsRuntimeException", page.ErrorDetails);
+            Assert.StartsWith("Nancy.RequestExecutionException", page.ErrorDetails);
+            Assert.Contains("JavaScriptEngineSwitcher.Core.JsRuntimeException", page.ErrorDetails);
             Assert.Contains("An exception is thrown in JavaScript code", page.ErrorDetails);
         }
     }

@@ -13,28 +13,15 @@
         <member name="M:Nancy.ViewEngines.React.ReactConventions.Validate(Nancy.Conventions.NancyConventions)">
             <inheritdoc/>
         </member>
-        <member name="T:Nancy.ViewEngines.React.ReactPipeline">
-            <inheritdoc/>
-        </member>
-        <member name="M:Nancy.ViewEngines.React.ReactPipeline.#ctor(Nancy.IRootPathProvider)">
-            <summary>
-            Initializes a new instance of the <see cref="T:Nancy.ViewEngines.React.ReactPipeline"/> class.
-            </summary>
-            <param name="rootPathProvider">The root path provider.</param>
-        </member>
-        <member name="M:Nancy.ViewEngines.React.ReactPipeline.Initialize(Nancy.Bootstrapper.IPipelines)">
-            <inheritdoc/>
-        </member>
         <member name="T:Nancy.ViewEngines.React.ReactViewEngine">
             <summary>
             The React.js view engine.
             </summary>
         </member>
-        <member name="M:Nancy.ViewEngines.React.ReactViewEngine.#ctor(System.Collections.Generic.IEnumerable{Nancy.ErrorHandling.IStatusCodeHandler})">
+        <member name="M:Nancy.ViewEngines.React.ReactViewEngine.#ctor">
             <summary>
             Initializes a new instance of the <see cref="T:Nancy.ViewEngines.React.ReactViewEngine"/> class.
             </summary>
-            <param name="statusCodeHandlers">The status code handlers. This is a workaround to generate error page, see NancyFx/Nancy#1948.</param>
         </member>
         <member name="P:Nancy.ViewEngines.React.ReactViewEngine.Extensions">
             <summary>

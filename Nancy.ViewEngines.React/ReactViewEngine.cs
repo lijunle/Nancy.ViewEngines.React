@@ -3,11 +3,8 @@
     using System;
     using System.Collections.Generic;
     using System.IO;
-    using JavaScriptEngineSwitcher.Core;
     using JSPool;
-    using Nancy.ErrorHandling;
-    using Nancy.Extensions;
-    using Nancy.Responses;
+    using Responses;
 
     /// <summary>
     /// The React.js view engine.
@@ -16,13 +13,11 @@
     {
         private static IDictionary<string, int> pathMapping;
 
-        private readonly IEnumerable<IStatusCodeHandler> statusCodeHandlers;
-
         private readonly JsPool pool;
 
         static ReactViewEngine()
         {
-            var path = Path.GetFullPath(Path.Combine(ReactConfiguration.ClientPath, "index.map"));
+            var path = Extension.ResolvePath(ReactConfiguration.ClientPath, "index.map");
             var content = File.ReadAllText(path);
             pathMapping = ReactConfiguration.Serializer.Deserialize<Dictionary<string, int>>(content);
         }
@@ -30,11 +25,8 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="ReactViewEngine"/> class.
         /// </summary>
-        /// <param name="statusCodeHandlers">The status code handlers. This is a workaround to generate error page, see NancyFx/Nancy#1948.</param>
-        public ReactViewEngine(IEnumerable<IStatusCodeHandler> statusCodeHandlers)
+        public ReactViewEngine()
         {
-            this.statusCodeHandlers = statusCodeHandlers;
-
             this.pool = new JsPool(new JsPoolConfig
             {
                 // TODO uncomment the following line to enable unstable watch mode, see Daniel15/JSPool#9
@@ -64,35 +56,33 @@
         }
 
         /// <inheritdoc/>
-        public Response RenderView(ViewLocationResult viewLocationResult, dynamic model, IRenderContext renderContext)
-        {
-            var engine = this.pool.GetEngine();
-
-            try
+        public Response RenderView(
+            ViewLocationResult viewLocationResult,
+            dynamic model,
+            IRenderContext renderContext) =>
+            new HtmlResponse(contents: stream =>
             {
-                var path = GetViewPath(viewLocationResult);
-                var id = GetViewId(path);
-                var payload = ReactConfiguration.Serializer.Serialize(model);
-                var html = engine.CallFunction<string>("render", id, payload);
+                var engine = this.pool.GetEngine();
+                var modelObject = model as object;
 
-                renderContext.Context.SetReactViewId(id);
-
-                return new HtmlResponse(contents: stream =>
+                try
                 {
+                    var viewId = GetViewId(viewLocationResult);
+                    var payload = ReactConfiguration.Serializer.Serialize(modelObject);
+
+                    var html = engine.CallFunction<string>("render", viewId, payload)
+                        .InjectModel(viewId, modelObject)
+                        .NormalizeDocType();
+
                     var writer = new StreamWriter(stream);
                     writer.Write(html);
                     writer.Flush();
-                });
-            }
-            catch (JsRuntimeException e)
-            {
-                return RenderExceptionResponse(renderContext, this.statusCodeHandlers, e.ToString());
-            }
-            finally
-            {
-                this.pool.ReturnEngineToPool(engine);
-            }
-        }
+                }
+                finally
+                {
+                    this.pool.ReturnEngineToPool(engine);
+                }
+            });
 
         /// <summary>
         /// Dispose React.js view engine.
@@ -100,46 +90,13 @@
         /// <param name="disposing">Disposing.</param>
         protected virtual void Dispose(bool disposing)
         {
-            if (disposing)
+            if (disposing && this.pool != null)
             {
-                if (this.pool != null)
-                {
-                    this.pool.Dispose();
-                }
+                this.pool.Dispose();
             }
         }
 
-        private static string GetViewPath(ViewLocationResult viewLocationResult) =>
-            $"{viewLocationResult.Location}/{viewLocationResult.Name}.{viewLocationResult.Extension}";
-
-        private static int GetViewId(string viewPath) =>
-            pathMapping[viewPath];
-
-        private static Response RenderExceptionResponse(
-            IRenderContext renderContext,
-            IEnumerable<IStatusCodeHandler> statusCodeHandlers,
-            params string[] messages)
-        {
-            string separator = string.Concat(Environment.NewLine, Environment.NewLine);
-            string message = string.Join(separator, messages);
-
-            renderContext.Context.WriteTraceLog(
-                x => x.AppendLine(string.Concat("[ReactViewEngine] Fail to render view, exception is thrown.", Environment.NewLine, message)));
-
-            var statusCode = HttpStatusCode.InternalServerError;
-            var context = new NancyContext();
-            context.Items[NancyEngine.ERROR_KEY] = message;
-
-            // TODO See NancyFx/Nancy#1948. Handle error status code manually by now.
-            foreach (var statusCodeHandler in statusCodeHandlers)
-            {
-                if (statusCodeHandler.HandlesStatusCode(statusCode, context))
-                {
-                    statusCodeHandler.Handle(statusCode, context);
-                }
-            }
-
-            return context.Response;
-        }
+        private static int GetViewId(ViewLocationResult viewLocationResult) =>
+            pathMapping[$"{viewLocationResult.Location}/{viewLocationResult.Name}.{viewLocationResult.Extension}"];
     }
 }
