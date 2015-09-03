@@ -125,6 +125,7 @@
       <Link>ClearScript.V8\v8-x64.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <Content Include="package.json" />
     <Content Include="packages.config" />
     <Content Include="Nancy.ViewEngines.React.Example.ruleset" />
     <Content Include="Views\Console.jsx" />
@@ -133,6 +134,7 @@
     <Content Include="Views\Form.jsx" />
     <Content Include="Views\Home.jsx" />
     <Content Include="Views\Layout.jsx" />
+    <Content Include="Views\Moment.jsx" />
     <Content Include="Views\Style.jsx" />
     <Content Include="Views\SuperSimple.sshtml" />
     <Content Include="Views\Title.jsx" />
@@ -152,6 +154,7 @@
     <Compile Include="Modules\ExceptionModule.cs" />
     <Compile Include="Modules\FormModule.cs" />
     <Compile Include="Modules\HomeModule.cs" />
+    <Compile Include="Modules\MomentModule.cs" />
     <Compile Include="Modules\StyleModule.cs" />
     <Compile Include="Modules\SuperSimpleModule.cs" />
     <Compile Include="Modules\TitleModule.cs" />
@@ -199,8 +202,10 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\Npm.js.2.13.1.0\build\npm.js.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Npm.js.2.13.1.0\build\npm.js.targets'))" />
   </Target>
   <Import Project="..\Nancy.ViewEngines.React\targets\Nancy.ViewEngines.React.targets" />
+  <Import Project="..\packages\Npm.js.2.13.1.0\build\npm.js.targets" Condition="Exists('..\packages\Npm.js.2.13.1.0\build\npm.js.targets')" />
   <Target Name="BeforeBuild">
     <Exec Command=".\node_modules\.bin\eslint --ext .js,.jsx $(ProjectDir)\Views" WorkingDirectory="$(SolutionDir)" />
   </Target>
