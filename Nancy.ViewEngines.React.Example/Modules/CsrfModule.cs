@@ -8,6 +8,12 @@
         public CsrfModule()
         {
             this.Get["csrf"] = _ => new CsrfModel();
+
+            this.Post["csrf"] = _ =>
+            {
+                this.ValidateCsrfToken();
+                return new CsrfModel(this.Request.Form.Title);
+            };
         }
 
         public class CsrfApplicationStartup : IApplicationStartup
@@ -18,6 +24,12 @@
 
         private class CsrfModel
         {
+            internal CsrfModel(string title = null)
+            {
+                this.Title = title;
+            }
+
+            public string Title { get; }
         }
     }
 }
