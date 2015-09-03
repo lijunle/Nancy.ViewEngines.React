@@ -126,14 +126,15 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <Content Include="packages.config" />
+    <Content Include="Nancy.ViewEngines.React.Example.ruleset" />
     <Content Include="Views\Console.jsx" />
+    <Content Include="Views\Exception.jsx" />
     <Content Include="Views\Form.jsx" />
     <Content Include="Views\Home.jsx" />
     <Content Include="Views\Layout.jsx" />
     <Content Include="Views\Style.jsx" />
     <Content Include="Views\SuperSimple.sshtml" />
     <Content Include="Views\Title.jsx" />
-    <Content Include="Nancy.ViewEngines.React.Example.ruleset" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -146,6 +147,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Modules\ConsoleModule.cs" />
+    <Compile Include="Modules\ExceptionModule.cs" />
     <Compile Include="Modules\FormModule.cs" />
     <Compile Include="Modules\HomeModule.cs" />
     <Compile Include="Modules\StyleModule.cs" />
