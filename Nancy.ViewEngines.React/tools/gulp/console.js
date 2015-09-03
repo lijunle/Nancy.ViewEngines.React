@@ -3,7 +3,7 @@
 
 const inServer = typeof document === 'undefined';
 const logger = inServer ? {} : window.console;
-const logs = {};
+const logs = [];
 
 [
   'assert', 'clear', 'count', 'debug', 'dir', 'dirxml', 'exception', 'group',
@@ -18,28 +18,34 @@ const logs = {};
   'log', 'dir', 'trace', 'debug', 'info', 'warn', 'error',
 ].forEach(method => {
   logger[method] = logger[method] || ((...args) => {
-    const stacktrace = (new Error()).stack;
-    logs[method] = logs[method] || [];
-    logs[method].push([stacktrace].concat(args));
+    const stacktrace = (new Error()).stack.replace(/^Error/, '\nStacktrace');
+    logs.push([method, stacktrace, args]);
   });
 });
 
-function formatCode(method, stacktrace, args) {
-  const argsCode = args.map(arg => JSON.stringify(arg)).join(', ');
-  const stacktraceCode = JSON.stringify(stacktrace.replace(/^Error/, '\nStacktrace'));
+function stringify(object) {
+  // JSON.stringify(undefined) returns undefined, not meets requirement
+  if (object === undefined) {
+    return 'undefined';
+  }
+
+  try {
+    return JSON.stringify(object);
+  } catch(e) {
+    return JSON.stringify(object.toString());
+  }
+}
+
+function formatCode([method, stacktrace, args]) {
+  const argsCode = args.map(stringify).join(', ');
+  const stacktraceCode = JSON.stringify(stacktrace);
   const code = `console.${method}(${argsCode}, ${stacktraceCode});`;
   return code;
 }
 
 if (inServer) {
   // restore the logs during server render back to client
-  logger.restore = () => {
-    return Object.keys(logs).map(method => {
-      return logs[method].map(([stacktrace, ...args]) => {
-        return formatCode(method, stacktrace, args);
-      }).join('');
-    }).join('');
-  };
+  logger.restore = () => logs.map(formatCode).join('');
 }
 
 export default logger; // as console
