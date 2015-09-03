@@ -23,26 +23,26 @@ gulp.task('info', ['init'], function _info() {
   gutil.log('Path environment variable:', process.env.PATH);
 });
 
-gulp.task('index', ['init', 'clean'], function _index() {
-  const buildIndex = require('./gulp/build-index');
+gulp.task('entry', ['init', 'clean'], function _entry() {
+  const buildEntry = require('./gulp/entry');
   const projectFile = options.projectFile;
   const clientPath = options.clientPath;
 
   return gulp.src(projectFile)
-    .pipe(buildIndex())
+    .pipe(buildEntry())
     .pipe(gulp.dest(clientPath));
 });
 
-gulp.task('index-mapping', ['init', 'index'], function _indexMapping(done) {
+gulp.task('path-mapping', ['init', 'entry'], function _pathMapping(done) {
   const path = require('path');
   const fs = require('fs');
-  const pathMapping = require('./gulp/build-index').pathMapping;
+  const pathMapping = require('./gulp/entry').pathMapping;
   const content = JSON.stringify(pathMapping, null, 4);
-  const filePath = path.resolve(options.clientPath, 'index.map');
+  const filePath = path.resolve(options.clientPath, 'path.map');
   fs.writeFile(filePath, content, done);
 });
 
-gulp.task('webpack', ['init', 'index', 'index-mapping'], function _webpack() {
+gulp.task('webpack', ['init', 'entry', 'path-mapping'], function _webpack() {
   const webpack = require('./gulp/webpack');
   return webpack(options);
 });

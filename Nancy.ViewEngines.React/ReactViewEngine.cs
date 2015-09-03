@@ -17,7 +17,7 @@
 
         static ReactViewEngine()
         {
-            var path = Extension.ResolvePath(ReactConfiguration.ClientPath, "index.map");
+            var path = Extension.ResolvePath(ReactConfiguration.ClientPath, "path.map");
             var content = File.ReadAllText(path);
             pathMapping = ReactConfiguration.Serializer.Deserialize<Dictionary<string, int>>(content);
         }

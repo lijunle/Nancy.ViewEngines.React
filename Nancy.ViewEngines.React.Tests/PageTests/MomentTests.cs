@@ -19,7 +19,7 @@
         public void Moment_page_should_render_label_and_current_time()
         {
             Assert.StartsWith("Current time:", this.page.Text);
-            Assert.InRange(this.page.Time, DateTime.Now - TimeSpan.FromSeconds(1), DateTime.Now);
+            Assert.InRange(this.page.Time, DateTime.Now - TimeSpan.FromSeconds(1.2), DateTime.Now);
         }
 
         [Fact]

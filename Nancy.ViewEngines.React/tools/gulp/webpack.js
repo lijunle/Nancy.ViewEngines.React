@@ -11,7 +11,7 @@ export default (options) => {
   });
 
   const compiler = webpack({
-    entry: options.indexPath,
+    entry: options.entryPath,
     output: {
       path: options.clientPath,
       filename: options.scriptBundleName,

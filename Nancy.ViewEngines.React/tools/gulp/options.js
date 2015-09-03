@@ -55,13 +55,11 @@ function parseConfig(projectPath) {
     });
 }
 
-const randomString = Math.random().toString().slice(2, 10);
-
 export default {
   debug: gutil.env.configuration !== 'Release',
   tfsBuild: process.env.TF_BUILD === 'True',
   projectFile: (gutil.env.projectFile || __filename).trim(), // default value for testing only
-  indexFileName: `__index_${randomString}.js`,
+  entryFileName: 'entry.map',
 
   initialize() {
     const options = this;
@@ -74,7 +72,7 @@ export default {
       const clientPath = path.resolve(projectPath, outputPath, clientRelativePath);
 
       options.clientPath = clientPath;
-      options.indexPath = path.resolve(clientPath, options.indexFileName);
+      options.entryPath = path.resolve(clientPath, options.entryFileName);
       options.webpackLockPath = path.resolve(clientPath, 'webpack.lock');
 
       options.extensions = parseList(config.extensions, ['jsx']).map(x => `.${x.trim('.')}`);
