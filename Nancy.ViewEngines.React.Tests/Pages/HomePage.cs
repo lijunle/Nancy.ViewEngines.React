@@ -5,7 +5,7 @@
     internal class HomePage : PageBase
     {
         internal IWebElement RootElement =>
-            this.Driver.FindElement(By.TagName("div"));
+            this.Driver.FindElement(By.CssSelector("[data-react-checksum]"));
 
         internal string Text =>
             this.RootElement.Text;
