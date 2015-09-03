@@ -4,9 +4,6 @@
 - [ReactConventions](#T-Nancy.ViewEngines.React.ReactConventions 'Nancy.ViewEngines.React.ReactConventions')
   - [Initialise()](#M-Nancy.ViewEngines.React.ReactConventions.Initialise-Nancy.Conventions.NancyConventions- 'Nancy.ViewEngines.React.ReactConventions.Initialise(Nancy.Conventions.NancyConventions)')
   - [Validate()](#M-Nancy.ViewEngines.React.ReactConventions.Validate-Nancy.Conventions.NancyConventions- 'Nancy.ViewEngines.React.ReactConventions.Validate(Nancy.Conventions.NancyConventions)')
-- [ReactPipeline](#T-Nancy.ViewEngines.React.ReactPipeline 'Nancy.ViewEngines.React.ReactPipeline')
-  - [#ctor(rootPathProvider)](#M-Nancy.ViewEngines.React.ReactPipeline.#ctor-Nancy.IRootPathProvider- 'Nancy.ViewEngines.React.ReactPipeline.#ctor(Nancy.IRootPathProvider)')
-  - [Initialize()](#M-Nancy.ViewEngines.React.ReactPipeline.Initialize-Nancy.Bootstrapper.IPipelines- 'Nancy.ViewEngines.React.ReactPipeline.Initialize(Nancy.Bootstrapper.IPipelines)')
 - [ReactViewEngine](#T-Nancy.ViewEngines.React.ReactViewEngine 'Nancy.ViewEngines.React.ReactViewEngine')
   - [#ctor()](#M-Nancy.ViewEngines.React.ReactViewEngine.#ctor 'Nancy.ViewEngines.React.ReactViewEngine.#ctor')
   - [Extensions](#P-Nancy.ViewEngines.React.ReactViewEngine.Extensions 'Nancy.ViewEngines.React.ReactViewEngine.Extensions')
@@ -42,41 +39,6 @@ This method has no parameters.
 
 <a name='M-Nancy.ViewEngines.React.ReactConventions.Validate-Nancy.Conventions.NancyConventions-'></a>
 ### Validate() `method` [#](#M-Nancy.ViewEngines.React.ReactConventions.Validate-Nancy.Conventions.NancyConventions- 'Go To Here') [^](#contents 'Back To Contents')
-
-##### Summary
-
-*Inherit from parent.*
-
-##### Parameters
-
-This method has no parameters.
-
-<a name='T-Nancy.ViewEngines.React.ReactPipeline'></a>
-## ReactPipeline [#](#T-Nancy.ViewEngines.React.ReactPipeline 'Go To Here') [^](#contents 'Back To Contents')
-
-##### Namespace
-
-Nancy.ViewEngines.React
-
-##### Summary
-
-*Inherit from parent.*
-
-<a name='M-Nancy.ViewEngines.React.ReactPipeline.#ctor-Nancy.IRootPathProvider-'></a>
-### #ctor(rootPathProvider) `constructor` [#](#M-Nancy.ViewEngines.React.ReactPipeline.#ctor-Nancy.IRootPathProvider- 'Go To Here') [^](#contents 'Back To Contents')
-
-##### Summary
-
-Initializes a new instance of the [ReactPipeline](#T-Nancy.ViewEngines.React.ReactPipeline 'Nancy.ViewEngines.React.ReactPipeline') class.
-
-##### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| rootPathProvider | [Nancy.IRootPathProvider](#T-Nancy.IRootPathProvider 'Nancy.IRootPathProvider') | The root path provider. |
-
-<a name='M-Nancy.ViewEngines.React.ReactPipeline.Initialize-Nancy.Bootstrapper.IPipelines-'></a>
-### Initialize() `method` [#](#M-Nancy.ViewEngines.React.ReactPipeline.Initialize-Nancy.Bootstrapper.IPipelines- 'Go To Here') [^](#contents 'Back To Contents')
 
 ##### Summary
 

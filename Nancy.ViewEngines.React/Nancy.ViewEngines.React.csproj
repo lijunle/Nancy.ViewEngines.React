@@ -84,7 +84,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReactConfiguration.cs" />
     <Compile Include="ReactConventions.cs" />
-    <Compile Include="ReactPipeline.cs" />
     <Compile Include="ReactViewEngine.cs" />
   </ItemGroup>
   <ItemGroup>

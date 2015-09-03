@@ -4,33 +4,6 @@
 
     internal static class Extension
     {
-        private const string ReactViewId = "Nancy.ViewEngines.React.ViewId";
-
-        internal static void SetReactViewId(this NancyContext context, int viewId) =>
-            context.Items[ReactViewId] = viewId;
-
-        internal static int? GetReactViewId(this NancyContext context)
-        {
-            object viewId = null;
-            return context.Items.TryGetValue(ReactViewId, out viewId)
-                ? (int?)viewId
-                : null;
-        }
-
-        internal static string GetResponseContent(this Response response)
-        {
-            using (var stream = new MemoryStream())
-            {
-                response.Contents.Invoke(stream);
-                stream.Position = 0;
-
-                var reader = new StreamReader(stream);
-                string content = reader.ReadToEnd();
-
-                return content;
-            }
-        }
-
         internal static string ResolvePath(params string[] paths) =>
             Path.GetFullPath(Path.Combine(paths));
 

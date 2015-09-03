@@ -13,18 +13,6 @@
         <member name="M:Nancy.ViewEngines.React.ReactConventions.Validate(Nancy.Conventions.NancyConventions)">
             <inheritdoc/>
         </member>
-        <member name="T:Nancy.ViewEngines.React.ReactPipeline">
-            <inheritdoc/>
-        </member>
-        <member name="M:Nancy.ViewEngines.React.ReactPipeline.#ctor(Nancy.IRootPathProvider)">
-            <summary>
-            Initializes a new instance of the <see cref="T:Nancy.ViewEngines.React.ReactPipeline"/> class.
-            </summary>
-            <param name="rootPathProvider">The root path provider.</param>
-        </member>
-        <member name="M:Nancy.ViewEngines.React.ReactPipeline.Initialize(Nancy.Bootstrapper.IPipelines)">
-            <inheritdoc/>
-        </member>
         <member name="T:Nancy.ViewEngines.React.ReactViewEngine">
             <summary>
             The React.js view engine.
