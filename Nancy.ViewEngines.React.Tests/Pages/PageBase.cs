@@ -28,6 +28,9 @@
             }
         }
 
+        protected IJavaScriptExecutor JavaScriptExecutor =>
+            this.Driver as IJavaScriptExecutor;
+
         protected abstract string Path { get; }
 
         internal TResult WaitUntil<TResult>(Func<IWebDriver, TResult> condition)
