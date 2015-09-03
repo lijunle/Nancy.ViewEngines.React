@@ -1,9 +1,14 @@
 import React from 'react';
+import Layout from './StyleLayout';
 
 export default React.createClass({
   propTypes: {
     styles: React.PropTypes.array.isRequired,
     updateStyles: React.PropTypes.func.isRequired,
+  },
+
+  statics: {
+    layout: Layout,
   },
 
   getInitialState() {

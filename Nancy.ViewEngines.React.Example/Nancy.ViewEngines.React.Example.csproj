@@ -135,6 +135,7 @@
     <Content Include="Views\Home.jsx" />
     <Content Include="Views\Moment.jsx" />
     <Content Include="Views\Style.jsx" />
+    <Content Include="Views\StyleLayout.jsx" />
     <Content Include="Views\SuperSimple.sshtml" />
     <Content Include="Views\Title.jsx" />
     <Content Include="Views\TitleLayout.jsx" />
