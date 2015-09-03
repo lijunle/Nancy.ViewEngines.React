@@ -4,6 +4,10 @@ import webpack from 'webpack';
 
 // TODO find another way to watch webpack
 export default (options) => {
+  const deinfePlugin = new webpack.DefinePlugin({
+    'process.env.NODE_ENV': options.debug ? '' : '"production"',
+  });
+
   const uglifyPlugin = new webpack.optimize.UglifyJsPlugin({
     compress: {
       warnings: false,
@@ -19,7 +23,7 @@ export default (options) => {
       library: 'render', // expose as render method
     },
     devtool: options.debug ? 'cheap-module-source-map' : null,
-    plugins: options.debug ? null : [uglifyPlugin],
+    plugins: options.debug ? null : [deinfePlugin, uglifyPlugin],
     bail: true,
     module: {
       loaders: [
