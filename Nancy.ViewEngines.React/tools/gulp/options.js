@@ -55,13 +55,11 @@ function parseConfig(projectPath) {
     });
 }
 
-const randomString = Math.random().toString().slice(2, 10);
-
 export default {
   debug: gutil.env.configuration !== 'Release',
   tfsBuild: process.env.TF_BUILD === 'True',
   projectFile: (gutil.env.projectFile || __filename).trim(), // default value for testing only
-  indexFileName: `__index_${randomString}.js`,
+  indexFileName: 'entry.map',
 
   initialize() {
     const options = this;
