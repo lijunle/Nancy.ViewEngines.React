@@ -109,14 +109,6 @@
     <Compile Include="Common\TestBootstrapper.cs" />
     <Compile Include="Common\TestRootPathProvider.cs" />
     <Compile Include="Fixture.cs" />
-    <Compile Include="PageTests\CsrfTests.cs" />
-    <Compile Include="PageTests\ExceptionTests.cs" />
-    <Compile Include="PageTests\FormTests.cs" />
-    <Compile Include="PageTests\HomeTests.cs" />
-    <Compile Include="PageTests\StyleTests.cs" />
-    <Compile Include="PageTests\SuperSimpleTests.cs" />
-    <Compile Include="PageTests\TestBase.cs" />
-    <Compile Include="PageTests\TitleTests.cs" />
     <Compile Include="Pages\CsrfPage.cs" />
     <Compile Include="Pages\ExceptionPage.cs" />
     <Compile Include="Pages\FormPage.cs" />
@@ -125,6 +117,14 @@
     <Compile Include="Pages\StylePage.cs" />
     <Compile Include="Pages\SuperSimplePage.cs" />
     <Compile Include="Pages\TitlePage.cs" />
+    <Compile Include="PageTests\CsrfTests.cs" />
+    <Compile Include="PageTests\ExceptionTests.cs" />
+    <Compile Include="PageTests\FormTests.cs" />
+    <Compile Include="PageTests\HomeTests.cs" />
+    <Compile Include="PageTests\StyleTests.cs" />
+    <Compile Include="PageTests\SuperSimpleTests.cs" />
+    <Compile Include="PageTests\TestBase.cs" />
+    <Compile Include="PageTests\TitleTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
