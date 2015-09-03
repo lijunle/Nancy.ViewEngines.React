@@ -24,7 +24,7 @@ gulp.task('info', ['init'], function _info() {
 });
 
 gulp.task('entry', ['init', 'clean'], function _entry() {
-  const buildEntry = require('./gulp/build-index');
+  const buildEntry = require('./gulp/entry');
   const projectFile = options.projectFile;
   const clientPath = options.clientPath;
 
@@ -36,7 +36,7 @@ gulp.task('entry', ['init', 'clean'], function _entry() {
 gulp.task('path-mapping', ['init', 'entry'], function _pathMapping(done) {
   const path = require('path');
   const fs = require('fs');
-  const pathMapping = require('./gulp/build-index').pathMapping;
+  const pathMapping = require('./gulp/entry').pathMapping;
   const content = JSON.stringify(pathMapping, null, 4);
   const filePath = path.resolve(options.clientPath, 'path.map');
   fs.writeFile(filePath, content, done);
