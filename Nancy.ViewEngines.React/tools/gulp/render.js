@@ -1,6 +1,7 @@
 import React from 'react';
 import Html from './html';
 import Csrf from '../utils/nancy-csrf';
+import invokeOrDefault from '../client/invokeOrDefault';
 
 function parse(payload) {
   try {
@@ -43,8 +44,8 @@ function renderClientSide(layout) {
   const instance = React.render(layout, container);
 
   const head = document.getElementsByTagName('head')[0];
-  let currentStyles = instance.getStyles();
-  let currentTitle = instance.getTitle();
+  let currentTitle = invokeOrDefault(instance.getTitle, '');
+  let currentStyles = invokeOrDefault(instance.getStyles, []);
 
   // hooks to update static HTML elements when re-render layout
   hook(layout, () => {

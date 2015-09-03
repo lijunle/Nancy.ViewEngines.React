@@ -1,12 +1,13 @@
 import React from 'react';
+import invokeOrDefault from '../client/invokeOrDefault';
 import { restore } from './console';
 
 function getData(layout) {
   const Layout = layout.type;
   const instance = new Layout(layout.props);
   const Container = Layout.container || 'div';
-  const title = typeof instance.getTitle === 'function' ? instance.getTitle() : '';
-  const styles = typeof instance.getStyles === 'function' ? instance.getStyles() : [];
+  const title = invokeOrDefault(instance.getTitle, '');
+  const styles = invokeOrDefault(instance.getStyles, []);
   return { Container, title, styles };
 }
 
