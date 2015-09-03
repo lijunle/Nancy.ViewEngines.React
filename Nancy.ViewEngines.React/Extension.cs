@@ -30,7 +30,7 @@
             ? content
             : content
                 .Replace("</head>", $"<script src='{ReactConfiguration.Script.Request}?t={ReactConfiguration.Script.HashCode}'></script></head>")
-                .Replace("</body>", $"<script>render({viewId}, {ReactConfiguration.Serializer.Serialize(model)}, {RenderCsrf(content, csrfToken)})</script></body>");
+                .Replace("</body>", $"<script>render({viewId}, {model.AsJson()}, {RenderCsrf(content, csrfToken)})</script></body>");
 
         internal static string NormalizeDocType(this string content) =>
             !content.StartsWith("<html>")
@@ -46,7 +46,10 @@
             string html,
             KeyValuePair<string, string>? csrfToken) =>
             csrfToken != null && html.Contains(csrfToken.Value.Value)
-            ? ReactConfiguration.Serializer.Serialize(csrfToken)
-            : ReactConfiguration.Serializer.Serialize(null);
+            ? csrfToken.AsJson()
+            : "null";
+
+        private static string AsJson(this object @object) =>
+            ReactConfiguration.Serializer.Serialize(@object);
     }
 }
