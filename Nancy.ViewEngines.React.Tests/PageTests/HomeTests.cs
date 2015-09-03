@@ -17,7 +17,7 @@
 
             Assert.NotNull(page);
 
-            Assert.Equal("Example Title", page.Title);
+            Assert.Equal("Home Page", page.Title);
             Assert.Equal("Home: Hello world", page.Text);
 
             Assert.NotEmpty(page.RootElement.GetAttribute("data-reactid"));

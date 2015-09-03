@@ -15,6 +15,8 @@
             }
 
             public string Text { get; }
+
+            public string Title => "Home Page";
         }
     }
 }
