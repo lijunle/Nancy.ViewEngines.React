@@ -128,6 +128,7 @@
     <Content Include="packages.config" />
     <Content Include="Nancy.ViewEngines.React.Example.ruleset" />
     <Content Include="Views\Console.jsx" />
+    <Content Include="Views\Csrf.jsx" />
     <Content Include="Views\Exception.jsx" />
     <Content Include="Views\Form.jsx" />
     <Content Include="Views\Home.jsx" />
@@ -147,6 +148,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Modules\ConsoleModule.cs" />
+    <Compile Include="Modules\CsrfModule.cs" />
     <Compile Include="Modules\ExceptionModule.cs" />
     <Compile Include="Modules\FormModule.cs" />
     <Compile Include="Modules\HomeModule.cs" />
