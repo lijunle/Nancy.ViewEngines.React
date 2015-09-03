@@ -24,8 +24,21 @@ const logs = {};
   });
 });
 
+function stringify(object) {
+  // JSON.stringify(undefined) returns undefined, not meets requirement
+  if (object === undefined) {
+    return 'undefined';
+  }
+
+  try {
+    return JSON.stringify(object);
+  } catch(e) {
+    return JSON.stringify(object.toString());
+  }
+}
+
 function formatCode(method, stacktrace, args) {
-  const argsCode = args.map(arg => JSON.stringify(arg)).join(', ');
+  const argsCode = args.map(stringify).join(', ');
   const stacktraceCode = JSON.stringify(stacktrace.replace(/^Error/, '\nStacktrace'));
   const code = `console.${method}(${argsCode}, ${stacktraceCode});`;
   return code;
