@@ -1,4 +1,4 @@
-﻿namespace Nancy.ViewEngines.React.Tests
+﻿namespace Nancy.ViewEngines.React.Tests.PageTests
 {
     using Pages;
     using Xunit;
