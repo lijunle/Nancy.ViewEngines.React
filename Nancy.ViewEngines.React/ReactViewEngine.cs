@@ -70,9 +70,10 @@
                 {
                     var viewId = GetViewId(viewLocationResult);
                     var payload = ReactConfiguration.Serializer.Serialize(modelObject);
+                    var csrfJson = ReactConfiguration.Serializer.Serialize(csrfToken);
 
-                    var html = engine.CallFunction<string>("render", viewId, payload)
-                        .InjectModel(viewId, modelObject)
+                    var html = engine.CallFunction<string>("render", viewId, payload, csrfJson)
+                        .InjectModel(viewId, modelObject, csrfToken)
                         .NormalizeDocType();
 
                     var writer = new StreamWriter(stream);

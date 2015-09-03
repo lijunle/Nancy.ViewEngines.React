@@ -1,5 +1,6 @@
 import React from 'react';
 import Html from './html';
+import Csrf from '../utils/nancy-csrf';
 
 function parse(payload) {
   try {
@@ -63,12 +64,15 @@ function renderClientSide(layout) {
 }
 
 export default (lookup, defaultLayout) => {
-  return function render(path, payload) {
+  return function render(path, payload, csrf) {
     const view = lookup[path];
     const model = parse(payload);
 
     const Layout = view.layout || defaultLayout;
     const layout = <Layout view={view} model={model} />;
+
+    const csrfToken = parse(csrf);
+    Csrf.setToken(csrfToken);
 
     return typeof window === 'undefined'
       ? React.renderToStaticMarkup(<Html layout={layout} />) // server side
