@@ -93,12 +93,13 @@
     <None Include="package.json" />
     <None Include="packages.config" />
     <None Include="targets\Nancy.ViewEngines.React.targets" />
-    <None Include="tools\gulp\console.js" />
+    <None Include="tools\client\console.js" />
+    <None Include="tools\client\html.jsx" />
+    <None Include="tools\client\invokeOrDefault.js" />
+    <None Include="tools\client\layout.jsx" />
+    <None Include="tools\client\render.js" />
     <None Include="tools\gulp\entry.js" />
-    <None Include="tools\gulp\html.jsx" />
-    <None Include="tools\gulp\layout.jsx" />
     <None Include="tools\gulp\options.js" />
-    <None Include="tools\gulp\render.js" />
     <None Include="tools\gulp\webpack.js" />
     <None Include="tools\gulpfile.js" />
     <None Include="tools\install.ps1" />

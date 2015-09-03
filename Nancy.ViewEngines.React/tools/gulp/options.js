@@ -77,7 +77,7 @@ export default {
 
       options.extensions = parseList(config.extensions, ['jsx']).map(x => `.${x.trim('.')}`);
       options.clientLibraries = parseList(config.clientLibraries, []);
-      options.layout = config.layout || path.resolve(__dirname, './layout.jsx');
+      options.layout = config.layout || path.resolve(__dirname, '../client/layout.jsx');
       options.scriptBundleName = config.scriptBundleName || 'script.js';
 
       options.publicPath = config.publicPath || 'assets';

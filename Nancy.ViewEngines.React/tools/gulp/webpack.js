@@ -36,7 +36,7 @@ export default (options) => {
           test: /\.jsx?$/,
           loader: 'imports',
           query: {
-            console: path.resolve(__dirname, './console.js'),
+            console: path.resolve(__dirname, '../client/console.js'),
           },
         },
       ],
