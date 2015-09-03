@@ -134,6 +134,7 @@
     <Content Include="Views\Form.jsx" />
     <Content Include="Views\Home.jsx" />
     <Content Include="Views\Layout.jsx" />
+    <Content Include="Views\Moment.jsx" />
     <Content Include="Views\Style.jsx" />
     <Content Include="Views\SuperSimple.sshtml" />
     <Content Include="Views\Title.jsx" />
@@ -153,6 +154,7 @@
     <Compile Include="Modules\ExceptionModule.cs" />
     <Compile Include="Modules\FormModule.cs" />
     <Compile Include="Modules\HomeModule.cs" />
+    <Compile Include="Modules\MomentModule.cs" />
     <Compile Include="Modules\StyleModule.cs" />
     <Compile Include="Modules\SuperSimpleModule.cs" />
     <Compile Include="Modules\TitleModule.cs" />
