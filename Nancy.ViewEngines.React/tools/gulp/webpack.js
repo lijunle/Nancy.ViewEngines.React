@@ -38,7 +38,10 @@ export default (options) => {
       ],
     },
     resolve: {
-      root: path.resolve(__dirname, '../../node_modules'),
+      root: [
+        path.resolve(__dirname, '../../node_modules'),
+        path.resolve(__dirname, '../utils'),
+      ],
       extensions: ['', '.js', '.jsx'],
     },
     resolveLoader: {
