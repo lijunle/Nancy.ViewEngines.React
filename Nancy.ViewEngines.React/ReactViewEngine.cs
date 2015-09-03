@@ -64,6 +64,7 @@
             {
                 var engine = this.pool.GetEngine();
                 var modelObject = model as object;
+                var csrfToken = renderContext.GetCsrfTokenSafe();
 
                 try
                 {

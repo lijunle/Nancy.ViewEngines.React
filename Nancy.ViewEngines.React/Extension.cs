@@ -1,9 +1,23 @@
 ﻿namespace Nancy.ViewEngines.React
 {
+    using System.Collections.Generic;
     using System.IO;
 
     internal static class Extension
     {
+        internal static KeyValuePair<string, string>? GetCsrfTokenSafe(
+            this IRenderContext renderContext)
+        {
+            try
+            {
+                return renderContext.GetCsrfToken();
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
         internal static string ResolvePath(params string[] paths) =>
             Path.GetFullPath(Path.Combine(paths));
 
