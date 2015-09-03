@@ -11,8 +11,8 @@
         {
             var assembly = typeof(TestRootPathProvider).Assembly;
             var assemblyPath = assembly.CodeBase.Replace("file:///", string.Empty);
-            var assemblyFolder = ResolvePath(assemblyPath, "..");
-            RootPath = ResolvePath(FindSolutionPath(assemblyFolder), RootFolder);
+            var assemblyFolder = Extension.ResolvePath(assemblyPath, "..");
+            RootPath = Extension.ResolvePath(FindSolutionPath(assemblyFolder), RootFolder);
         }
 
         internal static string RootPath { get; }
@@ -23,14 +23,11 @@
         private static string FindSolutionPath(string path) =>
             IsSolutionPath(path)
             ? path
-            : FindSolutionPath(ResolvePath(path, ".."));
+            : FindSolutionPath(Extension.ResolvePath(path, ".."));
 
         private static bool IsSolutionPath(string path) =>
             Directory.GetDirectories(path)
                 .Select(Path.GetFileName)
                 .Any(x => x == RootFolder);
-
-        private static string ResolvePath(string path1, string path2) =>
-            Path.GetFullPath(Path.Combine(path1, path2));
     }
 }
