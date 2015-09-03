@@ -1,9 +1,14 @@
 import React from 'react';
+import Layout from './TitleLayout';
 
 export default React.createClass({
   propTypes: {
     title: React.PropTypes.string.isRequired,
     updateTitle: React.PropTypes.func.isRequired,
+  },
+
+  statics: {
+    layout: Layout,
   },
 
   getInitialState() {

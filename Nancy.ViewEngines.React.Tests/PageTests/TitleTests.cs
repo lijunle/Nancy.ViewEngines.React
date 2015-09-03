@@ -28,6 +28,7 @@
             this.page.TitleBox.Clear();
             this.page.TitleBox.SendKeys(newTitle);
             this.page.UpdateButton.Click();
+            this.page.WaitUntil(driver => driver.Title == newTitle);
 
             Assert.Equal(newTitle, this.page.Title);
 
@@ -37,6 +38,7 @@
             this.page.TitleBox.Clear();
             this.page.TitleBox.SendKeys(anotherTitle);
             this.page.UpdateButton.Click();
+            this.page.WaitUntil(driver => driver.Title == anotherTitle);
 
             Assert.Equal(anotherTitle, this.page.Title);
         }

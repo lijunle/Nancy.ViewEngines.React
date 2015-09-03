@@ -137,6 +137,7 @@
     <Content Include="Views\Style.jsx" />
     <Content Include="Views\SuperSimple.sshtml" />
     <Content Include="Views\Title.jsx" />
+    <Content Include="Views\TitleLayout.jsx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
