@@ -1,7 +1,7 @@
 import React from 'react';
 import Html from './html';
 import Csrf from '../utils/nancy-csrf';
-import invokeOrDefault from '../client/invokeOrDefault';
+import invokeOrDefault from './invokeOrDefault';
 
 function parse(payload) {
   try {

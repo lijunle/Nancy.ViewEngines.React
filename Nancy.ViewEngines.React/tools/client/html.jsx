@@ -1,5 +1,5 @@
 import React from 'react';
-import invokeOrDefault from '../client/invokeOrDefault';
+import invokeOrDefault from './invokeOrDefault';
 import { restore } from './console';
 
 function getData(layout) {
