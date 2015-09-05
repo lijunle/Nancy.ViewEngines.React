@@ -208,7 +208,7 @@
   <Import Project="..\Nancy.ViewEngines.React\targets\Nancy.ViewEngines.React.targets" />
   <Import Project="..\packages\Npm.js.2.13.1.0\build\npm.js.targets" Condition="Exists('..\packages\Npm.js.2.13.1.0\build\npm.js.targets')" />
   <Target Name="BeforeBuild">
-    <Exec Command=".\node_modules\.bin\eslint --ext .js,.jsx $(ProjectDir)\Views" WorkingDirectory="$(SolutionDir)" />
+    <Exec Command=".\node_modules\.bin\eslint --ext .js,.jsx &quot;$(ProjectDir)\Views&quot;" WorkingDirectory="$(SolutionDir)" />
   </Target>
   <Target Name="AfterBuild">
   </Target>
