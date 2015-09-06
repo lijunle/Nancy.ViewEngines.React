@@ -10,14 +10,11 @@
     {
         static ReactConfiguration()
         {
-            // e.g., C:/project/bin/
-            string assemblyPath = GetAssemblyPath();
-
             // e.g., /assets/
             PublicPath = string.Concat('/', GetSettingOrDefault("publicPath", "assets").Trim('/'), '/');
 
             // e.g., C:/project/bin/client/
-            ClientPath = Extension.ResolvePath(assemblyPath, GetSettingOrDefault("clientPath", "client"));
+            ClientPath = Extension.ResolvePath(AssemblyPath, GetSettingOrDefault("clientPath", "client"));
 
             // e.g., ['jsx']
             Extensions = GetSettingOrDefault("extensions", "jsx").Split(';').Select(x => x.TrimStart('.'));
@@ -34,17 +31,20 @@
 
         internal static BundleConfiguration Script { get; }
 
-        private static string GetAssemblyPath()
+        private static string AssemblyPath
         {
-            // e.g., file:///C:/project/bin/web.dll
-            string codeBase = typeof(ReactConfiguration).Assembly.CodeBase;
+            get
+            {
+                // e.g., file:///C:/project/bin/web.dll
+                string codeBase = typeof(ReactConfiguration).Assembly.CodeBase;
 
-            // e.g., C:/project/bin/web.dll
-            string assemblyFilePath = new Uri(codeBase).LocalPath;
+                // e.g., C:/project/bin/web.dll
+                string assemblyFilePath = new Uri(codeBase).LocalPath;
 
-            // e.g., C:/project/bin/
-            string assemblyPath = Path.GetDirectoryName(assemblyFilePath);
-            return assemblyPath;
+                // e.g., C:/project/bin/
+                string assemblyPath = Path.GetDirectoryName(assemblyFilePath);
+                return assemblyPath;
+            }
         }
 
         private static string GetSettingOrDefault(string key, string defaultValue)
