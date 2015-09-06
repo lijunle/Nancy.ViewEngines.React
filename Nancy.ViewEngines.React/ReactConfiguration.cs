@@ -24,7 +24,6 @@
 
             // must be place at the end of configuration initialization
             Script = new BundleConfiguration("scriptBundleName", "script.js");
-            Style = new BundleConfiguration("styleBundleName", "style.css");
         }
 
         internal static string ClientPath { get; }
@@ -34,8 +33,6 @@
         internal static IEnumerable<string> Extensions { get; }
 
         internal static BundleConfiguration Script { get; }
-
-        internal static BundleConfiguration Style { get; }
 
         private static string GetAssemblyPath()
         {
