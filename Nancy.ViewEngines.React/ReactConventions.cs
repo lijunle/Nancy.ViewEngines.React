@@ -4,6 +4,7 @@
     using System.IO;
     using Conventions;
     using Responses;
+    using static ReactStatics;
 
     /// <inheritdoc/>
     public class ReactConventions : IConvention
@@ -27,7 +28,7 @@
                 string filePath = Extension.ResolvePath(ReactConfiguration.ClientPath, relativePath);
 
                 // only serve bundle source mapping in debug mode
-                return !ReactConfiguration.DebugMode && Path.GetExtension(filePath) == ".map"
+                return !DebugMode && Path.GetExtension(filePath) == ".map"
                     ? null
                     : new GenericFileResponse(filePath);
             }

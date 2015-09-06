@@ -5,6 +5,7 @@
     using System.IO;
     using JSPool;
     using Responses;
+    using static ReactStatics;
 
     /// <summary>
     /// The React.js view engine.
@@ -19,7 +20,7 @@
         {
             var path = Extension.ResolvePath(ReactConfiguration.ClientPath, "path.map");
             var content = File.ReadAllText(path);
-            pathMapping = ReactConfiguration.Serializer.Deserialize<Dictionary<string, int>>(content);
+            pathMapping = Serializer.Deserialize<Dictionary<string, int>>(content);
         }
 
         /// <summary>
@@ -69,8 +70,8 @@
                 try
                 {
                     var viewId = GetViewId(viewLocationResult);
-                    var payload = ReactConfiguration.Serializer.Serialize(modelObject);
-                    var csrfJson = ReactConfiguration.Serializer.Serialize(csrfToken);
+                    var payload = Serializer.Serialize(modelObject);
+                    var csrfJson = Serializer.Serialize(csrfToken);
 
                     var html = engine.CallFunction<string>("render", viewId, payload, csrfJson)
                         .InjectModel(viewId, modelObject, csrfToken)
