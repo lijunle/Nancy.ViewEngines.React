@@ -22,10 +22,10 @@
         private static Response ClientPathConventions(NancyContext context, string rootPath)
         {
             string requestPath = context.Request.Path;
-            if (requestPath.StartsWith(ReactConfiguration.PublicPath, StringComparison.InvariantCultureIgnoreCase))
+            if (requestPath.StartsWith(Server.AssetsPath, StringComparison.InvariantCultureIgnoreCase))
             {
-                string relativePath = requestPath.Substring(ReactConfiguration.PublicPath.Length);
-                string filePath = Extension.ResolvePath(ReactConfiguration.ClientPath, relativePath);
+                string relativePath = requestPath.Substring(Server.AssetsPath.Length);
+                string filePath = Extension.ResolvePath(Script.Dir, relativePath);
 
                 // only serve bundle source mapping in debug mode
                 return !DebugMode && Path.GetExtension(filePath) == ".map"

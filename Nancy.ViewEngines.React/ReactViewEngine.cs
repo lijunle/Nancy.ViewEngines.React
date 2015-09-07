@@ -12,16 +12,7 @@
     /// </summary>
     public class ReactViewEngine : IViewEngine, IDisposable
     {
-        private static IDictionary<string, int> pathMapping;
-
         private readonly JsPool pool;
-
-        static ReactViewEngine()
-        {
-            var path = Extension.ResolvePath(ReactConfiguration.ClientPath, "path.map");
-            var content = File.ReadAllText(path);
-            pathMapping = Serializer.Deserialize<Dictionary<string, int>>(content);
-        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ReactViewEngine"/> class.
@@ -32,8 +23,8 @@
             {
                 // TODO uncomment the following line to enable unstable watch mode, see Daniel15/JSPool#9
                 //// WatchPath = ReactConfiguration.ClientPath,
-                WatchFiles = new string[] { ReactConfiguration.Script.Path },
-                Initializer = initEngine => initEngine.ExecuteFile(ReactConfiguration.Script.Path)
+                WatchFiles = new string[] { Script.Path },
+                Initializer = initEngine => initEngine.ExecuteFile(Script.Path)
             });
         }
 
@@ -42,7 +33,7 @@
         /// </summary>
         /// <value>The React.js view engine discovering extensions.</value>
         public IEnumerable<string> Extensions =>
-            ReactConfiguration.Extensions;
+            Script.Extensions;
 
         /// <inheritdoc/>
         public void Initialize(ViewEngineStartupContext viewEngineStartupContext)
@@ -99,7 +90,7 @@
             }
         }
 
-        private static int GetViewId(ViewLocationResult viewLocationResult) =>
-            pathMapping[$"{viewLocationResult.Location}/{viewLocationResult.Name}.{viewLocationResult.Extension}"];
+        private static int GetViewId(ViewLocationResult view) =>
+            Script.PathMapping[$"{view.Location}/{view.Name}.{view.Extension}"];
     }
 }
