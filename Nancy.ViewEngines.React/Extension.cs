@@ -27,10 +27,10 @@
             int viewId,
             object model,
             KeyValuePair<string, string>? csrfToken) =>
-            !content.IsHtml() || !ReactConfiguration.Script.InjectionEnabled
+            !content.IsHtml() || !Script.InjectionEnabled
             ? content
             : content
-                .Replace("</head>", $"<script src='{ReactConfiguration.Script.Request}?t={ReactConfiguration.Script.HashCode}'></script></head>")
+                .Replace("</head>", $"<script src='{Script.Request}?t={Script.HashCode}'></script></head>")
                 .Replace("</body>", $"<script>render({viewId}, {model.AsJson()}, {RenderCsrf(content, csrfToken)})</script></body>");
 
         internal static string NormalizeDocType(this string content) =>
