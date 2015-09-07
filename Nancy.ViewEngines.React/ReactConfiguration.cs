@@ -45,9 +45,27 @@
 
         internal class ExtensionElement : ConfigurationElement
         {
+            private readonly string name;
+
+            static ExtensionElement()
+            {
+                DefaultValue = new ExtensionElement("jsx");
+            }
+
+            internal ExtensionElement()
+            {
+            }
+
+            private ExtensionElement(string name)
+            {
+                this.name = name;
+            }
+
+            internal static ExtensionElement DefaultValue { get; }
+
             [ConfigurationProperty("name", IsRequired = true)]
             internal string Name =>
-                this["name"] as string;
+                this.name ?? this["name"] as string;
         }
 
         internal class ExtensionCollection : ConfigurationElementCollection

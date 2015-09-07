@@ -52,6 +52,7 @@
 
                 this.Extensions = script.Extensions
                     .Cast<ReactConfiguration.ExtensionElement>()
+                    .DefaultIfEmpty(ReactConfiguration.ExtensionElement.DefaultValue)
                     .Where(x => !string.IsNullOrWhiteSpace(x.Name))
                     .Select(x => x.Name);
 
