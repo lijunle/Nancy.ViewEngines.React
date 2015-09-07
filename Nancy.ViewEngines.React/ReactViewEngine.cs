@@ -12,16 +12,7 @@
     /// </summary>
     public class ReactViewEngine : IViewEngine, IDisposable
     {
-        private static IDictionary<string, int> pathMapping;
-
         private readonly JsPool pool;
-
-        static ReactViewEngine()
-        {
-            var path = Extension.ResolvePath(Script.Dir, "path.map");
-            var content = File.ReadAllText(path);
-            pathMapping = Serializer.Deserialize<Dictionary<string, int>>(content);
-        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ReactViewEngine"/> class.
@@ -99,7 +90,7 @@
             }
         }
 
-        private static int GetViewId(ViewLocationResult viewLocationResult) =>
-            pathMapping[$"{viewLocationResult.Location}/{viewLocationResult.Name}.{viewLocationResult.Extension}"];
+        private static int GetViewId(ViewLocationResult view) =>
+            Script.PathMapping[$"{view.Location}/{view.Name}.{view.Extension}"];
     }
 }
