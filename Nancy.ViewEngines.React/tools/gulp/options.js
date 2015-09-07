@@ -76,7 +76,6 @@ export default {
       options.webpackLockPath = path.resolve(clientPath, 'webpack.lock');
 
       options.extensions = parseList(config.extensions, ['jsx']).map(x => `.${x.trim('.')}`);
-      options.clientLibraries = parseList(config.clientLibraries, []);
       options.layout = config.layout || path.resolve(__dirname, '../client/layout.jsx');
       options.scriptBundleName = config.scriptBundleName || 'script.js';
 

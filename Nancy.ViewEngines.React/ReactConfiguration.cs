@@ -3,39 +3,25 @@
     using System;
     using System.Collections.Generic;
     using System.Configuration;
-    using System.Diagnostics;
     using System.IO;
     using System.Linq;
-    using System.Reflection;
-    using Json;
 
     internal static class ReactConfiguration
     {
         static ReactConfiguration()
         {
-            DebugMode = AppDomain.CurrentDomain.GetAssemblies().Any(AssemblyInDebugMode);
-
-            Serializer = new JavaScriptSerializer();
-            Serializer.RegisterConverters(JsonSettings.Converters, JsonSettings.PrimitiveConverters);
-
-            // e.g., C:/project/bin/
-            string assemblyPath = GetAssemblyPath();
-
             // e.g., /assets/
             PublicPath = string.Concat('/', GetSettingOrDefault("publicPath", "assets").Trim('/'), '/');
 
             // e.g., C:/project/bin/client/
-            ClientPath = Extension.ResolvePath(assemblyPath, GetSettingOrDefault("clientPath", "client"));
+            ClientPath = Extension.ResolvePath(AssemblyPath, GetSettingOrDefault("clientPath", "client"));
 
             // e.g., ['jsx']
             Extensions = GetSettingOrDefault("extensions", "jsx").Split(';').Select(x => x.TrimStart('.'));
 
             // must be place at the end of configuration initialization
             Script = new BundleConfiguration("scriptBundleName", "script.js");
-            Style = new BundleConfiguration("styleBundleName", "style.css");
         }
-
-        internal static bool DebugMode { get; }
 
         internal static string ClientPath { get; }
 
@@ -45,21 +31,20 @@
 
         internal static BundleConfiguration Script { get; }
 
-        internal static BundleConfiguration Style { get; }
-
-        internal static JavaScriptSerializer Serializer { get; }
-
-        private static string GetAssemblyPath()
+        private static string AssemblyPath
         {
-            // e.g., file:///C:/project/bin/web.dll
-            string codeBase = typeof(ReactConfiguration).Assembly.CodeBase;
+            get
+            {
+                // e.g., file:///C:/project/bin/web.dll
+                string codeBase = typeof(ReactConfiguration).Assembly.CodeBase;
 
-            // e.g., C:/project/bin/web.dll
-            string assemblyFilePath = new Uri(codeBase).LocalPath;
+                // e.g., C:/project/bin/web.dll
+                string assemblyFilePath = new Uri(codeBase).LocalPath;
 
-            // e.g., C:/project/bin/
-            string assemblyPath = Path.GetDirectoryName(assemblyFilePath);
-            return assemblyPath;
+                // e.g., C:/project/bin/
+                string assemblyPath = Path.GetDirectoryName(assemblyFilePath);
+                return assemblyPath;
+            }
         }
 
         private static string GetSettingOrDefault(string key, string defaultValue)
@@ -67,9 +52,6 @@
             string value = ConfigurationManager.AppSettings[key];
             return string.IsNullOrWhiteSpace(value) ? defaultValue : value;
         }
-
-        private static bool AssemblyInDebugMode(Assembly assembly) =>
-            assembly.GetCustomAttributes<DebuggableAttribute>().Any(x => x.IsJITTrackingEnabled);
 
         internal class BundleConfiguration
         {

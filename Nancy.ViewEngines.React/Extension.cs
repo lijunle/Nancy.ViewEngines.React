@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using System.IO;
+    using static ReactStatics;
 
     internal static class Extension
     {
@@ -50,6 +51,6 @@
             : "null";
 
         private static string AsJson(this object @object) =>
-            ReactConfiguration.Serializer.Serialize(@object);
+            Serializer.Serialize(@object);
     }
 }

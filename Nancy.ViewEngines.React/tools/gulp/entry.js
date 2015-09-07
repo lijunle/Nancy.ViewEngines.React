@@ -12,15 +12,13 @@ const XPATH_SELECTOR = '//proj:Content/@Include | //proj:None/@Include';
 let pathMappingCount = 0;
 const pathMapping = {};
 
-function requireLibrary(libirary, indent = 0) {
+function requireLibrary(libirary) {
   const libiraryPath = libirary[0] === '.'
     ? path.resolve(__dirname, libirary)
     : libirary;
 
-  const indention = Array(indent + 1).join(' ');
   const libiraryPathString = JSON.stringify(libiraryPath);
-
-  return `${indention}require(${libiraryPathString})`;
+  return `require(${libiraryPathString})`;
 }
 
 function requireView(view) {
@@ -42,17 +40,12 @@ function buildEntryCode(items) {
     .filter(file => options.extensions.indexOf(path.extname(file)) !== -1)
     .map(file => [file.replace(/\\/g, '/'), requireView(file)]);
 
-  const clientCode = options.clientLibraries.map(x => requireLibrary(x, 2)).join(';\n');
-  const ifClientCode = options.clientLibraries.length === 0
-    ? ''
-    : `if (typeof window !== "undefined") {\n${clientCode};\n}\n\n`;
-
   const requireRender = requireLibrary('../client/render.js');
   const lookupCode = lookup.map(formatLine).join(',\n');
   const requireLayout = requireView(options.layout);
   const renderCode = `module.exports = ${requireRender}({\n${lookupCode}\n}, ${requireLayout});`;
 
-  return `${ifClientCode}${renderCode}`;
+  return renderCode;
 }
 
 function buildEntryFile(file) {
