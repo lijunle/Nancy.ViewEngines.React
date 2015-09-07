@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("Nancy.ViewEngines.React")]
@@ -13,3 +14,4 @@ using System.Runtime.InteropServices;
 [assembly: Guid("921894ed-2dc3-422c-8abc-0407d4d04a83")]
 [assembly: AssemblyVersion("0.0.0.1")]
 [assembly: AssemblyFileVersion("0.0.0.1")]
+[assembly: InternalsVisibleTo("Nancy.ViewEngines.React.UnitTests")]
