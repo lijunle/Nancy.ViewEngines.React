@@ -6,7 +6,9 @@
     {
         static ReactConfiguration()
         {
-            Instance = ConfigurationManager.GetSection("reactViewEngine") as ReactConfiguration;
+            Instance =
+                ConfigurationManager.GetSection("reactViewEngine") as ReactConfiguration ??
+                new ReactConfiguration();
         }
 
         internal static ReactConfiguration Instance { get; }
