@@ -80,12 +80,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConfigurationTests\DefaultTest.cs" />
+    <Compile Include="ConfigurationTests\ScriptTest.cs" />
     <Compile Include="ConfigurationTests\TestBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="ConfigurationFixtures\Default.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="ConfigurationFixtures\Script.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Nancy.ViewEngines.React.UnitTests.ruleset" />
