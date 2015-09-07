@@ -6,7 +6,7 @@
     using System.IO;
     using System.Linq;
 
-    internal static class ReactConfiguration
+    internal class ReactConfiguration
     {
         static ReactConfiguration()
         {
@@ -22,6 +22,8 @@
             // must be place at the end of configuration initialization
             Script = new BundleConfiguration("scriptBundleName", "script.js");
         }
+
+        internal static ReactConfiguration Instance { get; }
 
         internal static string ClientPath { get; }
 
