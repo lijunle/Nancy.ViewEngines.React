@@ -17,6 +17,7 @@
             Serializer.RegisterConverters(JsonSettings.Converters, JsonSettings.PrimitiveConverters);
 
             Script = new ScriptStatics(ReactConfiguration.Instance);
+            Server = new ServerStatics(ReactConfiguration.Instance);
         }
 
         internal static bool DebugMode { get; }
@@ -24,6 +25,8 @@
         internal static JavaScriptSerializer Serializer { get; }
 
         internal static ScriptStatics Script { get; }
+
+        internal static ServerStatics Server { get; }
 
         private static bool AssemblyInDebugMode(Assembly assembly) =>
             assembly.GetCustomAttributes<DebuggableAttribute>().Any(x => x.IsJITTrackingEnabled);
@@ -51,6 +54,15 @@
             internal IEnumerable<string> Extensions { get; }
 
             internal IDictionary<string, int> PathMapping { get; }
+        }
+
+        internal class ServerStatics
+        {
+            internal ServerStatics(ReactConfiguration configuration)
+            {
+            }
+
+            internal string AssetsPath { get; }
         }
     }
 }
