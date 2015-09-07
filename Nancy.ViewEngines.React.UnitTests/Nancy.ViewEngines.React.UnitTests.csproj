@@ -81,6 +81,7 @@
   <ItemGroup>
     <Compile Include="ConfigurationTests\DefaultTest.cs" />
     <Compile Include="ConfigurationTests\ScriptTest.cs" />
+    <Compile Include="ConfigurationTests\ServerTest.cs" />
     <Compile Include="ConfigurationTests\TestBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -90,6 +91,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="ConfigurationFixtures\Script.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="ConfigurationFixtures\Server.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Nancy.ViewEngines.React.UnitTests.ruleset" />
