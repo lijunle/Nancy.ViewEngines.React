@@ -98,6 +98,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Nancy.ViewEngines.React.UnitTests.ruleset" />
+    <None Include="package.json" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
