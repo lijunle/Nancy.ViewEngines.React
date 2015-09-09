@@ -55,11 +55,32 @@ function parseConfig(projectPath) {
     });
 }
 
+function _parseConfig(config) { // eslint-disable-line no-unused-vars
+  return new Promise(resolve => {
+    resolve({
+      script: {
+        dir: 'client',
+        name: 'script.js',
+        extensions: [],
+      },
+      server: {
+        assets: {
+          path: 'assets',
+        },
+      },
+    });
+  });
+}
+
 export default {
   debug: gutil.env.configuration !== 'Release',
   tfsBuild: process.env.TF_BUILD === 'True',
   projectFile: (gutil.env.projectFile || __filename).trim(), // default value for testing only
   entryFileName: 'entry.map',
+
+  _readFile: readFile,
+
+  _parseConfig: _parseConfig,
 
   initialize() {
     const options = this;
