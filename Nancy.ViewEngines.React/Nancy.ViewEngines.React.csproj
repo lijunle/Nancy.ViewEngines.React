@@ -93,6 +93,9 @@
     <None Include="Nancy.ViewEngines.React.ruleset" />
     <None Include="package.json" />
     <None Include="packages.config" />
+    <None Include="ReactConfiguration.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="targets\Nancy.ViewEngines.React.targets" />
     <None Include="tools\client\console.js" />
     <None Include="tools\client\html.jsx" />
