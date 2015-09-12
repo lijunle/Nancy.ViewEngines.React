@@ -42,7 +42,7 @@ function parseConfig(projectPath) {
     })
     .catch(() => {
       // if app.config not exist too, return empty contents
-      return '<contents></contents>';
+      return '<configuration></configuration>';
     })
     .then(contents => {
       // TODO provide a dedicated section for project settings
@@ -123,20 +123,22 @@ export default {
     const projectPath = path.dirname(options.projectFile);
     options.projectPath = projectPath;
 
-    return parseConfig(projectPath).then(config => {
-      const outputPath = (gutil.env.outputPath || 'bin').trim();
-      const clientRelativePath = config.clientPath || 'client';
-      const clientPath = path.resolve(projectPath, outputPath, clientRelativePath);
+    return Promise.resolve()
+      .then(() => readFile(path.resolve(projectPath, 'web.config')))
+      .catch(() => readFile(path.resolve(projectPath, 'app.config')))
+      .catch(() => '<configuration></configuration>')
+      .then(_parseConfig)
+      .then(config => {
+        const outputPath = (gutil.env.outputPath || 'bin').trim();
 
-      options.clientPath = clientPath;
-      options.entryPath = path.resolve(clientPath, options.entryFileName);
-      options.webpackLockPath = path.resolve(clientPath, 'webpack.lock');
+        options.clientPath = path.resolve(projectPath, outputPath, config.script.dir);
+        options.entryPath = path.resolve(options.clientPath, options.entryFileName);
 
-      options.extensions = parseList(config.extensions, ['jsx']).map(x => `.${x.trim('.')}`);
-      options.layout = config.layout || path.resolve(__dirname, '../client/layout.jsx');
-      options.scriptBundleName = config.scriptBundleName || 'script.js';
+        options.extensions = config.script.extensions.map(x => `.${x.trim('.')}`);
+        options.layout = config.script.layout || path.resolve(__dirname, '../client/layout.jsx'); // TODO
+        options.scriptBundleName = config.script.name;
 
-      options.publicPath = config.publicPath || 'assets';
-    });
+        options.publicPath = config.server.assets.path;
+      });
   },
 };
