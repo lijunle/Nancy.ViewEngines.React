@@ -31,11 +31,11 @@ function newStyle(style) {
 
 function updateStyles(styles, currentStyles, head) {
   currentStyles
-    .filter(current => styles.indexOf(current) === -1)
+    .filter(current => !styles.includes(current))
     .forEach(current => head.querySelector(`link[href='${current}']`).remove());
 
   styles
-    .filter(style => currentStyles.indexOf(style) === -1)
+    .filter(style => !currentStyles.includes(style))
     .forEach(style => head.appendChild(newStyle(style)));
 }
 

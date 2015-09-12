@@ -37,7 +37,7 @@ function formatLine(line) {
 
 function buildEntryCode(items) {
   const lookup = items
-    .filter(file => options.extensions.indexOf(path.extname(file)) !== -1)
+    .filter(file => options.extensions.includes(path.extname(file)))
     .map(file => [file.replace(/\\/g, '/'), requireView(file)]);
 
   const requireRender = requireLibrary('../client/render.js');
