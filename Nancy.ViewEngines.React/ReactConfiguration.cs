@@ -1,93 +1,102 @@
 ﻿namespace Nancy.ViewEngines.React
 {
-    using System;
-    using System.Collections.Generic;
     using System.Configuration;
-    using System.IO;
-    using System.Linq;
 
-    internal static class ReactConfiguration
+    internal class ReactConfiguration : ConfigurationSection
     {
         static ReactConfiguration()
         {
-            // e.g., /assets/
-            PublicPath = string.Concat('/', GetSettingOrDefault("publicPath", "assets").Trim('/'), '/');
-
-            // e.g., C:/project/bin/client/
-            ClientPath = Extension.ResolvePath(AssemblyPath, GetSettingOrDefault("clientPath", "client"));
-
-            // e.g., ['jsx']
-            Extensions = GetSettingOrDefault("extensions", "jsx").Split(';').Select(x => x.TrimStart('.'));
-
-            // must be place at the end of configuration initialization
-            Script = new BundleConfiguration("scriptBundleName", "script.js");
+            Instance =
+                ConfigurationManager.GetSection("reactViewEngine") as ReactConfiguration ??
+                new ReactConfiguration();
         }
 
-        internal static string ClientPath { get; }
+        internal static ReactConfiguration Instance { get; }
 
-        internal static string PublicPath { get; }
+        [ConfigurationProperty("xmlns")]
+        internal string XmlNamespace =>
+            this["xmlns"] as string;
 
-        internal static IEnumerable<string> Extensions { get; }
+        [ConfigurationProperty("script")]
+        internal ScriptElement Script =>
+            this["script"] as ScriptElement;
 
-        internal static BundleConfiguration Script { get; }
+        [ConfigurationProperty("server")]
+        internal ServerElement Server =>
+            this["server"] as ServerElement;
 
-        private static string AssemblyPath
+        internal class ScriptElement : ConfigurationElement
         {
-            get
-            {
-                // e.g., file:///C:/project/bin/web.dll
-                string codeBase = typeof(ReactConfiguration).Assembly.CodeBase;
+            [ConfigurationProperty("dir", DefaultValue = "client")]
+            internal string Dir =>
+                this["dir"] as string;
 
-                // e.g., C:/project/bin/web.dll
-                string assemblyFilePath = new Uri(codeBase).LocalPath;
+            [ConfigurationProperty("name", DefaultValue = "script.js")]
+            internal string Name =>
+                this["name"] as string;
 
-                // e.g., C:/project/bin/
-                string assemblyPath = Path.GetDirectoryName(assemblyFilePath);
-                return assemblyPath;
-            }
+            [ConfigurationProperty("extensions")]
+            internal ExtensionCollection Extensions =>
+                this["extensions"] as ExtensionCollection;
+
+            [ConfigurationProperty("layout")]
+            internal LayoutElement Layout =>
+                this["layout"] as LayoutElement;
         }
 
-        private static string GetSettingOrDefault(string key, string defaultValue)
+        internal class ServerElement : ConfigurationElement
         {
-            string value = ConfigurationManager.AppSettings[key];
-            return string.IsNullOrWhiteSpace(value) ? defaultValue : value;
+            [ConfigurationProperty("assets")]
+            internal AssetsElement Assets =>
+                this["assets"] as AssetsElement;
         }
 
-        internal class BundleConfiguration
+        internal class ExtensionElement : ConfigurationElement
         {
-            public BundleConfiguration(string settingKey, string defaultValue)
+            private readonly string name;
+
+            static ExtensionElement()
             {
-                string name = GetSettingOrDefault(settingKey, defaultValue);
-
-                this.Request = string.Concat(PublicPath, name);
-                this.Path = Extension.ResolvePath(ClientPath, name);
-
-                this.MapRequest = string.Concat(this.Request, ".map");
-                this.MapPath = string.Concat(this.Path, ".map");
-
-                this.HashCode = GetFileHashCode(this.Path);
-                this.InjectionEnabled = File.Exists(this.Path);
+                DefaultValue = new ExtensionElement("jsx");
             }
 
-            internal string Request { get; }
-
-            internal string Path { get; }
-
-            internal string MapRequest { get; }
-
-            internal string MapPath { get; }
-
-            internal int HashCode { get; }
-
-            internal bool InjectionEnabled { get; }
-
-            private static int GetFileHashCode(string path)
+            internal ExtensionElement()
             {
-                // although two different object do not guarantee hash code different, it is OK here.
-                var info = new FileInfo(path);
-                int hashCode = Math.Abs(info.LastWriteTimeUtc.GetHashCode());
-                return hashCode;
             }
+
+            private ExtensionElement(string name)
+            {
+                this.name = name;
+            }
+
+            internal static ExtensionElement DefaultValue { get; }
+
+            [ConfigurationProperty("name", IsRequired = true)]
+            internal string Name =>
+                this.name ?? this["name"] as string;
+        }
+
+        internal class ExtensionCollection : ConfigurationElementCollection
+        {
+            protected override ConfigurationElement CreateNewElement() =>
+                new ExtensionElement();
+
+            protected override object GetElementKey(ConfigurationElement element) =>
+                (element as ExtensionElement)?.Name;
+        }
+
+        internal class LayoutElement : ConfigurationElement
+        {
+            [ConfigurationProperty("name", IsRequired = true)]
+            public string Name =>
+                this["name"] as string;
+        }
+
+        internal class AssetsElement : ConfigurationElement
+        {
+            [ConfigurationProperty("path", DefaultValue = "assets")]
+            internal string Path =>
+                this["path"] as string;
         }
     }
 }

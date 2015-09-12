@@ -1,0 +1,51 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns="urn:Nancy.ViewEngines.React"
+           targetNamespace="urn:Nancy.ViewEngines.React"
+           elementFormDefault="qualified">
+  <xs:complexType name="ExtensionAdd">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:string" name="name" use="required"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="Extensions">
+    <xs:sequence>
+      <xs:element name="add" type="ExtensionAdd" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Layout">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:string" name="name" use="required"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="Script">
+    <xs:sequence>
+      <xs:element name="extensions" type="Extensions" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="layout" type="Layout" minOccurs="0" maxOccurs="1"/>
+    </xs:sequence>
+    <xs:attribute type="xs:string" name="dir" use="optional"/>
+    <xs:attribute type="xs:string" name="name" use="optional"/>
+  </xs:complexType>
+  <xs:complexType name="Assets">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:string" name="path" use="required"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="Server">
+    <xs:sequence>
+      <xs:element name="assets" type="Assets" minOccurs="0" maxOccurs="1"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ReactViewEngine">
+    <xs:sequence>
+      <xs:element name="script" type="Script" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="server" type="Server" minOccurs="0" maxOccurs="1"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="reactViewEngine" type="ReactViewEngine"/>
+</xs:schema>

@@ -68,6 +68,10 @@ Nancy.ViewEngines.React package are:
   It is licensed under MIT license. Check it at
   https://github.com/webpack/webpack/blob/master/LICENSE
 
+- Xml2js, installed by NPM and packed into node_modules.7z.
+  It is licensed under MIT license. Check it at
+  https://github.com/Leonidas-from-XIV/node-xml2js/blob/master/LICENSE
+
 - Xmldom, installed by NPM and packed into node_modules.7z.
   It is licensed under MIT and LGPL license. Check it at
   https://github.com/jindw/xmldom/blob/master/LICENSE

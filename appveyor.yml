@@ -25,11 +25,14 @@ cache:
   - packages -> **\packages.config
   - node_modules -> package.json
   - Nancy.ViewEngines.React\node_modules -> Nancy.ViewEngines.React\package.json
+  - Nancy.ViewEngines.React.Example\node_modules -> Nancy.ViewEngines.React.Example\package.json
+  - Nancy.ViewEngines.React.UnitTests\node_modules -> Nancy.ViewEngines.React.UnitTests\package.json
 
 before_build:
-  - ps: nuget restore "$env:APPVEYOR_BUILD_FOLDER\Nancy.ViewEngines.React.sln"
+  - ps: nuget restore Nancy.ViewEngines.React.sln
 
 before_test:
+  - ps: Nancy.ViewEngines.React.UnitTests\Test-JavaScript.ps1
   - cinst googlechrome
 
 artifacts:
