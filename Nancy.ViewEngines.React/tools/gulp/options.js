@@ -1,6 +1,5 @@
 import fs from 'fs';
 import path from 'path';
-import gutil from 'gulp-util';
 import { parseString } from 'xml2js';
 
 function readFile(filePath) {
@@ -70,36 +69,32 @@ function parseConfig(config) {
 }
 
 export default {
-  debug: gutil.env.configuration !== 'Release',
-  tfsBuild: process.env.TF_BUILD === 'True',
-  projectFile: (gutil.env.projectFile || __filename).trim(), // default value for testing only
-  entryFileName: 'entry.map',
-
   _readFile: readFile,
 
   _parseConfig: parseConfig,
 
-  initialize() {
-    const options = this;
-    const projectPath = path.dirname(options.projectFile);
-    options.projectPath = projectPath;
+  initialize(env) {
+    const outputPath = (env.outputPath || 'bin').trim();
+
+    this.entryFileName = 'entry.map';
+    this.debug = env.configuration !== 'Release';
+    this.projectFile = (env.projectFile || __filename).trim();
+    this.projectPath = path.dirname(this.projectFile);
 
     return Promise.resolve()
-      .then(() => readFile(path.resolve(projectPath, 'web.config')))
-      .catch(() => readFile(path.resolve(projectPath, 'app.config')))
+      .then(() => readFile(path.resolve(this.projectPath, 'web.config')))
+      .catch(() => readFile(path.resolve(this.projectPath, 'app.config')))
       .catch(() => '<configuration></configuration>')
       .then(parseConfig)
       .then(config => {
-        const outputPath = (gutil.env.outputPath || 'bin').trim();
+        this.clientPath = path.resolve(this.projectPath, outputPath, config.script.dir);
+        this.entryPath = path.resolve(this.clientPath, this.entryFileName);
 
-        options.clientPath = path.resolve(projectPath, outputPath, config.script.dir);
-        options.entryPath = path.resolve(options.clientPath, options.entryFileName);
+        this.extensions = config.script.extensions.map(x => `.${x.trim('.')}`);
+        this.layout = config.script.layout;
+        this.scriptBundleName = config.script.name;
 
-        options.extensions = config.script.extensions.map(x => `.${x.trim('.')}`);
-        options.layout = config.script.layout;
-        options.scriptBundleName = config.script.name;
-
-        options.publicPath = config.server.assets.path;
+        this.publicPath = config.server.assets.path;
       });
   },
 };

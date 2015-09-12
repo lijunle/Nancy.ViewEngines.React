@@ -5,7 +5,7 @@ const gutil = require('gulp-util');
 const options = require('./gulp/options');
 
 gulp.task('init', function _init() {
-  return options.initialize();
+  return options.initialize(gutil.env);
 });
 
 gulp.task('clean', ['init'], function _clean(done) {
@@ -16,7 +16,6 @@ gulp.task('clean', ['init'], function _clean(done) {
 
 gulp.task('info', ['init'], function _info() {
   gutil.log('Build runs at debug mode?', options.debug);
-  gutil.log('Build runs in TFS machine?', options.tfsBuild);
   gutil.log('Project file:', options.projectFile);
   gutil.log('Client path:', options.clientPath);
   gutil.log('Current working directory:', process.cwd());
