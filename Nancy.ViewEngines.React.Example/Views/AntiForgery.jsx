@@ -1,5 +1,5 @@
 import React from 'react';
-import Csrf from 'nancy-csrf';
+import AntiForgeryToken from 'anti-forgery-token';
 
 export default React.createClass({
   propTypes: {
@@ -10,7 +10,7 @@ export default React.createClass({
     return (
       <form method="post">
         <div>{this.props.title}</div>
-        <Csrf />
+        <AntiForgeryToken />
         <input type="text" name="title" />
         <input type="submit" value="Submit" />
       </form>

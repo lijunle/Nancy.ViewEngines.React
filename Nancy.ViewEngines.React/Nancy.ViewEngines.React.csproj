@@ -109,7 +109,7 @@
     <None Include="tools\install.ps1" />
     <None Include="tools\node.cmd" />
     <None Include="tools\uninstall.ps1" />
-    <None Include="tools\utils\nancy-csrf.jsx" />
+    <None Include="tools\utils\anti-forgery-token.jsx" />
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.1.0.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.Analyzers.dll" />

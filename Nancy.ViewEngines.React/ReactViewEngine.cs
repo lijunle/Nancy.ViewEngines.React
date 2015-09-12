@@ -56,16 +56,16 @@
             {
                 var engine = this.pool.GetEngine();
                 var modelObject = model as object;
-                var csrfToken = renderContext.GetCsrfTokenSafe();
+                var token = renderContext.GetTokenSafe();
 
                 try
                 {
                     var viewId = GetViewId(viewLocationResult);
                     var payload = Serializer.Serialize(modelObject);
-                    var csrfJson = Serializer.Serialize(csrfToken);
+                    var tokenJson = Serializer.Serialize(token);
 
-                    var html = engine.CallFunction<string>("render", viewId, payload, csrfJson)
-                        .InjectModel(viewId, modelObject, csrfToken)
+                    var html = engine.CallFunction<string>("render", viewId, payload, tokenJson)
+                        .InjectModel(viewId, modelObject, token)
                         .NormalizeDocType();
 
                     var writer = new StreamWriter(stream);

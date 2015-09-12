@@ -63,9 +63,9 @@ All settings are optional. Pre-defined settings work well in most cases. But you
 
 The react view engine natively provide anti-forgenry token to prevent cross-site request forgery attacks.
 
-In your view component, import `nancy-csrf` as a React component. Then render this component in your fomr component.
+In your view component, import `anti-forgery-token` as a React component. Then render this component in your form component.
 
-Please reference [Csrf.jsx](https://github.com/lijunle/Nancy.ViewEngines.React/blob/master/Nancy.ViewEngines.React.Example/Views/Csrf.jsx) for an example.
+Please reference [AntiForgery.jsx](https://github.com/lijunle/Nancy.ViewEngines.React/blob/master/Nancy.ViewEngines.React.Example/Views/AntiFogery.jsx) for an example.
 
 # Debug build
 
