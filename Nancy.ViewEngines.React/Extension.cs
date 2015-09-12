@@ -6,7 +6,7 @@
 
     internal static class Extension
     {
-        internal static KeyValuePair<string, string>? GetCsrfTokenSafe(
+        internal static KeyValuePair<string, string>? GetTokenSafe(
             this IRenderContext renderContext)
         {
             try
@@ -26,12 +26,12 @@
             this string content,
             int viewId,
             object model,
-            KeyValuePair<string, string>? csrfToken) =>
+            KeyValuePair<string, string>? token) =>
             !content.IsHtml() || !Script.InjectionEnabled
             ? content
             : content
                 .Replace("</head>", $"<script src='{Script.Request}?t={Script.HashCode}'></script></head>")
-                .Replace("</body>", $"<script>render({viewId}, {model.AsJson()}, {RenderCsrf(content, csrfToken)})</script></body>");
+                .Replace("</body>", $"<script>render({viewId}, {model.AsJson()}, {RenderToken(content, token)})</script></body>");
 
         internal static string NormalizeDocType(this string content) =>
             !content.StartsWith("<html>")
@@ -43,11 +43,11 @@
             content.Contains("</head>") &&
             content.Contains("</body>");
 
-        private static string RenderCsrf(
+        private static string RenderToken(
             string html,
-            KeyValuePair<string, string>? csrfToken) =>
-            csrfToken != null && html.Contains(csrfToken.Value.Value)
-            ? csrfToken.AsJson()
+            KeyValuePair<string, string>? token) =>
+            token != null && html.Contains(token.Value.Value)
+            ? token.AsJson()
             : "undefined";
 
         private static string AsJson(this object @object) =>

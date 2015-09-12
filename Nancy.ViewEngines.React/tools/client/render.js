@@ -66,15 +66,14 @@ function renderClientSide(layout) {
 }
 
 export default (lookup, defaultLayout) => {
-  return function render(path, payload, csrf) {
+  return function render(path, payload, token) {
     const view = lookup[path];
     const model = parse(payload);
 
     const Layout = view.layout || defaultLayout;
     const layout = <Layout view={view} model={model} />;
 
-    const csrfToken = parse(csrf);
-    AntiForgeryToken.setToken(csrfToken);
+    AntiForgeryToken.setToken(parse(token));
 
     return typeof window === 'undefined'
       ? React.renderToStaticMarkup(<Html layout={layout} />) // server side
