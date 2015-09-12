@@ -3,45 +3,86 @@
            targetNamespace="urn:Nancy.ViewEngines.React"
            elementFormDefault="qualified">
   <xs:complexType name="ExtensionAdd">
+    <xs:annotation>
+      <xs:documentation>Add an extension to the list.</xs:documentation>
+    </xs:annotation>
     <xs:simpleContent>
       <xs:extension base="xs:string">
-        <xs:attribute type="xs:string" name="name" use="required"/>
+        <xs:attribute type="xs:string" name="name" use="required">
+          <xs:annotation>
+            <xs:documentation>View file extension. Either prefix with or without dot-sign is OK.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
   <xs:complexType name="Extensions">
+    <xs:annotation>
+      <xs:documentation>The extension list to discover view files. Default is ".jsx".</xs:documentation>
+    </xs:annotation>
     <xs:sequence>
       <xs:element name="add" type="ExtensionAdd" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="Layout">
+    <xs:annotation>
+      <xs:documentation>Script layout configurations.</xs:documentation>
+    </xs:annotation>
     <xs:simpleContent>
       <xs:extension base="xs:string">
-        <xs:attribute type="xs:string" name="name" use="required"/>
+        <xs:attribute type="xs:string" name="name" use="required">
+          <xs:annotation>
+            <xs:documentation>The layout path name. It is relative to the project folder.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
   <xs:complexType name="Script">
+    <xs:annotation>
+      <xs:documentation>Script configurations.</xs:documentation>
+    </xs:annotation>
     <xs:sequence>
       <xs:element name="extensions" type="Extensions" minOccurs="0" maxOccurs="1"/>
       <xs:element name="layout" type="Layout" minOccurs="0" maxOccurs="1"/>
     </xs:sequence>
-    <xs:attribute type="xs:string" name="dir" use="optional"/>
-    <xs:attribute type="xs:string" name="name" use="optional"/>
+    <xs:attribute type="xs:string" name="dir" use="optional">
+      <xs:annotation>
+        <xs:documentation>The script output directory. Default is "client" folder under project output folder.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute type="xs:string" name="name" use="optional">
+      <xs:annotation>
+        <xs:documentation>The bundle script name. Default is ["script.js"].</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
   </xs:complexType>
   <xs:complexType name="Assets">
+    <xs:annotation>
+      <xs:documentation>Server assets configurations.</xs:documentation>
+    </xs:annotation>
     <xs:simpleContent>
       <xs:extension base="xs:string">
-        <xs:attribute type="xs:string" name="path" use="required"/>
+        <xs:attribute type="xs:string" name="path" use="required">
+          <xs:annotation>
+            <xs:documentation>The assets serving path. Default value is "assets". For example, the file "client/script.js" serves as "assets/script.js".</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
   <xs:complexType name="Server">
+    <xs:annotation>
+      <xs:documentation>Server configurations.</xs:documentation>
+    </xs:annotation>
     <xs:sequence>
       <xs:element name="assets" type="Assets" minOccurs="0" maxOccurs="1"/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="ReactViewEngine">
+    <xs:annotation>
+      <xs:documentation>React view engine configurations.</xs:documentation>
+    </xs:annotation>
     <xs:sequence>
       <xs:element name="script" type="Script" minOccurs="0" maxOccurs="1"/>
       <xs:element name="server" type="Server" minOccurs="0" maxOccurs="1"/>
