@@ -48,7 +48,7 @@
             KeyValuePair<string, string>? csrfToken) =>
             csrfToken != null && html.Contains(csrfToken.Value.Value)
             ? csrfToken.AsJson()
-            : "null";
+            : "undefined";
 
         private static string AsJson(this object @object) =>
             Serializer.Serialize(@object);

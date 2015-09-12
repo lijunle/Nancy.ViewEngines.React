@@ -1,6 +1,6 @@
 import React from 'react';
 import Html from './html';
-import Csrf from '../utils/nancy-csrf';
+import AntiForgeryToken from '../utils/anti-forgery-token';
 import invokeOrDefault from './invokeOrDefault';
 
 function parse(payload) {
@@ -74,7 +74,7 @@ export default (lookup, defaultLayout) => {
     const layout = <Layout view={view} model={model} />;
 
     const csrfToken = parse(csrf);
-    Csrf.setToken(csrfToken);
+    AntiForgeryToken.setToken(csrfToken);
 
     return typeof window === 'undefined'
       ? React.renderToStaticMarkup(<Html layout={layout} />) // server side
