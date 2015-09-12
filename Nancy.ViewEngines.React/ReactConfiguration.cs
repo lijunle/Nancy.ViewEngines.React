@@ -13,6 +13,10 @@
 
         internal static ReactConfiguration Instance { get; }
 
+        [ConfigurationProperty("xmlns")]
+        internal string XmlNamespace =>
+            this["xmlns"] as string;
+
         [ConfigurationProperty("script")]
         internal ScriptElement Script =>
             this["script"] as ScriptElement;
