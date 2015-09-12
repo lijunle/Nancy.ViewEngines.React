@@ -9,6 +9,8 @@ const PLUGIN_NAME = 'build-entry';
 const PROJ_NAMESPACE = 'http://schemas.microsoft.com/developer/msbuild/2003';
 const XPATH_SELECTOR = '//proj:Content/@Include | //proj:None/@Include';
 
+const requirePolyfill = 'require("babel/polyfill")\n';
+
 let pathMappingCount = 0;
 const pathMapping = {};
 
@@ -43,7 +45,7 @@ function buildEntryCode(items) {
   const requireRender = requireLibrary('../client/render.js');
   const lookupCode = lookup.map(formatLine).join(',\n');
   const requireLayout = requireView(options.layout);
-  const renderCode = `module.exports = ${requireRender}({\n${lookupCode}\n}, ${requireLayout});`;
+  const renderCode = `${requirePolyfill}module.exports = ${requireRender}({\n${lookupCode}\n}, ${requireLayout});`;
 
   return renderCode;
 }
