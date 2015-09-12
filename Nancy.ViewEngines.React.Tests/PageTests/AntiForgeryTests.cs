@@ -3,16 +3,16 @@
     using Pages;
     using Xunit;
 
-    public class CsrfTests : TestBase
+    public class AntiForgeryTests : TestBase
     {
-        private readonly CsrfPage page;
+        private readonly AntiForgeryPage page;
 
-        public CsrfTests(Fixture fixture)
+        public AntiForgeryTests(Fixture fixture)
             : base(fixture)
         {
             StaticConfiguration.DisableErrorTraces = false;
 
-            this.page = this.GoTo<CsrfPage>();
+            this.page = this.GoTo<AntiForgeryPage>();
         }
 
         [Fact]
@@ -52,7 +52,7 @@
         [Fact]
         public void Post_with_invalid_CSRF_token_should_not_pass_validation()
         {
-            this.page.SetCsrf("INVALID_CSRF_TOKEN");
+            this.page.SetCsrf("INVALID_ANTI_FORGERY_TOKEN");
             this.page.InputBox.SendKeys("anything");
             this.page.SubmitButton.Click();
             this.page.WaitUntil(driver => driver.Title == "500");

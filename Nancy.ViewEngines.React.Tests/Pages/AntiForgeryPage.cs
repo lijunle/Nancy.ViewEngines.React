@@ -2,7 +2,7 @@
 {
     using OpenQA.Selenium;
 
-    internal class CsrfPage : PageBase
+    internal class AntiForgeryPage : PageBase
     {
         internal IWebElement InputBox =>
             this.Driver.FindElement(By.CssSelector("input[type=text]"));
@@ -22,7 +22,7 @@
         internal string ErrorDetails =>
             this.Driver.FindElement(By.Id("errorContents")).Text;
 
-        protected override string Path => "csrf";
+        protected override string Path => "anti-forgery";
 
         internal void SetCsrf(string value) =>
             this.JavaScriptExecutor.ExecuteScript($"document.querySelector('input[type=hidden]').setAttribute('value', '{value}')");

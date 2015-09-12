@@ -109,8 +109,8 @@
     <Compile Include="Common\TestBootstrapper.cs" />
     <Compile Include="Common\TestRootPathProvider.cs" />
     <Compile Include="Fixture.cs" />
+    <Compile Include="Pages\AntiForgeryPage.cs" />
     <Compile Include="Pages\ConsolePage.cs" />
-    <Compile Include="Pages\CsrfPage.cs" />
     <Compile Include="Pages\ExceptionPage.cs" />
     <Compile Include="Pages\FormPage.cs" />
     <Compile Include="Pages\HomePage.cs" />
@@ -119,8 +119,8 @@
     <Compile Include="Pages\StylePage.cs" />
     <Compile Include="Pages\SuperSimplePage.cs" />
     <Compile Include="Pages\TitlePage.cs" />
+    <Compile Include="PageTests\AntiForgeryTests.cs" />
     <Compile Include="PageTests\ConsoleTests.cs" />
-    <Compile Include="PageTests\CsrfTests.cs" />
     <Compile Include="PageTests\ExceptionTests.cs" />
     <Compile Include="PageTests\FormTests.cs" />
     <Compile Include="PageTests\HomeTests.cs" />

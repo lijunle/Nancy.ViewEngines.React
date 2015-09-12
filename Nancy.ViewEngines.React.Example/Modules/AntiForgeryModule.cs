@@ -3,28 +3,28 @@
     using Bootstrapper;
     using Security;
 
-    public class CsrfModule : NancyModule
+    public class AntiForgeryModule : NancyModule
     {
-        public CsrfModule()
+        public AntiForgeryModule()
         {
-            this.Get["csrf"] = _ => new CsrfModel();
+            this.Get["anti-forgery"] = _ => new AntiForgeryModel();
 
-            this.Post["csrf"] = _ =>
+            this.Post["anti-forgery"] = _ =>
             {
                 this.ValidateCsrfToken();
-                return new CsrfModel(this.Request.Form.Title);
+                return new AntiForgeryModel(this.Request.Form.Title);
             };
         }
 
-        public class CsrfApplicationStartup : IApplicationStartup
+        public class AntiForgeryApplicationStartup : IApplicationStartup
         {
             public void Initialize(IPipelines pipelines) =>
                 Csrf.Enable(pipelines);
         }
 
-        private class CsrfModel
+        private class AntiForgeryModel
         {
-            internal CsrfModel(string title = null)
+            internal AntiForgeryModel(string title = null)
             {
                 this.Title = title;
             }
