@@ -10,19 +10,15 @@ describe('Default test', () => {
     parse = _readFile(file).then(_parseConfig);
   });
 
-  it('should set up script properties', (done) => {
+  it('should set up script properties', () =>
     parse.then(config => {
       expect(config.script.dir).to.be('client');
       expect(config.script.name).to.be('script.js');
-      expect(config.script.extensions).to.have.length(0);
-      done();
-    });
-  });
+      expect(config.script.extensions).to.have.length(1).and.to.contain('jsx');
+    }));
 
-  it('should set up server assets path', (done) => {
+  it('should set up server assets path', () =>
     parse.then(config => {
       expect(config.server.assets.path).to.be('assets');
-      done();
-    });
-  });
+    }));
 });

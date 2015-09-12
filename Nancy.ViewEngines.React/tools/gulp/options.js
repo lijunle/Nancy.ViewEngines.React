@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import gutil from 'gulp-util';
 import { DOMParser } from 'xmldom';
+import { parseString } from 'xml2js';
 
 function readFile(filePath) {
   return new Promise((resolve, reject) => {
@@ -55,19 +56,54 @@ function parseConfig(projectPath) {
     });
 }
 
-function _parseConfig(config) { // eslint-disable-line no-unused-vars
-  return new Promise(resolve => {
-    resolve({
-      script: {
-        dir: 'client',
-        name: 'script.js',
-        extensions: [],
-      },
-      server: {
-        assets: {
-          path: 'assets',
+function get(obj, property, ...args) {
+  if (property === null || property === undefined) {
+    return obj;
+  }
+
+  if (obj && obj[0] && obj[0][property]) {
+    return get(obj[0][property], ...args);
+  }
+
+  if (obj && obj[0] && obj[0].$ && obj[0].$[property]) {
+    return get(obj[0].$[property], ...args);
+  }
+
+  return null;
+}
+
+function toExtension(extensionNode) {
+  return typeof extensionNode === 'string'
+    ? extensionNode
+    : extensionNode.$.name;
+}
+
+function _parseConfig(config) {
+  return new Promise((resolve, reject) => {
+    parseString(config, (err, result) => {
+      if (err) {
+        reject(err);
+      }
+
+      const reactViewEngine = result.configuration.reactViewEngine;
+
+      const extensionNodes =
+        get(reactViewEngine, 'script', 'extensions', 'add') || ['jsx'];
+
+      const configuration = {
+        script: {
+          dir: get(reactViewEngine, 'script', 'dir') || 'client',
+          name: get(reactViewEngine, 'script', 'name') || 'script.js',
+          extensions: extensionNodes.map(toExtension),
         },
-      },
+        server: {
+          assets: {
+            path: get(reactViewEngine, 'server', 'assets', 'path') || 'assets',
+          },
+        },
+      };
+
+      resolve(configuration);
     });
   });
 }
