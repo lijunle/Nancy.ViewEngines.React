@@ -1,4 +1,7 @@
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns="urn:Nancy.ViewEngines.React"
+           targetNamespace="urn:Nancy.ViewEngines.React"
+           elementFormDefault="qualified">
   <xs:complexType name="ExtensionAdd">
     <xs:simpleContent>
       <xs:extension base="xs:string">
