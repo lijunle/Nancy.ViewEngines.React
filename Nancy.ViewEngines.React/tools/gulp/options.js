@@ -54,6 +54,8 @@ function parseConfig(config) {
           dir: get(reactViewEngine, 'script', 'dir') || 'client',
           name: get(reactViewEngine, 'script', 'name') || 'script.js',
           extensions: extensionNodes.map(toExtension),
+          layout: get(reactViewEngine, 'script', 'layout', 'name') ||
+            path.resolve(__dirname, '../client/layout.jsx'),
         },
         server: {
           assets: {
@@ -94,7 +96,7 @@ export default {
         options.entryPath = path.resolve(options.clientPath, options.entryFileName);
 
         options.extensions = config.script.extensions.map(x => `.${x.trim('.')}`);
-        options.layout = config.script.layout || path.resolve(__dirname, '../client/layout.jsx'); // TODO
+        options.layout = config.script.layout;
         options.scriptBundleName = config.script.name;
 
         options.publicPath = config.server.assets.path;

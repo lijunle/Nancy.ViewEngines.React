@@ -15,6 +15,7 @@ describe('Script test', () => {
       expect(config.script.dir).to.be('script-dir');
       expect(config.script.name).to.be('script-name.js');
       expect(config.script.extensions).to.have.length(2);
+      expect(config.script.layout).to.be('layout-name.jsx');
     }));
 
   it('should load extensions', () =>
