@@ -16,6 +16,7 @@
             Assert.Equal("script-dir", this.Configuration.Script.Dir);
             Assert.Equal("script-name.js", this.Configuration.Script.Name);
             Assert.Equal(2, this.Configuration.Script.Extensions.Count);
+            Assert.Equal("layout-name.jsx", this.Configuration.Script.Layout.Name);
         }
 
         [Fact]

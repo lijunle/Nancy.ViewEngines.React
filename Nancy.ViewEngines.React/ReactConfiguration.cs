@@ -34,6 +34,10 @@
             [ConfigurationProperty("extensions")]
             internal ExtensionCollection Extensions =>
                 this["extensions"] as ExtensionCollection;
+
+            [ConfigurationProperty("layout")]
+            internal LayoutElement Layout =>
+                this["layout"] as LayoutElement;
         }
 
         internal class ServerElement : ConfigurationElement
@@ -75,6 +79,13 @@
 
             protected override object GetElementKey(ConfigurationElement element) =>
                 (element as ExtensionElement)?.Name;
+        }
+
+        internal class LayoutElement : ConfigurationElement
+        {
+            [ConfigurationProperty("name", IsRequired = true)]
+            public string Name =>
+                this["name"] as string;
         }
 
         internal class AssetsElement : ConfigurationElement
