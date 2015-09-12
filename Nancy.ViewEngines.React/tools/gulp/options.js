@@ -1,7 +1,6 @@
 import fs from 'fs';
 import path from 'path';
 import gutil from 'gulp-util';
-import { DOMParser } from 'xmldom';
 import { parseString } from 'xml2js';
 
 function readFile(filePath) {
@@ -14,46 +13,6 @@ function readFile(filePath) {
       }
     });
   });
-}
-
-function toObject(keyValuePairs) {
-  return keyValuePairs.reduce((result, keyValuePair) => {
-    const key = keyValuePair[0];
-    const value = keyValuePair[1];
-    result[key] = value;
-    return result;
-  }, {});
-}
-
-function parseList(str, defaultValue) {
-  return str ? str.split(';') : defaultValue;
-}
-
-function parseConfig(projectPath) {
-  return Promise.resolve()
-    .then(() => {
-      const webConfig = path.resolve(projectPath, 'web.config');
-      return readFile(webConfig);
-    })
-    .catch(() => {
-      // if web.config not exist, try app.config
-      const appConfig = path.resolve(projectPath, 'app.config');
-      return readFile(appConfig);
-    })
-    .catch(() => {
-      // if app.config not exist too, return empty contents
-      return '<configuration></configuration>';
-    })
-    .then(contents => {
-      // TODO provide a dedicated section for project settings
-      const doc = new DOMParser().parseFromString(contents, 'text/xml');
-      const entries = Array.from(doc.getElementsByTagName('add'))
-        .filter(entry => entry.hasAttribute('key'))
-        .map(entry => [entry.getAttribute('key'), entry.getAttribute('value')]);
-
-      const result = toObject(entries);
-      return result;
-    });
 }
 
 function get(obj, property, ...args) {
@@ -78,7 +37,7 @@ function toExtension(extensionNode) {
     : extensionNode.$.name;
 }
 
-function _parseConfig(config) {
+function parseConfig(config) {
   return new Promise((resolve, reject) => {
     parseString(config, (err, result) => {
       if (err) {
@@ -116,7 +75,7 @@ export default {
 
   _readFile: readFile,
 
-  _parseConfig: _parseConfig,
+  _parseConfig: parseConfig,
 
   initialize() {
     const options = this;
@@ -127,7 +86,7 @@ export default {
       .then(() => readFile(path.resolve(projectPath, 'web.config')))
       .catch(() => readFile(path.resolve(projectPath, 'app.config')))
       .catch(() => '<configuration></configuration>')
-      .then(_parseConfig)
+      .then(parseConfig)
       .then(config => {
         const outputPath = (gutil.env.outputPath || 'bin').trim();
 
