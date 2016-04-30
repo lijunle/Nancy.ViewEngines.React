@@ -88,7 +88,9 @@
     <Compile Include="ReactViewEngine.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include=".bin\git.cmd" />
     <None Include=".bin\node.cmd" />
+    <None Include=".bin\npm.cmd" />
     <None Include="Nancy.ViewEngines.React.nuspec" />
     <None Include="Nancy.ViewEngines.React.ruleset" />
     <None Include="package.json" />
@@ -127,9 +129,9 @@
   </Target>
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="BeforeBuild">
-    <Exec Command=".\packages\Npm.js.2.13.1.0\tools\npm --unicode=false install" WorkingDirectory="$(SolutionDir)" />
+    <Exec Command=".\Nancy.ViewEngines.React\.bin\npm --unicode=false install" WorkingDirectory="$(SolutionDir)" />
     <Exec Command=".\node_modules\.bin\eslint --ext .js,.jsx &quot;$(ProjectDir)\tools&quot;" WorkingDirectory="$(SolutionDir)" />
-    <Exec Command="..\packages\Npm.js.2.13.1.0\tools\npm --unicode=false install" WorkingDirectory="$(MSBuildProjectPath)" />
+    <Exec Command=".\.bin\npm --unicode=false install" WorkingDirectory="$(MSBuildProjectPath)" />
     <Exec Command=".\tools\7za a -t7z -bd -mx9 -y .\node_modules.7z .\node_modules" WorkingDirectory="$(MSBuildProjectPath)" />
   </Target>
   <Target Name="AfterBuild">

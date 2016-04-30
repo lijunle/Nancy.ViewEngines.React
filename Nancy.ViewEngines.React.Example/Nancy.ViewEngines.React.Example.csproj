@@ -108,7 +108,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <None Include=".bin\node.cmd" />
+    <None Include=".bin\git.cmd" />
     <None Include="..\packages\JavaScriptEngineSwitcher.V8.1.2.9\content\ClearScript.V8\ClearScriptV8-32.dll">
       <Link>ClearScript.V8\ClearScriptV8-32.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -139,6 +139,8 @@
     <Content Include="Views\SuperSimple.sshtml" />
     <Content Include="Views\Title.jsx" />
     <Content Include="Views\TitleLayout.jsx" />
+    <None Include=".bin\node.cmd" />
+    <None Include=".bin\npm.cmd" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -203,10 +205,8 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
-    <Error Condition="!Exists('..\packages\Npm.js.2.13.1.0\build\npm.js.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Npm.js.2.13.1.0\build\npm.js.targets'))" />
   </Target>
   <Import Project="..\Nancy.ViewEngines.React\targets\Nancy.ViewEngines.React.targets" />
-  <Import Project="..\packages\Npm.js.2.13.1.0\build\npm.js.targets" Condition="Exists('..\packages\Npm.js.2.13.1.0\build\npm.js.targets')" />
   <Target Name="BeforeBuild">
     <Exec Command=".\node_modules\.bin\eslint --ext .js,.jsx &quot;$(ProjectDir)\Views&quot;" WorkingDirectory="$(SolutionDir)" />
   </Target>

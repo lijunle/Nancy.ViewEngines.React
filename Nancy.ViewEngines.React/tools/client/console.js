@@ -31,7 +31,7 @@ function stringify(object) {
 
   try {
     return JSON.stringify(object);
-  } catch(e) {
+  } catch (e) {
     return JSON.stringify(object.toString());
   }
 }
