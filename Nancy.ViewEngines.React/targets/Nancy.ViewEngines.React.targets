@@ -23,6 +23,7 @@
   </PropertyGroup>
   <Target Name="RestoreReactViewEnginePackages">
     <Message Text="Building React view engine scripts..." />
+    <Exec Command=".\.bin\npm --unicode=false install" WorkingDirectory="$(MSBuildProjectPath)" />
     <Exec Command="$(Execute)" WorkingDirectory="$(MSBuildThisFileDirectory)..\tools" />
     <Message Text="React view engine scripts is built!" />
   </Target>
