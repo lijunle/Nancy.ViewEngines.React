@@ -117,8 +117,8 @@
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="BeforeBuild">
     <Exec Command=".\Nancy.ViewEngines.React\.bin\npm --unicode=false install" WorkingDirectory="$(SolutionDir)" />
-    <Exec Command=".\node_modules\.bin\eslint --ext .js,.jsx &quot;$(ProjectDir)\tools&quot;" WorkingDirectory="$(SolutionDir)" />
     <Exec Command=".\.bin\npm --unicode=false install" WorkingDirectory="$(MSBuildProjectPath)" />
+    <Exec Command=".\node_modules\.bin\eslint --ext .js,.jsx &quot;$(ProjectDir)\tools&quot;" WorkingDirectory="$(SolutionDir)" />
     <Exec Command=".\tools\7za a -t7z -bd -mx9 -y .\node_modules.7z .\node_modules" WorkingDirectory="$(MSBuildProjectPath)" />
   </Target>
   <Target Name="AfterBuild">
