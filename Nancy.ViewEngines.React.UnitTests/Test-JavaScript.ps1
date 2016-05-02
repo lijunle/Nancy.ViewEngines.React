@@ -1,8 +1,16 @@
 $Project = "$($env:APPVEYOR_BUILD_FOLDER)\Nancy.ViewEngines.React.UnitTests"
 $Stream = cmd /c "$($Project)\node_modules\.bin\mocha" --compilers js:babel/register -R json "$($Project)/*Tests/**/*.js"
-$Output = [String]::Join("", $Stream)
+if ($LastExitCode -ne 0) {
+    Write-Host "Fail the build because mocha command exits with $LastExitCode"
+    $host.SetShouldExit($LastExitCode)
+}
 
+$Output = [String]::Join("", $Stream)
 $Result = ConvertFrom-Json $Output
+if ($LastExitCode -ne 0) {
+    Write-Host "Fail the build because mocha report cannot convert to JSON. Actual value = $Output"
+    $host.SetShouldExit($LastExitCode)
+}
 
 $Failure = $false
 foreach ($Test in $Result.Tests) {
@@ -19,6 +27,6 @@ foreach ($Test in $Result.Tests) {
 }
 
 if ($Failure -eq $true) {
-    Write-Host "Failing build as there are broken tests"
+    Write-Host "Fail the build because there are failing test cases"
     $host.SetShouldExit(1)
 }
