@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOMServer from 'react-dom/server';
 import invokeOrDefault from './invokeOrDefault';
 import { restore } from './console';
 
@@ -19,7 +20,7 @@ export default React.createClass({
   render() {
     const layout = this.props.layout;
     const { Container, title, styles } = getData(layout);
-    const content = React.renderToString(layout);
+    const content = ReactDOMServer.renderToString(layout);
     const consoleCode = restore();
 
     return (
