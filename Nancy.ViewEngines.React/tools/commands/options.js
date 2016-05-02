@@ -64,7 +64,7 @@ function parseConfig(config) {
 function buildOptions(config, env, projectFile, projectPath) {
   const debug = env.configuration !== 'Release';
   const entryFileName = 'entry.map';
-  const outputPath = (env.outputPath || 'bin').trim();
+  const outputPath = env.outputPath;
   const clientPath = path.resolve(projectPath, outputPath, config.script.dir);
   return {
     debug,
@@ -82,7 +82,7 @@ function buildOptions(config, env, projectFile, projectPath) {
 }
 
 function parseOptions(env) {
-  const projectFile = (env.projectFile || __filename).trim();
+  const projectFile = env.projectFile;
   const projectPath = path.dirname(projectFile);
 
   return Promise.resolve()
