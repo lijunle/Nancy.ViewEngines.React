@@ -77,5 +77,14 @@ It determines the process is in debug build only when *all loaded* assemblies ar
 
 Check the [Nancy.ViewEngines.React.Example](https://github.com/lijunle/Nancy.ViewEngines.React/tree/master/Nancy.ViewEngines.React.Example) project.
 
+# Dependency Status
+
+Package.json Location | Status
+--- | ---
+Root | [![devDependency Status](https://david-dm.org/lijunle/Nancy.ViewEngines.React/dev-status.svg)](https://david-dm.org/lijunle/Nancy.ViewEngines.React#info=devDependencies)
+Nancy.ViewEngines.React | [![devDependency Status](https://david-dm.org/lijunle/Nancy.ViewEngines.React/dev-status.svg?path=Nancy.ViewEngines.React)](https://david-dm.org/lijunle/Nancy.ViewEngines.React?path=Nancy.ViewEngines.React#info=devDependencies)
+Nancy.ViewEngines.React.UnitTests | [![devDependency Status](https://david-dm.org/lijunle/Nancy.ViewEngines.React/dev-status.svg?path=Nancy.ViewEngines.React.UnitTests)](https://david-dm.org/lijunle/Nancy.ViewEngines.React?path=Nancy.ViewEngines.React.UnitTests#info=devDependencies)
+Nancy.ViewEngines.React.Example | [![Dependency Status](https://david-dm.org/lijunle/Nancy.ViewEngines.React.svg?path=Nancy.ViewEngines.React.Example)](https://david-dm.org/lijunle/Nancy.ViewEngines.React?path=Nancy.ViewEngines.React.Example) [![devDependency Status](https://david-dm.org/lijunle/Nancy.ViewEngines.React/dev-status.svg?path=Nancy.ViewEngines.React.Example)](https://david-dm.org/lijunle/Nancy.ViewEngines.React?path=Nancy.ViewEngines.React.Example#info=devDependencies)
+
 # License
 MIT License.
