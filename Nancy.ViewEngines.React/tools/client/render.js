@@ -14,8 +14,8 @@ function parse(payload) {
 function hook(layout, callback) {
   const LayoutPrototype = layout.type.prototype;
   const layoutRender = LayoutPrototype.render;
-  LayoutPrototype.render = function _render() {
-    const result = layoutRender.apply(this, arguments);
+  LayoutPrototype.render = function _render(...args) {
+    const result = layoutRender.apply(this, args);
     callback(this);
     return result;
   };

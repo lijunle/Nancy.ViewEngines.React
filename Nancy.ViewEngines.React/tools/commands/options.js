@@ -5,7 +5,8 @@ const parseString = require('xml2js').parseString;
 const readFile = require('./file').readFile;
 
 function get(obj, property) {
-  const args = [].slice.call(arguments, 2);
+  // TODO This file run by node.js. Wait for node.js 6.x NuGet package, prefer rest-params.
+  const args = [].slice.call(arguments, 2); // eslint-disable-line prefer-rest-params
 
   if (property === null || property === undefined) {
     return obj;
