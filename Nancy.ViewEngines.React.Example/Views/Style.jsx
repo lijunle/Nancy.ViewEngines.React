@@ -1,34 +1,32 @@
 import React from 'react';
 import Layout from './StyleLayout';
 
-export default React.createClass({
-  propTypes: {
+export default class Style extends React.Component {
+  static layout = Layout
+
+  static propTypes = {
     styles: React.PropTypes.array.isRequired,
     updateStyles: React.PropTypes.func.isRequired,
-  },
-
-  statics: {
-    layout: Layout,
-  },
+  }
 
   getInitialState() {
     return {
       styles: this.props.styles,
       value: 'red',
     };
-  },
+  }
 
   handleChange(event) {
     const value = event.target.value;
     this.setState({ value });
-  },
+  }
 
   handleAdd() {
     const value = '';
     const styles = this.state.styles.concat([`/style/color/${this.state.value}`]);
     this.props.updateStyles(styles);
     this.setState({ styles, value });
-  },
+  }
 
   handleRemove(style) {
     return () => {
@@ -36,7 +34,7 @@ export default React.createClass({
       this.props.updateStyles(styles);
       this.setState({ styles });
     };
-  },
+  }
 
   renderItem(style) {
     const segments = style.split('/');
@@ -47,7 +45,7 @@ export default React.createClass({
         {style} <button onClick={this.handleRemove(style)}>remove</button>
       </li>
     );
-  },
+  }
 
   render() {
     return (
@@ -58,5 +56,5 @@ export default React.createClass({
         <input type="button" value="Add" onClick={this.handleAdd} />
       </div>
     );
-  },
-});
+  }
+}

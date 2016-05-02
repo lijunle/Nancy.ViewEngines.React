@@ -1,20 +1,20 @@
 import React from 'react';
 
-export default React.createClass({
-  propTypes: {
+export default class Form extends React.Component {
+  static propTypes = {
     text: React.PropTypes.string,
-  },
+  }
 
   getInitialState() {
     return {
       text: this.props.text,
     };
-  },
+  }
 
   handleChange(event) {
     const text = event.target.value;
     this.setState({ text });
-  },
+  }
 
   handleSubmit(event) {
     event.preventDefault();
@@ -30,7 +30,7 @@ export default React.createClass({
 
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     xhr.send(`text=${this.state.text}`);
-  },
+  }
 
   render() {
     return (
@@ -39,5 +39,5 @@ export default React.createClass({
         <input type="submit" value="Submit" />
       </form>
     );
-  },
-});
+  }
+}

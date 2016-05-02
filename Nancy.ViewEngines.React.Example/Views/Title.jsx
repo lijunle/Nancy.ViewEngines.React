@@ -1,30 +1,28 @@
 import React from 'react';
 import Layout from './TitleLayout';
 
-export default React.createClass({
-  propTypes: {
+export default class Title extends React.Component {
+  static layout = Layout
+
+  static propTypes = {
     title: React.PropTypes.string.isRequired,
     updateTitle: React.PropTypes.func.isRequired,
-  },
-
-  statics: {
-    layout: Layout,
-  },
+  }
 
   getInitialState() {
     return {
       title: this.props.title,
     };
-  },
+  }
 
   handleChange(event) {
     const title = event.target.value;
     this.setState({ title });
-  },
+  }
 
   handleUpdate() {
     this.props.updateTitle(this.state.title);
-  },
+  }
 
   render() {
     return (
@@ -38,5 +36,5 @@ export default React.createClass({
         <input type="button" value="Update" onClick={this.handleUpdate} />
       </div>
     );
-  },
-});
+  }
+}
