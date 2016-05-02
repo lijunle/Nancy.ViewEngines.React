@@ -1,5 +1,5 @@
 $Project = "$($env:APPVEYOR_BUILD_FOLDER)\Nancy.ViewEngines.React.UnitTests"
-$Stream = cmd /c "$($Project)\node_modules\.bin\mocha" --compilers js:babel/register -R json "$($Project)/*Tests/**/*.js"
+$Stream = cmd /c "cd $($Project) && .\.bin\npm test --silent -- -R json"
 if ($LastExitCode -ne 0) {
     Write-Host "Fail the build because mocha command exits with $LastExitCode"
     $host.SetShouldExit($LastExitCode)
