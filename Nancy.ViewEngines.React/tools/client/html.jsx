@@ -12,31 +12,28 @@ function getData(layout) {
   return { Container, title, styles };
 }
 
-export default React.createClass({
-  propTypes: {
-    layout: React.PropTypes.node.isRequired,
-  },
+export default function Html({ layout }) {
+  const { Container, title, styles } = getData(layout);
+  const content = ReactDOMServer.renderToString(layout);
+  const consoleCode = restore();
 
-  render() {
-    const layout = this.props.layout;
-    const { Container, title, styles } = getData(layout);
-    const content = ReactDOMServer.renderToString(layout);
-    const consoleCode = restore();
+  return (
+    <html>
+      <head>
+        <title>{title}</title>
+        <meta charSet="utf-8" />
+        <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+        {consoleCode ? <script dangerouslySetInnerHTML={{ __html: consoleCode }} /> : null}
+        {styles.map(style => <link rel="stylesheet" type="text/css" href={style} />)}
+      </head>
+      <body>
+        <Container dangerouslySetInnerHTML={{ __html: content }} />
+      </body>
+    </html>
+  );
+}
 
-    return (
-      <html>
-        <head>
-          <title>{title}</title>
-          <meta charSet="utf-8" />
-          <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-          <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-          {consoleCode ? <script dangerouslySetInnerHTML={{ __html: consoleCode }} /> : null}
-          {styles.map(style => <link rel="stylesheet" type="text/css" href={style} />)}
-        </head>
-        <body>
-          <Container dangerouslySetInnerHTML={{ __html: content }} />
-        </body>
-      </html>
-    );
-  },
-});
+Html.propTypes = {
+  layout: React.PropTypes.node.isRequired,
+};
