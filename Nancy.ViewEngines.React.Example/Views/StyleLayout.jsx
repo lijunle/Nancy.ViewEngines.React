@@ -16,13 +16,13 @@ export default React.createClass({
     return this.state.styles;
   },
 
+  updateStyles(styles) {
+    this.setState({ styles });
+  },
+
   render() {
     return (
       <this.props.view {...this.props.model} updateStyles={this.updateStyles} />
     );
-  },
-
-  updateStyles(styles) {
-    this.setState({ styles });
   },
 });

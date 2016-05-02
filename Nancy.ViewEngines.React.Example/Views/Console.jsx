@@ -7,6 +7,12 @@ export default React.createClass({
     };
   },
 
+  handleChange(event) {
+    const value = event.target.value;
+    this.setState({ value });
+    console.log(value); // eslint-disable-line no-console
+  },
+
   render() {
     if (typeof document === 'undefined') {
       /* eslint-disable no-console */
@@ -28,11 +34,5 @@ export default React.createClass({
         <input type="text" value={this.state.value} onChange={this.handleChange} />
       </div>
     );
-  },
-
-  handleChange(event) {
-    const value = event.target.value;
-    this.setState({ value });
-    console.log(value); // eslint-disable-line no-console
   },
 });

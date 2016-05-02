@@ -11,15 +11,6 @@ export default React.createClass({
     };
   },
 
-  render() {
-    return (
-      <form onSubmit={this.handleSubmit}>
-        <input type="text" value={this.state.text} onChange={this.handleChange} />
-        <input type="submit" value="Submit" />
-      </form>
-    );
-  },
-
   handleChange(event) {
     const text = event.target.value;
     this.setState({ text });
@@ -39,5 +30,14 @@ export default React.createClass({
 
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     xhr.send(`text=${this.state.text}`);
+  },
+
+  render() {
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <input type="text" value={this.state.text} onChange={this.handleChange} />
+        <input type="submit" value="Submit" />
+      </form>
+    );
   },
 });
