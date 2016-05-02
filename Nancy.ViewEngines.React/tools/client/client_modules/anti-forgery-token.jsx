@@ -1,8 +1,8 @@
-const React = require('react');
+var React = require('react');
 
 // on each request, it renders on different engines, global variables are OK here.
-let tokenName;
-let tokenValue;
+var tokenName;
+var tokenValue;
 
 function AntiForgeryToken() {
   if (!tokenName) {
@@ -16,9 +16,10 @@ function AntiForgeryToken() {
   });
 }
 
-AntiForgeryToken.setToken = (token = {}) => {
-  tokenName = token.key;
-  tokenValue = token.value;
+AntiForgeryToken.setToken = function setToken(token) {
+  var t = token || {};
+  tokenName = t.key;
+  tokenValue = t.value;
 };
 
 module.exports = AntiForgeryToken;

@@ -5,9 +5,17 @@ extends:
 parser: espree
 
 parserOptions:
-  ecmaVersion: 6
+  ecmaVersion: 5
   sourceType: script
   ecmaFeatures:
     globalReturn: false
     generators: false
     jsx: false
+
+rules:
+  no-var: 0
+  vars-on-top: 0
+  object-shorthand: 0
+  prefer-template: 0
+  prefer-rest-params: 0
+  prefer-arrow-callback: 0

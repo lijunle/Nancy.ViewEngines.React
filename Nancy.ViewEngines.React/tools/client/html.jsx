@@ -1,15 +1,19 @@
-const React = require('react');
-const ReactDOMServer = require('react-dom/server');
-const invokeOrDefault = require('./invokeOrDefault');
-const { restore } = require('./console');
+var React = require('react');
+var ReactDOMServer = require('react-dom/server');
+var invokeOrDefault = require('./invokeOrDefault');
+var restore = require('./console').restore;
 
 function getData(layout) {
-  const Layout = layout.type;
-  const instance = new Layout(layout.props);
-  const Container = Layout.container || 'div';
-  const title = invokeOrDefault(instance.getTitle, '');
-  const styles = invokeOrDefault(instance.getStyles, []);
-  return { Container, title, styles };
+  var Layout = layout.type;
+  var instance = new Layout(layout.props);
+  var Container = Layout.container || 'div';
+  var title = invokeOrDefault(instance.getTitle, '');
+  var styles = invokeOrDefault(instance.getStyles, []);
+  return {
+    Container: Container,
+    title: title,
+    styles: styles,
+  };
 }
 
 function Viewpoint() {
@@ -20,18 +24,18 @@ function Viewpoint() {
 }
 
 function Console() {
-  const consoleCode = restore();
+  var consoleCode = restore();
   return consoleCode
     ? React.createElement('script', { dangerouslySetInnerHTML: { __html: consoleCode } })
     : null;
 }
 
-function Style({ style }) {
+function Style(props) {
   return React.createElement('link', {
     rel: 'stylesheet',
     type: 'text/css',
-    href: style,
-    key: style,
+    href: props.style,
+    key: props.style,
   });
 }
 
@@ -39,9 +43,16 @@ Style.propTypes = {
   style: React.PropTypes.string.isRequired,
 };
 
-function Html({ layout }) {
-  const { Container, title, styles } = getData(layout);
-  const content = ReactDOMServer.renderToString(layout);
+function Html(props) {
+  var data = getData(props.layout);
+  var Container = data.Container;
+  var title = data.title;
+
+  var styleElements = data.styles.map(function styleElement(style) {
+    return React.createElement(Style, { style: style });
+  });
+
+  var content = ReactDOMServer.renderToString(props.layout);
 
   return React.createElement(
     'html',
@@ -54,7 +65,7 @@ function Html({ layout }) {
       React.createElement('meta', { httpEquiv: 'X-UA-Compatible', content: 'IE=edge' }),
       React.createElement(Viewpoint),
       React.createElement(Console),
-      (styles.map(style => React.createElement(Style, { style })))
+      styleElements
     ),
     React.createElement(
       'body',

@@ -1,7 +1,7 @@
-const React = require('react');
+var React = require('react');
 
 // TODO Convert Layout to stateless component.
-const Layout = React.createClass({ // eslint-disable-line react/prefer-es6-class
+var Layout = React.createClass({ // eslint-disable-line react/prefer-es6-class
   propTypes: {
     view: React.PropTypes.func.isRequired, // React component constructor
     model: React.PropTypes.object.isRequired,
@@ -11,15 +11,15 @@ const Layout = React.createClass({ // eslint-disable-line react/prefer-es6-class
     container: 'div',
   },
 
-  getTitle() {
+  getTitle: function getTitle() {
     return this.props.model.title || '';
   },
 
-  getStyles() {
+  getStyles: function getStyles() {
     return this.props.model.styles || [];
   },
 
-  render() {
+  render: function render() {
     return React.createElement(this.props.view, this.props.model);
   },
 });
