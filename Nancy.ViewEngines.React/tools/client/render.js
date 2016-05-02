@@ -73,12 +73,12 @@ export default function renderFactory(lookup, defaultLayout) {
     const model = parse(payload);
 
     const Layout = view.layout || defaultLayout;
-    const layout = <Layout view={view} model={model} />;
+    const layout = React.createElement(Layout, { view, model });
 
     AntiForgeryToken.setToken(parse(token));
 
     return typeof window === 'undefined'
-      ? ReactDOMServer.renderToStaticMarkup(<Html layout={layout} />) // server side
+      ? ReactDOMServer.renderToStaticMarkup(React.createElement(Html, { layout })) // server side
       : renderClientSide(layout); // client side
   };
 }

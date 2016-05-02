@@ -4,19 +4,19 @@ import React from 'react';
 let tokenName;
 let tokenValue;
 
-export default React.createClass({
-  statics: {
-    setToken(token = {}) {
-      tokenName = token.key;
-      tokenValue = token.value;
-    },
-  },
+export default function AntiForgeryToken() {
+  if (!tokenName) {
+    throw Error('CSRF is not enabled on this request.');
+  }
 
-  render() {
-    if (!tokenName) {
-      throw Error('CSRF is not enabled on this request.');
-    }
+  return React.createElement('input', {
+    type: 'hidden',
+    name: tokenName,
+    value: tokenValue,
+  });
+}
 
-    return <input type="hidden" name={tokenName} value={tokenValue} />;
-  },
-});
+AntiForgeryToken.setToken = (token = {}) => {
+  tokenName = token.key;
+  tokenValue = token.value;
+};

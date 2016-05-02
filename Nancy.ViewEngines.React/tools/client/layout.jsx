@@ -1,6 +1,7 @@
 import React from 'react';
 
-export default React.createClass({
+// TODO Convert Layout to stateless component.
+export default React.createClass({ // eslint-disable-line react/prefer-es6-class
   propTypes: {
     view: React.PropTypes.func.isRequired, // React component constructor
     model: React.PropTypes.object.isRequired,
@@ -19,6 +20,6 @@ export default React.createClass({
   },
 
   render() {
-    return <this.props.view {...this.props.model} />;
+    return React.createElement(this.props.view, this.props.model);
   },
 });

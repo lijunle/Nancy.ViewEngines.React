@@ -1,0 +1,13 @@
+---
+extends:
+  - airbnb
+
+parser: espree
+
+parserOptions:
+  ecmaVersion: 6
+  sourceType: module
+  ecmaFeatures:
+    globalReturn: false
+    generators: false
+    jsx: false

@@ -12,25 +12,58 @@ function getData(layout) {
   return { Container, title, styles };
 }
 
+function Viewpoint() {
+  return React.createElement('meta', {
+    name: 'viewport',
+    content: 'width=device-width, initial-scale=1, user-scalable=no',
+  });
+}
+
+function Console() {
+  const consoleCode = restore();
+  return consoleCode
+    ? React.createElement('script', { dangerouslySetInnerHTML: { __html: consoleCode } })
+    : null;
+}
+
+function Style({ style }) {
+  return React.createElement('link', {
+    rel: 'stylesheet',
+    type: 'text/css',
+    href: style,
+    key: style,
+  });
+}
+
+Style.propTypes = {
+  style: React.PropTypes.string.isRequired,
+};
+
 export default function Html({ layout }) {
   const { Container, title, styles } = getData(layout);
   const content = ReactDOMServer.renderToString(layout);
-  const consoleCode = restore();
 
-  return (
-    <html>
-      <head>
-        <title>{title}</title>
-        <meta charSet="utf-8" />
-        <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-        {consoleCode ? <script dangerouslySetInnerHTML={{ __html: consoleCode }} /> : null}
-        {styles.map(style => <link rel="stylesheet" type="text/css" href={style} />)}
-      </head>
-      <body>
-        <Container dangerouslySetInnerHTML={{ __html: content }} />
-      </body>
-    </html>
+  return React.createElement(
+    'html',
+    null,
+    React.createElement(
+      'head',
+      null,
+      React.createElement('title', null, title),
+      React.createElement('meta', { charSet: 'utf-8' }),
+      React.createElement('meta', { httpEquiv: 'X-UA-Compatible', content: 'IE=edge' }),
+      React.createElement(Viewpoint),
+      React.createElement(Console),
+      (styles.map(style => React.createElement(Style, { style })))
+    ),
+    React.createElement(
+      'body',
+      null,
+      React.createElement(
+        Container,
+        { dangerouslySetInnerHTML: { __html: content } }
+      )
+    )
   );
 }
 
