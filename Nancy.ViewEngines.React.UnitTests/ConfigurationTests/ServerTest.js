@@ -1,20 +1,18 @@
 /* global describe, beforeEach, it */
 
-import path from 'path';
-import expect from 'expect.js';
-import { readFile } from '../../Nancy.ViewEngines.React/tools/commands/file';
-import { parseConfig } from '../../Nancy.ViewEngines.React/tools/commands/options';
+const path = require('path');
+const expect = require('expect.js');
+const readFile = require('../../Nancy.ViewEngines.React/tools/commands/file').readFile;
+const parseConfig = require('../../Nancy.ViewEngines.React/tools/commands/options').parseConfig;
 
 describe('Server test', () => {
-  let parse;
-
   beforeEach(() => {
     const file = path.resolve(__dirname, '../ConfigurationFixtures', 'Server.config');
-    parse = readFile(file).then(parseConfig);
+    this.parse = readFile(file).then(parseConfig);
   });
 
   it('should load properties', () =>
-    parse.then(config => {
+    this.parse.then(config => {
       expect(config.server.assets.path).to.be('assets-path');
     }));
 });
