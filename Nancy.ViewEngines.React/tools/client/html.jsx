@@ -1,7 +1,7 @@
-import React from 'react';
-import ReactDOMServer from 'react-dom/server';
-import invokeOrDefault from './invokeOrDefault';
-import { restore } from './console';
+const React = require('react');
+const ReactDOMServer = require('react-dom/server');
+const invokeOrDefault = require('./invokeOrDefault');
+const { restore } = require('./console');
 
 function getData(layout) {
   const Layout = layout.type;
@@ -39,7 +39,7 @@ Style.propTypes = {
   style: React.PropTypes.string.isRequired,
 };
 
-export default function Html({ layout }) {
+function Html({ layout }) {
   const { Container, title, styles } = getData(layout);
   const content = ReactDOMServer.renderToString(layout);
 
@@ -70,3 +70,5 @@ export default function Html({ layout }) {
 Html.propTypes = {
   layout: React.PropTypes.node.isRequired,
 };
+
+module.exports = Html;

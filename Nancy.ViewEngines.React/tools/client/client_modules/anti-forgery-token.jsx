@@ -1,10 +1,10 @@
-import React from 'react';
+const React = require('react');
 
 // on each request, it renders on different engines, global variables are OK here.
 let tokenName;
 let tokenValue;
 
-export default function AntiForgeryToken() {
+function AntiForgeryToken() {
   if (!tokenName) {
     throw Error('CSRF is not enabled on this request.');
   }
@@ -20,3 +20,5 @@ AntiForgeryToken.setToken = (token = {}) => {
   tokenName = token.key;
   tokenValue = token.value;
 };
+
+module.exports = AntiForgeryToken;

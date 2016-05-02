@@ -1,9 +1,9 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import ReactDOMServer from 'react-dom/server';
-import Html from './html';
-import AntiForgeryToken from './client_modules/anti-forgery-token';
-import invokeOrDefault from './invokeOrDefault';
+const React = require('react');
+const ReactDOM = require('react-dom');
+const ReactDOMServer = require('react-dom/server');
+const Html = require('./html');
+const AntiForgeryToken = require('./client_modules/anti-forgery-token');
+const invokeOrDefault = require('./invokeOrDefault');
 
 function parse(payload) {
   try {
@@ -67,7 +67,7 @@ function renderClientSide(layout) {
   });
 }
 
-export default function renderFactory(lookup, defaultLayout) {
+function renderFactory(lookup, defaultLayout) {
   return function render(path, payload, token) {
     const view = lookup[path];
     const model = parse(payload);
@@ -82,3 +82,5 @@ export default function renderFactory(lookup, defaultLayout) {
       : renderClientSide(layout); // client side
   };
 }
+
+module.exports = renderFactory;
