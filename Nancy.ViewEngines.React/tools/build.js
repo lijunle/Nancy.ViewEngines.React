@@ -5,10 +5,14 @@ const clean = require('./commands/clean');
 const buildEntry = require('./commands/entry');
 const webpack = require('./commands/webpack');
 
+function trim(str) {
+  return (str || '').trim();
+}
+
 const env = {
-  projectFile: process.argv[2],
-  outputPath: process.argv[3],
-  configuration: process.argv[4],
+  projectFile: trim(process.argv[2]),
+  outputPath: trim(process.argv[3]),
+  configuration: trim(process.argv[4]),
 };
 
 options(env)
