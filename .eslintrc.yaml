@@ -2,6 +2,8 @@
 extends:
   - airbnb
 
+parser: babel-eslint
+
 # Suppress lots of rules, treat as warnings. Revisit them later.
 rules:
   import/no-unresolved:
