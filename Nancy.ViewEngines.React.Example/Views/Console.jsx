@@ -15,7 +15,8 @@ export default React.createClass({
       console.log('Log something during server render will be restored for client.');
       console.warn('Warn and other console methods work fine too.');
 
-      console.log('Output an object which cannot JSON.stringify will restore its `toString` function', this);
+      console.log('Output an object which cannot JSON.stringify will restore' +
+        ' its `toString` function', this);
       console.log('It handles `undefined` and `null` stringify', undefined, null);
 
       /* eslint-enable no-console */

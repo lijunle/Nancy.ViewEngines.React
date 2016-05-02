@@ -65,7 +65,7 @@ function renderClientSide(layout) {
   });
 }
 
-export default (lookup, defaultLayout) => {
+export default function renderFactory(lookup, defaultLayout) {
   return function render(path, payload, token) {
     const view = lookup[path];
     const model = parse(payload);
@@ -79,4 +79,4 @@ export default (lookup, defaultLayout) => {
       ? React.renderToStaticMarkup(<Html layout={layout} />) // server side
       : renderClientSide(layout); // client side
   };
-};
+}

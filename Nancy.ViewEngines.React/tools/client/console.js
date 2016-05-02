@@ -5,12 +5,14 @@ const inServer = typeof document === 'undefined';
 const logger = inServer ? {} : window.console;
 const logs = [];
 
+function noop() {}
+
 [
   'assert', 'clear', 'count', 'debug', 'dir', 'dirxml', 'exception', 'group',
   'groupCollapsed', 'groupEnd', 'markTimeline', 'profile', 'profileEnd',
   'table', 'time', 'timeEnd', 'timeStamp',
 ].forEach(method => {
-  logger[method] = logger[method] || () => {};
+  logger[method] = logger[method] || noop;
 });
 
 // restore the log arguements to redirect information for client
