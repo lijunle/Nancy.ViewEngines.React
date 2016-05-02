@@ -4,6 +4,10 @@ extends:
 
 # Suppress lots of rules, treat as warnings. Revisit them later.
 rules:
-  import/no-unresolved: [1]
+  import/no-unresolved:
+    - 2
+    - ignore:
+      - react
+      - anti-forgery-token
   react/prefer-es6-class: [1]
   react/prefer-stateless-function: [1]
