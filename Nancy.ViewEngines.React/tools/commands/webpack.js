@@ -1,9 +1,10 @@
-import path from 'path';
-import gutil from 'gulp-util';
-import webpack from 'webpack';
+/* eslint-disable no-console */
 
-// TODO find another way to watch webpack
-export default (options) => {
+const path = require('path');
+const webpack = require('webpack');
+
+// TODO find a way to do webpack watch
+function compile(options) {
   const deinfePlugin = new webpack.DefinePlugin({
     'process.env.NODE_ENV': options.debug ? '' : '"production"',
   });
@@ -15,7 +16,7 @@ export default (options) => {
   });
 
   const compiler = webpack({
-    entry: options.entryPath,
+    entry: options.entryFile,
     output: {
       path: options.clientPath,
       filename: options.scriptBundleName,
@@ -56,10 +57,9 @@ export default (options) => {
   return new Promise((resolve, reject) => {
     compiler.run((err, stats) => {
       if (err) {
-        gutil.log(err);
         reject(err);
       } else {
-        gutil.log(stats.toString({
+        resolve(stats.toString({
           colors: false,
           hash: false,
           version: false,
@@ -68,4 +68,15 @@ export default (options) => {
       }
     });
   });
-};
+}
+
+function build(options) {
+  return Promise.resolve()
+    .then(() => console.log('[Start] Webpack.'))
+    .then(() => compile(options))
+    .then(stats => console.log(stats))
+    .then(() => console.log('[End] Webpack.'))
+    .then(() => options);
+}
+
+module.exports = build;

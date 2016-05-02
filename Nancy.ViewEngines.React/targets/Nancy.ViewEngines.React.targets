@@ -14,10 +14,7 @@
     -->
     <Execute>
       <![CDATA[
-      "$(MSBuildThisFileDirectory)..\tools\node" "$(MSBuildThisFileDirectory)..\node_modules\gulp\bin\gulp.js" ^
-        --projectFile " $(MSBuildProjectFullPath) " ^
-        --outputPath " $(OutputPath) " ^
-        --configuration "$(Configuration)"
+      .\node .\build " $(MSBuildProjectFullPath) " " $(OutputPath) " "$(Configuration)"
       ]]>
     </Execute>
   </PropertyGroup>

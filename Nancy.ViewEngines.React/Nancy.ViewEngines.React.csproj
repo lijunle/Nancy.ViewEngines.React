@@ -84,15 +84,17 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="targets\Nancy.ViewEngines.React.targets" />
+    <None Include="tools\build.js" />
     <None Include="tools\client\console.js" />
     <None Include="tools\client\html.jsx" />
     <None Include="tools\client\invokeOrDefault.js" />
     <None Include="tools\client\layout.jsx" />
     <None Include="tools\client\render.js" />
-    <None Include="tools\gulp\entry.js" />
-    <None Include="tools\gulp\options.js" />
-    <None Include="tools\gulp\webpack.js" />
-    <None Include="tools\gulpfile.js" />
+    <None Include="tools\commands\clean.js" />
+    <None Include="tools\commands\entry.js" />
+    <None Include="tools\commands\file.js" />
+    <None Include="tools\commands\options.js" />
+    <None Include="tools\commands\webpack.js" />
     <None Include="tools\install.ps1" />
     <None Include="tools\node.cmd" />
     <None Include="tools\uninstall.ps1" />

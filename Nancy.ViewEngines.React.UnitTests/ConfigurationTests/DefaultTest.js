@@ -1,13 +1,14 @@
 import path from 'path';
 import expect from 'expect.js';
-import { _readFile, _parseConfig } from '../../Nancy.ViewEngines.React/tools/gulp/options';
+import { readFile } from '../../Nancy.ViewEngines.React/tools/commands/file';
+import { parseConfig } from '../../Nancy.ViewEngines.React/tools/commands/options';
 
 describe('Default test', () => {
   let parse;
 
   beforeEach(() => {
     const file = path.resolve(__dirname, '../ConfigurationFixtures', 'Default.config');
-    parse = _readFile(file).then(_parseConfig);
+    parse = readFile(file).then(parseConfig);
   });
 
   it('should set up script properties', () =>
