@@ -3,10 +3,6 @@
 const path = require('path');
 const webpack = require('webpack');
 
-function mapLocal(array) {
-  return array.map((item) => path.resolve(__dirname, '../../node_modules', item));
-}
-
 // TODO find a way to do webpack watch
 function compile(options) {
   const deinfePlugin = new webpack.DefinePlugin({
@@ -39,12 +35,6 @@ function compile(options) {
           test: /\.jsx?$/,
           exclude: /node_modules/,
           loader: 'babel',
-          query: {
-            presets: mapLocal([
-              'babel-preset-es2015',
-              'babel-preset-react',
-            ]),
-          },
         },
         {
           test: /\.jsx?$/,
@@ -58,7 +48,7 @@ function compile(options) {
     resolve: {
       root: [
         path.resolve(__dirname, '../../node_modules'),
-        path.resolve(__dirname, '../utils'),
+        path.resolve(__dirname, '../client/client_modules'),
       ],
       extensions: ['', '.js', '.jsx'],
     },

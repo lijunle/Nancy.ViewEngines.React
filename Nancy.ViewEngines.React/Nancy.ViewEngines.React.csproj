@@ -85,6 +85,7 @@
     </None>
     <None Include="targets\Nancy.ViewEngines.React.targets" />
     <None Include="tools\build.js" />
+    <None Include="tools\client\client_modules\anti-forgery-token.jsx" />
     <None Include="tools\client\console.js" />
     <None Include="tools\client\html.jsx" />
     <None Include="tools\client\invokeOrDefault.js" />
@@ -98,7 +99,6 @@
     <None Include="tools\install.ps1" />
     <None Include="tools\node.cmd" />
     <None Include="tools\uninstall.ps1" />
-    <None Include="tools\utils\anti-forgery-token.jsx" />
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\Newtonsoft.Json.dll" />
@@ -117,8 +117,8 @@
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="BeforeBuild">
     <Exec Command=".\Nancy.ViewEngines.React\.bin\npm --unicode=false install" WorkingDirectory="$(SolutionDir)" />
-    <Exec Command=".\node_modules\.bin\eslint --ext .js,.jsx &quot;$(ProjectDir)\tools&quot;" WorkingDirectory="$(SolutionDir)" />
     <Exec Command=".\.bin\npm --unicode=false install" WorkingDirectory="$(MSBuildProjectPath)" />
+    <Exec Command=".\node_modules\.bin\eslint --ext .js,.jsx &quot;$(ProjectDir)\tools&quot;" WorkingDirectory="$(SolutionDir)" />
     <Exec Command=".\tools\7za a -t7z -bd -mx9 -y .\node_modules.7z .\node_modules" WorkingDirectory="$(MSBuildProjectPath)" />
   </Target>
   <Target Name="AfterBuild">
