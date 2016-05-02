@@ -90,4 +90,4 @@ function renderFactory(lookup, defaultLayout) {
   };
 }
 
-module.exports = renderFactory;
+exports.default = renderFactory;

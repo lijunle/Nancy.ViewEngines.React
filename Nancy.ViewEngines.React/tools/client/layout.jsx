@@ -24,4 +24,4 @@ var Layout = React.createClass({ // eslint-disable-line react/prefer-es6-class
   },
 });
 
-module.exports = Layout;
+exports.default = Layout;
