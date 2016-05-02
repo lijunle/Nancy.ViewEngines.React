@@ -9,34 +9,33 @@ export default class Style extends React.Component {
     updateStyles: React.PropTypes.func.isRequired,
   }
 
-  getInitialState() {
-    return {
+  constructor(props) {
+    super(props);
+
+    this.state = {
       styles: this.props.styles,
       value: 'red',
     };
   }
 
-  handleChange(event) {
-    const value = event.target.value;
-    this.setState({ value });
+  handleChange = (event) => {
+    this.setState({ value: event.target.value });
   }
 
-  handleAdd() {
+  handleAdd = () => {
     const value = '';
     const styles = this.state.styles.concat([`/style/color/${this.state.value}`]);
     this.props.updateStyles(styles);
     this.setState({ styles, value });
   }
 
-  handleRemove(style) {
-    return () => {
-      const styles = this.state.styles.filter(x => x !== style);
-      this.props.updateStyles(styles);
-      this.setState({ styles });
-    };
+  handleRemove = (style) => () => {
+    const styles = this.state.styles.filter(x => x !== style);
+    this.props.updateStyles(styles);
+    this.setState({ styles });
   }
 
-  renderItem(style) {
+  renderItem = (style) => {
     const segments = style.split('/');
     const color = segments[segments.length - 1];
 

@@ -5,18 +5,20 @@ export default class Form extends React.Component {
     text: React.PropTypes.string,
   }
 
-  getInitialState() {
-    return {
+  constructor(props) {
+    super(props);
+
+    this.state = {
       text: this.props.text,
     };
   }
 
-  handleChange(event) {
+  handleChange = (event) => {
     const text = event.target.value;
     this.setState({ text });
   }
 
-  handleSubmit(event) {
+  handleSubmit = (event) => {
     event.preventDefault();
 
     const xhr = new XMLHttpRequest();

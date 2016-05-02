@@ -9,18 +9,20 @@ export default class Title extends React.Component {
     updateTitle: React.PropTypes.func.isRequired,
   }
 
-  getInitialState() {
-    return {
+  constructor(props) {
+    super(props);
+
+    this.state = {
       title: this.props.title,
     };
   }
 
-  handleChange(event) {
+  handleChange = (event) => {
     const title = event.target.value;
     this.setState({ title });
   }
 
-  handleUpdate() {
+  handleUpdate = () => {
     this.props.updateTitle(this.state.title);
   }
 

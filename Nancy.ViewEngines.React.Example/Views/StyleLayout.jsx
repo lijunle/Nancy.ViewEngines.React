@@ -6,17 +6,17 @@ export default class StyleLatyout extends React.Component {
     model: React.PropTypes.object.isRequired,
   }
 
-  getInitialState() {
-    return {
+  constructor(props) {
+    super(props);
+
+    this.state = {
       styles: this.props.model.styles,
     };
   }
 
-  getStyles() {
-    return this.state.styles;
-  }
+  getStyles = () => this.state.styles
 
-  updateStyles(styles) {
+  updateStyles = (styles) => {
     this.setState({ styles });
   }
 

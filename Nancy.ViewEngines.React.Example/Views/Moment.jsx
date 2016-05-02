@@ -2,8 +2,10 @@ import React from 'react';
 import moment from 'moment';
 
 export default class Moment extends React.Component {
-  getInitialState() {
-    return {
+  constructor(props) {
+    super(props);
+
+    this.state = {
       currentTime: null,
     };
   }
@@ -13,7 +15,7 @@ export default class Moment extends React.Component {
     setInterval(this.updateCurrentTime, 1000);
   }
 
-  updateCurrentTime() {
+  updateCurrentTime = () => {
     this.setState({
       currentTime: moment().format(),
     });

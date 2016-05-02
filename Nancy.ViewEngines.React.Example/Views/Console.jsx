@@ -1,13 +1,15 @@
 import React from 'react';
 
 export default class Console extends React.Component {
-  getInitialState() {
-    return {
+  constructor(props) {
+    super(props);
+
+    this.state = {
       value: '',
     };
   }
 
-  handleChange(event) {
+  handleChange = (event) => {
     const value = event.target.value;
     this.setState({ value });
     console.log(value); // eslint-disable-line no-console

@@ -6,17 +6,17 @@ export default class TitleLayout extends React.Component {
     model: React.PropTypes.object.isRequired,
   }
 
-  getInitialState() {
-    return {
+  constructor(props) {
+    super(props);
+
+    this.state = {
       title: this.props.model.title,
     };
   }
 
-  getTitle() {
-    return this.state.title;
-  }
+  getTitle = () => this.state.title
 
-  updateTitle(title) {
+  updateTitle = (title) => {
     this.setState({ title });
   }
 
