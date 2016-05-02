@@ -1,11 +1,9 @@
 import React from 'react';
 
-export default React.createClass({
-  propTypes: {
-    text: React.PropTypes.string.isRequired,
-  },
+export default function Home({ text }) {
+  return <div>Home: <code>{text}</code></div>;
+}
 
-  render() {
-    return <div>Home: <code>{this.props.text}</code></div>;
-  },
-});
+Home.propTypes = {
+  text: React.PropTypes.string.isRequired,
+};

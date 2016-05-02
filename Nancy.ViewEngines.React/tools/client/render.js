@@ -1,4 +1,6 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
+import ReactDOMServer from 'react-dom/server';
 import Html from './html';
 import AntiForgeryToken from '../utils/anti-forgery-token';
 import invokeOrDefault from './invokeOrDefault';
@@ -41,7 +43,7 @@ function updateStyles(styles, currentStyles, head) {
 
 function renderClientSide(layout) {
   const container = document.querySelector('[data-react-checksum]').parentElement;
-  const instance = React.render(layout, container);
+  const instance = ReactDOM.render(layout, container);
 
   const head = document.getElementsByTagName('head')[0];
   let currentTitle = invokeOrDefault(instance.getTitle, '');
@@ -76,7 +78,7 @@ export default function renderFactory(lookup, defaultLayout) {
     AntiForgeryToken.setToken(parse(token));
 
     return typeof window === 'undefined'
-      ? React.renderToStaticMarkup(<Html layout={layout} />) // server side
+      ? ReactDOMServer.renderToStaticMarkup(<Html layout={layout} />) // server side
       : renderClientSide(layout); // client side
   };
 }
