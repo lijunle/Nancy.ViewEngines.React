@@ -3,6 +3,10 @@
 const path = require('path');
 const webpack = require('webpack');
 
+function mapLocal(array) {
+  return array.map((item) => path.resolve(__dirname, '../../node_modules', item));
+}
+
 // TODO find a way to do webpack watch
 function compile(options) {
   const deinfePlugin = new webpack.DefinePlugin({
@@ -16,7 +20,10 @@ function compile(options) {
   });
 
   const compiler = webpack({
-    entry: options.entryFile,
+    entry: [
+      'babel-polyfill',
+      options.entryFile,
+    ],
     output: {
       path: options.clientPath,
       filename: options.scriptBundleName,
@@ -32,6 +39,12 @@ function compile(options) {
           test: /\.jsx?$/,
           exclude: /node_modules/,
           loader: 'babel',
+          query: {
+            presets: mapLocal([
+              'babel-preset-es2015',
+              'babel-preset-react',
+            ]),
+          },
         },
         {
           test: /\.jsx?$/,
