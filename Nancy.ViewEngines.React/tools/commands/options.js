@@ -95,3 +95,4 @@ function parseOptions(env) {
 }
 
 module.exports = parseOptions;
+module.exports.parseConfig = parseConfig;
