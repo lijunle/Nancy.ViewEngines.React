@@ -1,0 +1,16 @@
+# Configurations
+.vs/*
+.git/*
+.nuget/*
+
+# NuGet packages
+packages/*
+
+# NPM packages
+**/node_modules/*
+
+# MSBuild output
+**/obj/*
+**/bin/*
+**/Debug/*
+**/Release/*
