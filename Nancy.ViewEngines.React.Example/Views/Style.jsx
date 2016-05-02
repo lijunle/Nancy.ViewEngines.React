@@ -18,6 +18,26 @@ export default React.createClass({
     };
   },
 
+  handleChange(event) {
+    const value = event.target.value;
+    this.setState({ value });
+  },
+
+  handleAdd() {
+    const value = '';
+    const styles = this.state.styles.concat([`/style/color/${this.state.value}`]);
+    this.props.updateStyles(styles);
+    this.setState({ styles, value });
+  },
+
+  handleRemove(style) {
+    return () => {
+      const styles = this.state.styles.filter(x => x !== style);
+      this.props.updateStyles(styles);
+      this.setState({ styles });
+    };
+  },
+
   renderItem(style) {
     const segments = style.split('/');
     const color = segments[segments.length - 1];
@@ -38,25 +58,5 @@ export default React.createClass({
         <input type="button" value="Add" onClick={this.handleAdd} />
       </div>
     );
-  },
-
-  handleChange(event) {
-    const value = event.target.value;
-    this.setState({ value });
-  },
-
-  handleAdd() {
-    const value = '';
-    const styles = this.state.styles.concat([`/style/color/${this.state.value}`]);
-    this.props.updateStyles(styles);
-    this.setState({ styles, value });
-  },
-
-  handleRemove(style) {
-    return () => {
-      const styles = this.state.styles.filter(x => x !== style);
-      this.props.updateStyles(styles);
-      this.setState({ styles });
-    };
   },
 });

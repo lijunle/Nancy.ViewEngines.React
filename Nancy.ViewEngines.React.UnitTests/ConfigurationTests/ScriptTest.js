@@ -1,3 +1,5 @@
+/* global describe, beforeEach, it */
+
 import path from 'path';
 import expect from 'expect.js';
 import { readFile } from '../../Nancy.ViewEngines.React/tools/commands/file';

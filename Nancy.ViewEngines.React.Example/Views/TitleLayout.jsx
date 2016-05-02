@@ -16,13 +16,13 @@ export default React.createClass({
     return this.state.title;
   },
 
+  updateTitle(title) {
+    this.setState({ title });
+  },
+
   render() {
     return (
       <this.props.view {...this.props.model} updateTitle={this.updateTitle} />
     );
-  },
-
-  updateTitle(title) {
-    this.setState({ title });
   },
 });

@@ -14,8 +14,8 @@ function parse(payload) {
 function hook(layout, callback) {
   const LayoutPrototype = layout.type.prototype;
   const layoutRender = LayoutPrototype.render;
-  LayoutPrototype.render = function _render() {
-    const result = layoutRender.apply(this, arguments);
+  LayoutPrototype.render = function _render(...args) {
+    const result = layoutRender.apply(this, args);
     callback(this);
     return result;
   };
@@ -65,7 +65,7 @@ function renderClientSide(layout) {
   });
 }
 
-export default (lookup, defaultLayout) => {
+export default function renderFactory(lookup, defaultLayout) {
   return function render(path, payload, token) {
     const view = lookup[path];
     const model = parse(payload);
@@ -79,4 +79,4 @@ export default (lookup, defaultLayout) => {
       ? React.renderToStaticMarkup(<Html layout={layout} />) // server side
       : renderClientSide(layout); // client side
   };
-};
+}

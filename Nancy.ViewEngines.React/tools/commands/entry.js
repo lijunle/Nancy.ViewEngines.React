@@ -46,14 +46,15 @@ function buildEntryCode(items, options) {
   const requireRender = requireLibrary('../client/render.js');
   const lookupCode = lookup.map(formatLine).join(',\n');
   const requireLayout = requireView(options.layout, options);
-  const renderCode = `${requirePolyfill}module.exports = ${requireRender}({\n${lookupCode}\n}, ${requireLayout});`;
+  const renderCode = `${requirePolyfill}\
+    module.exports = ${requireRender}({\n${lookupCode}\n}, ${requireLayout});`;
 
   return renderCode;
 }
 
 function buildEntryFile(content, options) {
   const doc = new DOMParser().parseFromString(content);
-  const select = xpath.useNamespaces({ 'proj': PROJ_NAMESPACE });
+  const select = xpath.useNamespaces({ proj: PROJ_NAMESPACE });
   const items = select(XPATH_SELECTOR, doc).map(node => node.value);
   const code = buildEntryCode(items, options);
   return code;

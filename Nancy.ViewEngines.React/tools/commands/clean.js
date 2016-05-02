@@ -5,7 +5,7 @@ const rimraf = require('rimraf');
 function removePath(path) {
   return new Promise((resolve, reject) =>
     rimraf(path, (error) =>
-      error ? reject(error) : resolve()));
+      (error ? reject(error) : resolve())));
 }
 
 function clean(options) {

@@ -29,11 +29,11 @@ export default React.createClass({
           <meta charSet="utf-8" />
           <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
           <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-          {consoleCode ? <script dangerouslySetInnerHTML={{__html: consoleCode}} /> : null}
+          {consoleCode ? <script dangerouslySetInnerHTML={{ __html: consoleCode }} /> : null}
           {styles.map(style => <link rel="stylesheet" type="text/css" href={style} />)}
         </head>
         <body>
-          <Container dangerouslySetInnerHTML={{__html: content}} />
+          <Container dangerouslySetInnerHTML={{ __html: content }} />
         </body>
       </html>
     );
