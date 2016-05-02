@@ -3,6 +3,7 @@
 const options = require('./commands/options');
 const clean = require('./commands/clean');
 const buildEntry = require('./commands/entry');
+const webpack = require('./commands/webpack');
 
 const env = {
   projectFile: process.argv[2],
@@ -13,4 +14,5 @@ const env = {
 options(env)
 .then(clean)
 .then(buildEntry)
+.then(webpack)
 .catch(error => console.error('[Error] Error = ', error));
