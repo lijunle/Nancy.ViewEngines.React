@@ -4,6 +4,7 @@ const path = require('path');
 const xpath = require('xpath');
 const DOMParser = require('xmldom').DOMParser;
 const readFile = require('./file').readFile;
+const writeFile = require('./file').writeFile;
 const writeFileWithDir = require('./file').writeFileWithDir;
 
 const PROJ_NAMESPACE = 'http://schemas.microsoft.com/developer/msbuild/2003';
@@ -58,12 +59,21 @@ function buildEntryFile(content, options) {
   return code;
 }
 
+// TODO this function is using a global variable, should refactor.
+function writePathMapping(options) {
+  const pathMapping = formatLine.pathMapping;
+  const content = JSON.stringify(pathMapping, null, 4);
+  const filePath = path.resolve(options.clientPath, 'path.map');
+  return writeFile(filePath, content);
+}
+
 function buildEntry(options) {
   return Promise.resolve()
     .then(() => console.log('[Start] Build entry. Project file:', options.projectFile))
     .then(() => readFile(options.projectFile))
     .then(content => buildEntryFile(content, options))
     .then(content => writeFileWithDir(options.entryFile, content))
+    .then(() => writePathMapping(options))
     .then(() => console.log('[End] Build entry. Entry file:', options.entryFile))
     .then(() => options);
 }
