@@ -178,7 +178,6 @@
   </Target>
   <Import Project="..\Nancy.ViewEngines.React\targets\Nancy.ViewEngines.React.targets" />
   <Target Name="BeforeBuild">
-    <Exec Command=".\node_modules\.bin\eslint --ext .js,.jsx &quot;$(ProjectDir)\Views&quot;" WorkingDirectory="$(SolutionDir)" />
   </Target>
   <Target Name="AfterBuild">
   </Target>
