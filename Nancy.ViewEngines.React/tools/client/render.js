@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import ReactDOMServer from 'react-dom/server';
 import Html from './html';
-import AntiForgeryToken from '../utils/anti-forgery-token';
+import AntiForgeryToken from './client_modules/anti-forgery-token';
 import invokeOrDefault from './invokeOrDefault';
 
 function parse(payload) {

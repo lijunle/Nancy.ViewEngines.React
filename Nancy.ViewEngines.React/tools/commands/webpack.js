@@ -58,7 +58,7 @@ function compile(options) {
     resolve: {
       root: [
         path.resolve(__dirname, '../../node_modules'),
-        path.resolve(__dirname, '../utils'),
+        path.resolve(__dirname, '../client/client_modules'),
       ],
       extensions: ['', '.js', '.jsx'],
     },
