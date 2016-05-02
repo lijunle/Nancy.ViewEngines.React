@@ -1,20 +1,8 @@
 /* eslint-disable no-console */
 
-const fs = require('fs');
 const path = require('path');
 const parseString = require('xml2js').parseString;
-
-function readFile(filePath) {
-  return new Promise((resolve, reject) => {
-    fs.readFile(filePath, { encoding: 'utf-8' }, (error, contents) => {
-      if (error) {
-        reject(error);
-      } else {
-        resolve(contents);
-      }
-    });
-  });
-}
+const readFile = require('./file').readFile;
 
 function get(obj, property) {
   const args = [].slice.call(arguments, 2);

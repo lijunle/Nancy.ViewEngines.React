@@ -2,6 +2,7 @@
 
 const options = require('./commands/options');
 const clean = require('./commands/clean');
+const buildEntry = require('./commands/entry');
 
 const env = {
   projectFile: process.argv[2],
@@ -11,4 +12,5 @@ const env = {
 
 options(env)
 .then(clean)
+.then(buildEntry)
 .catch(error => console.error('[Error] Error = ', error));
