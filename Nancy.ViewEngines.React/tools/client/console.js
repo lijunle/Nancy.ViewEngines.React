@@ -50,4 +50,4 @@ if (inServer) {
   logger.restore = () => logs.map(formatCode).join('');
 }
 
-export default logger; // as console
+module.exports = logger; // as console
