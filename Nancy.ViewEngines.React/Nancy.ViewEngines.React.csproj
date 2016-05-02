@@ -98,6 +98,7 @@
     <None Include="tools\commands\webpack.js" />
     <None Include="tools\install.ps1" />
     <None Include="tools\node.cmd" />
+    <None Include="tools\npm.cmd" />
     <None Include="tools\uninstall.ps1" />
   </ItemGroup>
   <ItemGroup>
