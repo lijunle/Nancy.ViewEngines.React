@@ -16,6 +16,7 @@
   <files>
     <file src="targets\**\*" target="build" />
     <file src="tools\**\*" target="tools" />
+    <file src="package.json" target="package.json" />
     <file src="node_modules.7z" target="node_modules.7z" />
   </files>
 </package>

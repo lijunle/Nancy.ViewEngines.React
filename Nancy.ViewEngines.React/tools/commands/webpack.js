@@ -73,11 +73,20 @@ function compile(options) {
   });
 }
 
+function outputError(error) {
+  console.log(error.toString());
+
+  if (error.details) {
+    console.log(error.details);
+  }
+}
+
 function build(options) {
   return Promise.resolve()
     .then(() => console.log('[Start] Webpack.'))
     .then(() => compile(options))
     .then(stats => console.log(stats))
+    .catch(outputError)
     .then(() => console.log('[End] Webpack.'))
     .then(() => options);
 }

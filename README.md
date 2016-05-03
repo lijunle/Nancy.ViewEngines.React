@@ -37,7 +37,7 @@ All settings are optional. Pre-defined settings work well in most cases. But you
 
   Please reference [ReactConfiguration.xsd](https://github.com/lijunle/Nancy.ViewEngines.React/blob/master/Nancy.ViewEngines.React/ReactConfiguration.xsd) for available settings and their documentations, reference [ConfigurationFixtures](https://github.com/lijunle/Nancy.ViewEngines.React/tree/master/Nancy.ViewEngines.React.UnitTests/ConfigurationFixtures) folder for examples.
 
-  ```
+  ```xml
   <?xml version="1.0" encoding="utf-8"?>
   <configuration>
     <configSections>
@@ -65,7 +65,7 @@ The react view engine natively provide anti-forgenry token to prevent cross-site
 
 In your view component, import `anti-forgery-token` as a React component. Then render this component in your form component.
 
-Please reference [AntiForgery.jsx](https://github.com/lijunle/Nancy.ViewEngines.React/blob/master/Nancy.ViewEngines.React.Example/Views/AntiFogery.jsx) for an example.
+Please reference [AntiForgery.jsx](https://github.com/lijunle/Nancy.ViewEngines.React/blob/master/Nancy.ViewEngines.React.Example/Views/AntiForgery.jsx) for an example.
 
 # Debug build
 

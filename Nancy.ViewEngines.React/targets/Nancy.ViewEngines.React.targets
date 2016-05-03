@@ -10,18 +10,19 @@
     <!--
       The whitespaces wrapping the path variables are critical.
       They avoid the tailing character is back-slash to escape the quote sign.
-      They will be trim off when parse from gulp.
+      They will be trim off during build.
     -->
     <Execute>
       <![CDATA[
-      .\node .\build " $(MSBuildProjectFullPath) " " $(OutputPath) " "$(Configuration)"
+      set PATH=.\tools;%PATH%
+      .\tools\npm run build -- " $(MSBuildProjectFullPath) " " $(OutputPath) " " $(Configuration) "
       ]]>
     </Execute>
   </PropertyGroup>
   <Target Name="RestoreReactViewEnginePackages">
     <Message Text="Building React view engine scripts..." />
     <Exec Command=".\.bin\npm --unicode=false install" WorkingDirectory="$(MSBuildProjectPath)" />
-    <Exec Command="$(Execute)" WorkingDirectory="$(MSBuildThisFileDirectory)..\tools" />
+    <Exec Command="$(Execute)" WorkingDirectory="$(MSBuildThisFileDirectory).." />
     <Message Text="React view engine scripts is built!" />
   </Target>
 </Project>

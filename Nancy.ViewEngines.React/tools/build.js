@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 
+const path = require('path');
 const options = require('./commands/options');
 const clean = require('./commands/clean');
 const buildEntry = require('./commands/entry');
@@ -10,8 +11,8 @@ function trim(str) {
 }
 
 const env = {
-  projectFile: trim(process.argv[2]),
-  outputPath: trim(process.argv[3]),
+  projectFile: trim(process.argv[2]) || path.resolve(__dirname, '../package.json'),
+  outputPath: trim(process.argv[3]) || 'bin',
   configuration: trim(process.argv[4]),
 };
 
